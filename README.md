@@ -42,19 +42,19 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 
 ### USER STORIES
 
-- As a user, I want to consult the classification of fish by sustainability, so that I can make educated choices about the type of fish I buy.
+- As a user, I want to consult the list of susbtainable fish, so that I can make educated choices about the type of fish I buy.
 
 - As a user, I want to see detailed information about species, so that I can discover interesting facts about different types of fish.
 
-- As a user, I want to see detailed information about marine sustainability, so that I can evaluate my own ecological footprint and improve my habits.
+- As a user, I want to see information about marine sustainability, so that I can evaluate my own ecological footprint and improve my habits.
 
-- As a user, I want to have access to an interactive map with several fishes' original fishing locations, so that I can buy more local fish
+- As a user, I want to have access to an interactive map with several fishes' original fishing locations, so that I can be aware of the location of the fish I'm going to buy.
 
-- As a user, I want to have access to an interactive map with several fishes' original fishing locations, so that I can be aware when there is overfishing in a protected area.
+- As a user, I want to have access the interactive map to show me protected areas, so that I can be aware when there is overfishing in a protected area.
 
-- As a user, I want to consult various recipes that use sustainable fish, so that it is easier for me to choose to consume it.
+- As a user, I want to consult a list of recipes that use sustainable fish, so that it is easier for me to choose to consume it and I can more easily insert it into my diet.
 
-- As a user, I want to consult various recipes that use sustainable fish, so that I can more easily insert it into my diet.
+- As a user I want to see detailed information of recipes, so that I can know how to make them.
 
 - As a user, I want to be able to post my recipes, so that I can help grow the repertoire of recipes.
 
