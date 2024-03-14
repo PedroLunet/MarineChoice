@@ -4,7 +4,7 @@
 
 MarineChoice is a phone application that allows users to make conscientious choices about the types of fish they consume on a daily basis by providing them with the information and resources to learn about the harm in non-sustainable fishing and the overconsumption of fish in general. Along with this information, our app also allows the user to learn more about marine life, gives them a surplus of recipes that use susbtainable fish, and share their own.
 
-This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Costa (up202206180@fe.up.pt), Luana Lime (up202206845@fe.up.pt), José Santos (up202108673@fe.up.pt), Pedro Lunet (up202207150@fe.up.pt), Team 1 - Class 14, for 'Engenharia de Software' 2023/24.
+This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Costa (up202206180@fe.up.pt), Luana Lima (up202206845@fe.up.pt), José Santos (up202108673@fe.up.pt), Pedro Lunet (up202207150@fe.up.pt), Team 1 - Class 14, for 'Engenharia de Software' 2023/24.
 
 ### IMPLEMENTED FEATURES
 
@@ -14,9 +14,9 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 
 - (Main Feature) Classify fish by sustainability;
 
-- Login and Register (!);
+- Login and Register;
 
-- Choose language for app (!);
+- Choose language for app;
 
 - Give detailed information about species;
 
@@ -30,15 +30,18 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 
 - Rate recipes;
 
-- Search for specific type of cuisine (!);
+- Search for specific type of cuisine;
 
-- Give suggestions of nearby restaurants that serve sustainable fish (!).
-
-(!) MEANS USER STORIES NOT DONE
+- Filter Ingredients.
 
 ### DEPENDENCIES AND APIs
 
-(...)
+- Map
+
+- Notifications
+
+- Account recovery
+
 
 ### USER STORIES
 
@@ -63,3 +66,11 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 - As a user, I want to be able to rate recipes via stars, so that I let other users know the quality of the recipe.
 
 - As a user, I want to be able to view ratings, so that it's easier to choose a recipe.
+
+- As a user, I want to be able to search for a specific type of cuisine, so that it's easier for me to choose a meal.
+
+- As a guest, I want to be able to log in or register, so that I can access the app using my account.
+
+- As a user, I want to be able to swap between portuguese and english, so that I can choose the one that I'm most confortable with.
+
+- As a user, I want to be able to filter ingredients, so that I can add/remove ingredients that I do/don't want.
