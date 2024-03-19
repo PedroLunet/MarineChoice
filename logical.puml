@@ -1,0 +1,14 @@
+@startuml logical
+
+package "MarineChoice Application" {
+  [User]
+  [Recipe]
+  [Fish]
+  [Map]
+}
+
+User --> Recipe : Posts/Views
+Recipe --> Fish : Uses
+Fish --> Map : Located In
+
+@enduml
