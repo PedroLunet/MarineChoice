@@ -1,0 +1,22 @@
+@startuml physical
+
+package "Client Device" {
+  [User Interface]
+}
+
+cloud "Internet" 
+
+database "Database Server" {
+  [User Data]
+  [Recipe Data]
+  [Fish Data]
+  [Map Data]
+}
+
+[User Interface] --> Internet
+Internet --> [User Data]
+Internet --> [Recipe Data]
+Internet --> [Fish Data]
+Internet --> [Map Data]
+
+@enduml
