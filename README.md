@@ -42,7 +42,6 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 
 - Account recovery
 
-
 ### USER STORIES
 
 - As a user, I want to consult the list of susbtainable fish, so that I can make educated choices about the type of fish I buy.
@@ -74,3 +73,96 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 - As a user, I want to be able to swap between portuguese and english, so that I can choose the one that I'm most confortable with.
 
 - As a user, I want to be able to filter ingredients, so that I can add/remove ingredients that I do/don't want.
+
+### ACCEPTANCE TESTS
+
+Feature: Consult the list of sustainable fish
+  Scenario: User consults the list of sustainable fish
+    Given the user is on the homepage
+    When the user navigates to the "Sustainable Fish" page
+    Then the user should see a list of sustainable fish
+
+Feature: View detailed information about species
+  Scenario: User views detailed information about a fish species
+    Given the user is on the "Sustainable Fish" page
+    When the user clicks on a fish species
+    Then the user should see detailed information about that species
+
+Feature: View information about marine sustainability
+  Scenario: User views information about marine sustainability
+    Given the user is on the homepage
+    When the user navigates to the "Marine Sustainability" page
+    Then the user should see information about marine sustainability
+
+Feature: Access interactive map with fishing locations
+  Scenario: User accesses interactive map with fishing locations
+    Given the user is on the homepage
+    When the user navigates to the "Interactive Map" page
+    Then the user should see an interactive map with fishing locations
+
+Feature: Access interactive map with protected areas
+  Scenario: User accesses interactive map with protected areas
+    Given the user is on the "Interactive Map" page
+    When the user clicks on the "Protected Areas" filter
+    Then the user should see protected areas highlighted on the map
+
+Feature: Consult a list of recipes that use sustainable fish
+  Scenario: User consults a list of recipes that use sustainable fish
+    Given the user is on the homepage
+    When the user navigates to the "Recipes" page
+    Then the user should see a list of recipes that use sustainable fish
+
+Feature: View detailed information of recipes
+  Scenario: User views detailed information of a recipe
+    Given the user is on the "Recipes" page
+    When the user clicks on a recipe
+    Then the user should see detailed information of that recipe
+
+Feature: Post recipes
+  Scenario: User posts a recipe
+    Given the user is logged in
+    When the user navigates to the "Post Recipe" page
+    And the user fills in the recipe form and submits it
+    Then the user's recipe should be added to the "Recipes" page
+
+Feature: Read other users' recipes
+  Scenario: User reads other users' recipes
+    Given the user is on the "Recipes" page
+    When the user clicks on a recipe posted by another user
+    Then the user should see detailed information of that recipe
+
+Feature: Rate recipes
+  Scenario: User rates a recipe
+    Given the user is logged in and viewing a recipe
+    When the user clicks on a star to rate the recipe
+    Then the user's rating should be saved and displayed
+
+Feature: View ratings
+  Scenario: User views ratings of a recipe
+    Given the user is on the "Recipes" page
+    When the user clicks on a recipe
+    Then the user should see the ratings of that recipe
+
+Feature: Search for a specific type of cuisine
+  Scenario: User searches for a specific type of cuisine
+    Given the user is on the "Recipes" page
+    When the user enters a cuisine type in the search bar and submits it
+    Then the user should see a list of recipes that match the cuisine type
+
+Feature: Log in or register
+  Scenario: Guest logs in or registers
+    Given the guest is on the homepage
+    When the guest clicks on the "Log In" or "Register" button
+    Then the guest should be redirected to the "Log In" or "Register" page
+
+Feature: Swap between Portuguese and English
+  Scenario: User swaps between Portuguese and English
+    Given the user is on any page
+    When the user clicks on the language toggle button
+    Then the page should be displayed in the selected language
+
+Feature: Filter ingredients
+  Scenario: User filters ingredients
+    Given the user is on the "Recipes" page
+    When the user enters an ingredient in the filter bar and submits it
+    Then the user should see a list of recipes that match the filtered ingredient
