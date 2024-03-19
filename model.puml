@@ -1,0 +1,32 @@
+@startuml domain modeling
+
+class User {
+    + name: string
+    + username: string
+    + password: string
+    + preferedLanguage: string
+}
+
+class Recipe {
+    + title: string
+    + sustainabilityRate: float
+    + cuisineType: string
+    + ingredients: List<string>
+    + rating: float
+}
+
+class Fish {
+    + name: string
+    + origin: string
+    + sustainabilityRate: float
+    + avgPricePerKg: float
+}
+
+class Map {
+    + location: List<string>
+    + protectedAreas: List<string>
+}
+
+
+
+@enduml
