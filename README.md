@@ -76,93 +76,182 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 
 ### ACCEPTANCE TESTS
 
-Feature: Consult the list of sustainable fish
-  Scenario: User consults the list of sustainable fish
-    Given the user is on the homepage
-    When the user navigates to the "Sustainable Fish" page
-    Then the user should see a list of sustainable fish
+**Feature:** Consult the list of sustainable fish
 
-Feature: View detailed information about species
-  Scenario: User views detailed information about a fish species
-    Given the user is on the "Sustainable Fish" page
-    When the user clicks on a fish species
-    Then the user should see detailed information about that species
+&nbsp;&nbsp;**Scenario:** User consults the list of sustainable fish
 
-Feature: View information about marine sustainability
-  Scenario: User views information about marine sustainability
-    Given the user is on the homepage
-    When the user navigates to the "Marine Sustainability" page
-    Then the user should see information about marine sustainability
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the homepage
 
-Feature: Access interactive map with fishing locations
-  Scenario: User accesses interactive map with fishing locations
-    Given the user is on the homepage
-    When the user navigates to the "Interactive Map" page
-    Then the user should see an interactive map with fishing locations
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user navigates to the "Sustainable Fish" page
 
-Feature: Access interactive map with protected areas
-  Scenario: User accesses interactive map with protected areas
-    Given the user is on the "Interactive Map" page
-    When the user clicks on the "Protected Areas" filter
-    Then the user should see protected areas highlighted on the map
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see a list of sustainable fish
 
-Feature: Consult a list of recipes that use sustainable fish
-  Scenario: User consults a list of recipes that use sustainable fish
-    Given the user is on the homepage
-    When the user navigates to the "Recipes" page
-    Then the user should see a list of recipes that use sustainable fish
+&nbsp;
 
-Feature: View detailed information of recipes
-  Scenario: User views detailed information of a recipe
-    Given the user is on the "Recipes" page
-    When the user clicks on a recipe
-    Then the user should see detailed information of that recipe
+**Feature:** View detailed information about species
 
-Feature: Post recipes
-  Scenario: User posts a recipe
-    Given the user is logged in
-    When the user navigates to the "Post Recipe" page
-    And the user fills in the recipe form and submits it
-    Then the user's recipe should be added to the "Recipes" page
+&nbsp;&nbsp;**Scenario:** User views detailed information about a fish species
 
-Feature: Read other users' recipes
-  Scenario: User reads other users' recipes
-    Given the user is on the "Recipes" page
-    When the user clicks on a recipe posted by another user
-    Then the user should see detailed information of that recipe
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the "Sustainable Fish" page
 
-Feature: Rate recipes
-  Scenario: User rates a recipe
-    Given the user is logged in and viewing a recipe
-    When the user clicks on a star to rate the recipe
-    Then the user's rating should be saved and displayed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks on a fish species
 
-Feature: View ratings
-  Scenario: User views ratings of a recipe
-    Given the user is on the "Recipes" page
-    When the user clicks on a recipe
-    Then the user should see the ratings of that recipe
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see detailed information about that species
 
-Feature: Search for a specific type of cuisine
-  Scenario: User searches for a specific type of cuisine
-    Given the user is on the "Recipes" page
-    When the user enters a cuisine type in the search bar and submits it
-    Then the user should see a list of recipes that match the cuisine type
+&nbsp;
 
-Feature: Log in or register
-  Scenario: Guest logs in or registers
-    Given the guest is on the homepage
-    When the guest clicks on the "Log In" or "Register" button
-    Then the guest should be redirected to the "Log In" or "Register" page
+**Feature:** View information about marine sustainability
 
-Feature: Swap between Portuguese and English
-  Scenario: User swaps between Portuguese and English
-    Given the user is on any page
-    When the user clicks on the language toggle button
-    Then the page should be displayed in the selected language
+&nbsp;&nbsp;**Scenario:** User views information about marine sustainability
 
-Feature: Filter ingredients
-  Scenario: User filters ingredients
-    Given the user is on the "Recipes" page
-    When the user enters an ingredient in the filter bar and submits it
-    Then the user should see a list of recipes that match the filtered ingredient
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the homepage
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user navigates to the "Marine Sustainability" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see information about marine sustainability
+
+&nbsp;
+
+**Feature:** Access interactive map with fishing locations
+
+&nbsp;&nbsp;**Scenario:** User accesses interactive map with fishing locations
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the homepage
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user navigates to the "Interactive Map" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see an interactive map with fishing locations
+
+&nbsp;
+
+**Feature:** Access interactive map with protected areas
+
+&nbsp;&nbsp;**Scenario:** User accesses interactive map with protected areas
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the "Interactive Map" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks on the "Protected Areas" filter
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see protected areas highlighted on the map
+
+&nbsp;
+
+**Feature:** Consult a list of recipes that use sustainable fish
+
+&nbsp;&nbsp;**Scenario:** User consults a list of recipes that use sustainable fish
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the homepage
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user navigates to the "Recipes" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see a list of recipes that use sustainable fish
+
+&nbsp;
+
+**Feature:** View detailed information of recipes
+
+&nbsp;&nbsp;**Scenario:** User views detailed information of a recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the "Recipes" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks on a recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see detailed information of that recipe
+
+&nbsp;
+
+**Feature:** Post recipes
+
+&nbsp;&nbsp;**Scenario:** User posts a recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is logged in
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user navigates to the "Post Recipe" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**And** the user fills in the recipe form and submits it
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user's recipe should be added to the "Recipes" page
+
+&nbsp;
+
+**Feature:** Read other users' recipes
+
+&nbsp;&nbsp;**Scenario:** User reads other users' recipes
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the "Recipes" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks on a recipe posted by another user
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see detailed information of that recipe
+
+&nbsp;
+
+**Feature:** Rate recipes
+
+&nbsp;&nbsp;**Scenario:** User rates a recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is logged in and viewing a recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks on a star to rate the recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user's rating should be saved and displayed
+
+&nbsp;
+
+**Feature:** View ratings
+
+&nbsp;&nbsp;**Scenario:** User views ratings of a recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the "Recipes" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks on a recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see the ratings of that recipe
+
+&nbsp;
+
+**Feature:** Search for a specific type of cuisine
+
+&nbsp;&nbsp;**Scenario:** User searches for a specific type of cuisine
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the "Recipes" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user enters a cuisine type in the search bar and submits it
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see a list of recipes that match the cuisine type
+
+&nbsp;
+
+**Feature:** Log in or register
+
+&nbsp;&nbsp;**Scenario:** Guest logs in or registers
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the guest is on the homepage
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the guest clicks on the "Log In" or "Register" button
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the guest should be redirected to the "Log In" or "Register" page
+
+&nbsp;
+
+**Feature:** Swap between Portuguese and English
+
+&nbsp;&nbsp;**Scenario:** User swaps between Portuguese and English
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on any page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks on the language toggle button
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the page should be displayed in the selected language
+
+&nbsp;
+
+**Feature:** Filter ingredients
+
+&nbsp;&nbsp;**Scenario:** User filters ingredients
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the "Recipes" page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user enters an ingredient in the filter bar and submits it
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see a list of recipes that match the filtered ingredient
