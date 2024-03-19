@@ -34,3 +34,4 @@ User "1" -- "0..*" Recipe : has
 Map "1" -- "*" Fish : has
 Recipe "*" -- "*" Fish : has
 @enduml
+
