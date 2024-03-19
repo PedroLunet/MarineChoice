@@ -4,7 +4,7 @@
 
 MarineChoice is a phone application that allows users to make conscientious choices about the types of fish they consume on a daily basis by providing them with the information and resources to learn about the harm in non-sustainable fishing and the overconsumption of fish in general. Along with this information, our app also allows the user to learn more about marine life, gives them a surplus of recipes that use susbtainable fish, and share their own.
 
-This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Costa (up202206180@fe.up.pt), Luana Lima (up202206845@fe.up.pt), José Santos (up202108673@fe.up.pt), Pedro Lunet (up202207150@fe.up.pt), Team 1 - Class 14, for 'Engenharia de Software' 2023/24.
+This project was developed by Cláudia Mesquita ([up202206173@fe.up.pt](mailto:up202206173@fe.up.pt)), Pedro Costa ([up202206180@fe.up.pt](mailto:up202206180@fe.up.pt)), Luana Lima ([up202206845@fe.up.pt](mailto:up202206845@fe.up.pt)), José Santos ([up202108673@fe.up.pt](mailto:up202108673@fe.up.pt)), Pedro Lunet ([up202207150@fe.up.pt](mailto:up202207150@fe.up.pt)), Team 1 - Class 14, for 'Engenharia de Software' 2023/24.
 
 ### IMPLEMENTED FEATURES
 
@@ -105,8 +105,6 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 &nbsp;&nbsp;**Scenario:** User views information about marine sustainability
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is on the homepage
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user navigates to the "Marine Sustainability" page
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see information about marine sustainability
 
@@ -222,15 +220,27 @@ This project was developed by Cláudia Mesquita (up202206173@fe.up.pt), Pedro Co
 
 &nbsp;
 
-**Feature:** Log in or register
+**Feature:** Register
 
-&nbsp;&nbsp;**Scenario:** Guest logs in or registers
+&nbsp;&nbsp;**Scenario:** Guest registers
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the guest is on the homepage
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the guest is on the login page
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the guest clicks on the "Log In" or "Register" button
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the guest clicks on the "Register" button
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the guest should be redirected to the "Log In" or "Register" page
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the guest should be redirected to the "Register" page
+
+&nbsp;
+
+**Feature:** Login 
+
+&nbsp;&nbsp;**Scenario:** Guest logs in
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the guest is on the login page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the guest fills their information and clicks the "Login" button
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the guest should be redirected to the homepage
 
 &nbsp;
 

@@ -4,7 +4,7 @@ class User {
     + name: string
     + username: string
     + password: string
-    + preferedLanguage: string
+    + portugueseOrEnglish: bool (If true, the app will be in Portuguese, otherwise, it will be in English.)
 }
 
 class Recipe {
