@@ -13,7 +13,9 @@ class Recipe {
     + cuisineType: string
     + ingredients: List<string>
     + rating: float
+    + permanentPost : bool
 }
+
 
 class Fish {
     + name: string
@@ -28,5 +30,7 @@ class Map {
 }
 
 
-
+User "1" -- "0..*" Recipe : has
+Map "1" -- "*" Fish : has
+Recipe "*" -- "*" Fish : has
 @enduml
