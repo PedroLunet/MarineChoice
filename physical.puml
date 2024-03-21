@@ -4,19 +4,20 @@ package "Client Device" {
   [User Interface]
 }
 
-cloud "Internet" 
-
 database "Database Server" {
   [User Data]
   [Recipe Data]
-  [Fish Data]
-  [Map Data]
 }
 
-[User Interface] --> Internet
-Internet --> [User Data]
-Internet --> [Recipe Data]
-Internet --> [Fish Data]
-Internet --> [Map Data]
+database "API Server" {
+  [Map Data]
+  [Fish Data]
+}
+
+
+[User Interface] --> [User Data]
+[User Interface] --> [Recipe Data]
+[User Interface] --> [Fish Data]
+[User Interface] --> [Map Data]
 
 @enduml
