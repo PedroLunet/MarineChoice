@@ -1,14 +1,17 @@
 @startuml logical
 
-package "MarineChoice Application" {
-  [User]
-  [Recipe]
-  [Fish]
-  [Map]
+package "MarineChoice System" {
+  [MarineChoice Application]
+  [Recipe Validation]
+  [Database]
 }
 
-User --> Recipe : Posts/Views
-Recipe --> Fish : Uses
-Fish --> Map : Located In
+package "External Services" {
+  [Admin Gateway]
+}
+
+[MarineChoice Application] -> [Recipe Validation]
+[Recipe Validation] -> [Database]
+[Recipe Validation] --> [Admin Gateway]
 
 @enduml

@@ -31,7 +31,6 @@ class Map {
 }
 
 
-User "1" -- "*" Recipe : has
 Map "1" -- "1..*" Fish : has
 Recipe "*" -- "1..*" Fish : has
 User "1" -- "*" Recipe : creates
