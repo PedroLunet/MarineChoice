@@ -74,6 +74,8 @@ This project was developed by Cláudia Mesquita ([up202206173@fe.up.pt](mailto:u
 
 - As a user, I want to be able to filter ingredients, so that I can add/remove ingredients that I do/don't want.
 
+- As a user, I want to be able to edit my recipes, so that I can correct mistakes.
+
 ### ACCEPTANCE TESTS
 
 **Feature:** Consult the list of sustainable fish
@@ -265,3 +267,15 @@ This project was developed by Cláudia Mesquita ([up202206173@fe.up.pt](mailto:u
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user enters an ingredient in the filter bar and submits it
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should see a list of recipes that match the filtered ingredient
+
+&nbsp;
+
+**Feature:** Edit recipe
+
+&nbsp;&nbsp;**Scenario:** User edits recipe they created
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Given** the user is in recipe page
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**When** the user clicks to edit their own recipe
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Then** the user should be able to edit the recipe  

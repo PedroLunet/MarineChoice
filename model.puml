@@ -4,7 +4,8 @@ class User {
     + name: string
     + username: string
     + password: string
-    + portugueseOrEnglish: bool (If true, the app will be in Portuguese, otherwise, it will be in English.)
+    + portugueseOrEnglish: bool 
+    ' (If true, the app will be in Portuguese, otherwise, it will be in English.)
 }
 
 class Recipe {
@@ -30,8 +31,9 @@ class Map {
 }
 
 
-User "1" -- "0..*" Recipe : has
-Map "1" -- "*" Fish : has
-Recipe "*" -- "*" Fish : has
+User "1" -- "*" Recipe : has
+Map "1" -- "1..*" Fish : has
+Recipe "*" -- "1..*" Fish : has
+User "1" -- "*" Recipe : creates
 @enduml
 
