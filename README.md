@@ -4,7 +4,7 @@ Welcome to the documentation pages of the MarineChoice!
 
 You can find here details about the MarineChoice, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by type of activities:
 
-- [Business modeling](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#business-modleing)
+- [Business modeling](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#business-modeling)
     - [Product Vision](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#product-vision)
     - [Features and Assumptions](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#features-and-assumptions)
     - [Elevator Pitch](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#elevator-pitch)
