@@ -63,7 +63,7 @@ MarineChoice has the goal to empower seafood consumers with the knowledge and to
 
 (...)
 
-### Requirements
+## Requirements
 
 (...)
 
@@ -71,7 +71,7 @@ MarineChoice has the goal to empower seafood consumers with the knowledge and to
 
 ![alt text](image.png)
 
-### Architecture and Design
+## Architecture and Design
 
 (...)
 
@@ -83,7 +83,7 @@ MarineChoice has the goal to empower seafood consumers with the knowledge and to
 
 ![alt text](image-2.png)
 
-### Vertical Prototype
+## Vertical Prototype
 
 (...)
 
