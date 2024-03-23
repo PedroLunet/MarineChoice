@@ -5,7 +5,7 @@ Welcome to the documentation pages of the MarineChoice!
 You can find here details about the MarineChoice, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by type of activities:
 
 - Business modeling
-    - Product Vision
+    - [Product Vision](###Product Vision)
     - Features and Assumptions
     - Elevator Pitch
 - Requirements
