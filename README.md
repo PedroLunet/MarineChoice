@@ -5,17 +5,17 @@ Welcome to the documentation pages of the MarineChoice!
 You can find here details about the MarineChoice, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by type of activities:
 
 - Business modeling
-    - ([Product Vision](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#product-vision))
-    - Features and Assumptions
-    - Elevator Pitch
+    - [Product Vision](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#product-vision)
+    - [Features and Assumptions](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#features-and-assumptions)
+    - [Elevator Pitch](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#elevator-pitch)
 - Requirements
-    - User stories
-    - Domain model
+    - [User stories](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/46)
+    - [Domain model](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#domain-model)
 - Architecture and Design
-    - Logical architecture
-    - Physical architecture
-    - Vertical prototype
-- Project management
+    - [Logical architecture](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#logical-architecture)
+    - [Physical architecture](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#physical-architecture)
+    - [Vertical prototype](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#vertical-prototype)
+- [Project Management](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#project-management)
 
 Contributions are expected to be made exclusively by the initial team, but we may open them to the community, after the course, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
@@ -84,5 +84,9 @@ MarineChoice has the goal to empower seafood consumers with the knowledge and to
 ![alt text](image-2.png)
 
 ### Vertical Prototype
+
+(...)
+
+### Project Management
 
 (...)
