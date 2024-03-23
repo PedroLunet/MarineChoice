@@ -4,14 +4,14 @@ Welcome to the documentation pages of the MarineChoice!
 
 You can find here details about the MarineChoice, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by type of activities:
 
-- Business modeling
+- [Business modeling](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#business-modleing)
     - [Product Vision](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#product-vision)
     - [Features and Assumptions](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#features-and-assumptions)
     - [Elevator Pitch](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#elevator-pitch)
-- Requirements
+- [Requirements](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/blob/master/README.md#requirements)
     - [User stories](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/46)
     - [Domain model](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#domain-model)
-- Architecture and Design
+- [Architecture and Design](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#architecture-and-design)
     - [Logical architecture](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#logical-architecture)
     - [Physical architecture](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#physical-architecture)
     - [Vertical prototype](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#vertical-prototype)
