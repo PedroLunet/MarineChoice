@@ -83,10 +83,10 @@ MarineChoice has the goal to empower seafood consumers with the knowledge and to
 
 ![alt text](image-2.png)
 
-## Vertical Prototype
+### Vertical Prototype
 
 (...)
 
-### Project Management
+## Project Management
 
 (...)
