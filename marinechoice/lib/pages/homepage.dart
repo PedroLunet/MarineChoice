@@ -62,6 +62,9 @@ class _HomePage extends State<HomePage> {
       type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/icons/home.svg', height: 25, width: 30,),
+            label: ("HOME"),),
+          BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/icons/fishing-rod.svg', height: 25, width: 30,),
               label: ("FIND"),),
           BottomNavigationBarItem(
@@ -165,9 +168,9 @@ class _HomePage extends State<HomePage> {
             color: Color(0xffB4D8F9),
           ),
           child: SvgPicture.asset(
-            'assets/icons/home.svg',
-            height: 37,
-            width: 37,
+            'assets/icons/arrow-left.svg',
+            height: 25,
+            width: 25,
           ),
         ),
       ),
@@ -182,7 +185,7 @@ class _HomePage extends State<HomePage> {
               color: Color(0xffB4D8F9),
             ),
             child: SvgPicture.asset(
-              'assets/icons/profile-user.svg',
+              'assets/icons/settings.svg',
               height: 37,
               width: 37,
             ),
