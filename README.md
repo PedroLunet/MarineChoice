@@ -67,17 +67,17 @@ MarineChoice has the goal to empower seafood consumers with the knowledge and to
 
 ### Domain Model
 
-![alt text](image.png)
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/e82f2514-aed1-4e3b-a7a2-97059b4869d8)
 
 ## Architecture and Design
 
 ### Logical Architecture
 
-![alt text](image-1.png)
+![image-2](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/e36f1651-87b0-4700-8ab2-be8d79483422)
 
 ### Physical Architecture
 
-![alt text](image-2.png)
+![image-1](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/6e90a0a0-3192-4b20-9035-2fa164c1a4f7)
 
 ### Vertical Prototype
 
