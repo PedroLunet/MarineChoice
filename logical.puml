@@ -1,5 +1,7 @@
 @startuml logical
 
+top to bottom direction
+
 package "MarineChoice System" {
   [MarineChoice Application]
   [Recipe Validation]
