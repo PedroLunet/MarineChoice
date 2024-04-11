@@ -33,7 +33,8 @@ Pedro Lunet ([up202207150@fe.up.pt](mailto:up202207150@fe.up.pt))
 
 ### Product Vision
 
-MarineChoice has the goal to empower seafood consumers with the knowledge and tools to make sustainable choices, in regards to their eating habits. Our app provides insights into harmful fishing practices, offers delicious recipes using sustainable fish, and fosters a community of environmentally-conscious individuals. Together, we're shaping a future where every seafood choice supports healthy oceans.
+
+MarineChoice empowers seafood consumers by offering insights into harmful fishing practices, sustainable recipes, and fostering an eco-conscious community, all aimed at shaping a future where every seafood choice supports healthy oceans.
 
 ### Features and Assumptions
 
