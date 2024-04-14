@@ -33,7 +33,8 @@ Pedro Lunet ([up202207150@fe.up.pt](mailto:up202207150@fe.up.pt))
 
 ### Product Vision
 
-MarineChoice has the goal to empower seafood consumers with the knowledge and tools to make sustainable choices, in regards to their eating habits. Our app provides insights into harmful fishing practices, offers delicious recipes using sustainable fish, and fosters a community of environmentally-conscious individuals. Together, we're shaping a future where every seafood choice supports healthy oceans.
+
+MarineChoice empowers seafood consumers by offering insights into harmful fishing practices, sustainable recipes, and fostering an eco-conscious community, all aimed at shaping a future where every seafood choice supports healthy oceans.
 
 ### Features and Assumptions
 
@@ -67,7 +68,7 @@ MarineChoice has the goal to empower seafood consumers with the knowledge and to
 
 ### Domain Model
 
-![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/e82f2514-aed1-4e3b-a7a2-97059b4869d8)
+![domain modeling](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/95a41aff-235c-4c56-be79-8f38a7845b91)
 
 ## Architecture and Design
 
@@ -90,4 +91,4 @@ In this prototype we have implemented a few simple features, like allowing the u
 
 ## Project Management
 
-(...)
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/89967de9-0b6b-457c-a386-025769a1813d)
