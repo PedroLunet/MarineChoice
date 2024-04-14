@@ -190,21 +190,6 @@ class _HomePage extends State<HomePage> {
         ),
       ),
       backgroundColor: const Color(0xffB4D8F9),
-      leading: GestureDetector(
-        onTap: () {},
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: Color(0xffB4D8F9),
-          ),
-          child: SvgPicture.asset(
-            'assets/icons/arrow-left.svg',
-            height: 25,
-            width: 25,
-          ),
-        ),
-      ),
       actions: [
         GestureDetector(
           onTap: () {},
