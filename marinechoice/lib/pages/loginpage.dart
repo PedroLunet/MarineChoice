@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'homepage.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -12,6 +14,8 @@ class LoginPage extends StatelessWidget {
       String username = usernameController.text;
       String password = passwordController.text;
       print('Username: $username, Password: $password');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const HomePage()));
     }
 
     return Scaffold(
