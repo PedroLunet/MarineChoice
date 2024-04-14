@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  google_maps_flutter: ^2.5.0
+  location: ^5.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -76,9 +78,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Gruppo
+    - family: Poppins
       fonts:
-        - asset: fonts/Gruppo-Regular.ttf
+        - asset: fonts/Poppins-Regular.ttf
           weight: 400
   #   - family: Trajan Pro
   #     fonts:

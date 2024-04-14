@@ -1,19 +1,23 @@
-@startuml logical
+@startuml physical
 
-top to bottom direction
-
-package "MarineChoice System" {
-  [MarineChoice Application]
-  [Recipe Validation]
-  [Database]
+package "Client Device" {
+  [User Interface]
 }
 
-package "External Services" {
-  [Admin Gateway]
+database "Database Server" {
+  [User Data]
+  [Recipe Data]
 }
 
-[MarineChoice Application] -> [Recipe Validation]
-[Recipe Validation] -> [Database]
-[Recipe Validation] --> [Admin Gateway]
+database "API Server" {
+  [Map Data]
+  [Fish Data]
+}
+
+
+[User Interface] --> [User Data]
+[User Interface] --> [Recipe Data]
+[User Interface] --> [Fish Data]
+[User Interface] --> [Map Data]
 
 @enduml

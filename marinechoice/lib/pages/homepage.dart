@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marinechoice/pages/mappage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,12 +28,24 @@ class _HomePage extends State<HomePage> {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.all(40),
+              margin: const EdgeInsets.all(20),
               child: const Text(
-                ' WELCOME, John Doe \n        Did you know...',
+                'WELCOME, John Doe',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 32,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+
+            Container(
+              child: const Text(
+                'Did you know...',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
@@ -54,41 +67,59 @@ class _HomePage extends State<HomePage> {
       );
   }
 
+
+  _navigate(int index){
+      switch (index) {
+        case 0:
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const HomePage()));
+          break;
+        case 3:
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const MapPage()));
+          break;
+      }
+
+  }
+
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
-        backgroundColor: const Color(0xff5B92C6),
-        currentIndex: 0,
+      backgroundColor: const Color(0xff5B92C6),
+      currentIndex: 0,
+      onTap: _navigate,
       selectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/home.svg', height: 25, width: 30,),
-            label: ("HOME"),),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/fishing-rod.svg', height: 25, width: 30,),
-              label: ("FIND"),),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/chef-hat.svg', height: 30, width: 30,),
-              label: ("COOK")),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/map.svg', height: 30, width: 30,),
-              label: ("MAP")),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/envelope-open.svg', height: 25, width: 30,),
-              label: ("SHARE")),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/user.svg', height: 30, width: 30,),
-              label: ("YOU")),
-        ],
+      items: [
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset('assets/icons/home.svg', height: 25, width: 30,),
+          label: ("HOME"),),
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset('assets/icons/fishing-rod.svg', height: 25, width: 30,),
+          label: ("FIND"),),
+        BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/icons/chef-hat.svg', height: 30, width: 30,),
+            label: ("COOK")),
+        BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/icons/map.svg', height: 30, width: 30,),
+            label: ("MAP")),
+        BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/icons/envelope-open.svg', height: 25, width: 30,),
+            label: ("SHARE")),
+        BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/icons/user.svg', height: 30, width: 30,),
+            label: ("YOU")),
+      ],
       selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900,),
       unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900,),
-      );
+    );
   }
+
 
   Widget buildContainer(String text, int number) {
     if (number == selectedBox || text.length <= 27 * 6) {
       return Container(
         padding: const EdgeInsets.all(20),
+        width: MediaQuery.of(context).size.width - 20,
         decoration: BoxDecoration(
             border: Border.all(color: const Color(0xff126863), width: 3),
             color: const Color(0xffD6E7F7),
@@ -98,7 +129,7 @@ class _HomePage extends State<HomePage> {
           text,
           style: const TextStyle(
             fontSize: 20,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w400,
           ),
         ),
       );
@@ -115,7 +146,7 @@ class _HomePage extends State<HomePage> {
             "${text.characters.take((27 * 6) - 3)}...",
             style: const TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w400,
             ),
           ),
           TextButton(

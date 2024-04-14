@@ -1,5 +1,13 @@
 @startuml domain modeling
 
+header
+A user should be able to create a recipe 
+which should have at least one type of fish,
+and this fish should be represented in the map,
+which displays the location of various
+fishes and various Protected areas.
+end header
+
 class User {
     + name: string
     + username: string
