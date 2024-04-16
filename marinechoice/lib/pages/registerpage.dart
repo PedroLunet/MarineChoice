@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'homepage.dart';
-import 'registerpage.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController confirmPasswordController = TextEditingController();
 
-    void loginPressed() {
-      String username = usernameController.text;
+    bool checkPassword() {
       String password = passwordController.text;
-      print('Username: $username, Password: $password');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const HomePage()));
-    }
-
-    void registerPressed() {
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const RegisterPage()));
+      String confirm = confirmPasswordController.text;
+      return password == confirm;
     }
 
     return Scaffold(
@@ -40,7 +32,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const Text(
-                'Login',
+                'Register',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -62,19 +54,39 @@ class LoginPage extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
                   controller: passwordController,
+                  obscureText: true,
                   decoration: const InputDecoration(
                     hintText: 'Password',
                   ),
-                  obscureText: true, // Mask the password input
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 50),
+                child: TextField(
+                  controller: confirmPasswordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    hintText: 'Confirm Password',
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: loginPressed,
-                child: const Text('Login'),
-              ),
-              ElevatedButton(
-                onPressed: registerPressed,
+                onPressed: () {
+                  if (checkPassword()) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                    );
+                  } else {
+                    // Handle password mismatch error
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Passwords do not match.'),
+                      ),
+                    );
+                  }
+                },
                 child: const Text('Register'),
               ),
             ],
