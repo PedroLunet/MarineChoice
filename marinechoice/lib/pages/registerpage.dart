@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
-import "package:country_picker/country_picker.dart";
-import 'package:flutter/cupertino.dart';
+import 'package:csc_picker/csc_picker.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -99,17 +98,14 @@ class _RegisterPageState extends State<RegisterPage> {
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.symmetric(horizontal: 50),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      showCountryPicker(
-                        context: context,
-                        onSelect: (Country country) {
-                          print('Select country: ${country.displayName}');
-                        },
-                      );
-                    }, child: const Text('country'),
-                  )
+                child: CSCPicker(
+                  onCountryChanged: (value) {
+                    print(value);
+                  },
+                  showStates: false,
+                  showCities: false,
                 ),
+              ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
