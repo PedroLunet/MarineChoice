@@ -91,5 +91,6 @@ In this prototype we have implemented a few simple features, like allowing the u
 
 ## Project Management
 
+Sprint 1 beginning:
 ![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/3efa67e3-0c0c-4170-b65a-194aab3da556)
 
