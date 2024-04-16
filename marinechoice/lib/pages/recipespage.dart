@@ -1,83 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
-import 'package:marinechoice/pages/recipespage.dart';
+import 'package:sqflite/sqflite.dart';
 
+import '../dbhelperfilters.dart';
 import 'homepage.dart';
+import 'mappage.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+class RecipesPage extends StatefulWidget {
+  const RecipesPage({super.key});
+
   @override
-  State<MapPage> createState() => _MapPageState();
+  State<RecipesPage> createState() => _RecipesPageState();
 }
 
-class _MapPageState extends State<MapPage> {
-  Location _locationController = new Location();
-  LatLng? _currentP = null;
-
-  @override
-  void initState() {
-    super.initState();
-    getLocationUpdates();
-  }
-
+class _RecipesPageState extends State<RecipesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
       bottomNavigationBar: buildBottomNavigationBar(),
-      body: _currentP == null
-          ? const Center(
-        child: Text("Loading...", style: TextStyle(fontSize: 40),),
-      )
-          : GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: _currentP!,
-          zoom: 3,
-        ),
-        markers: {
-          Marker(
-              markerId: MarkerId("_currentLocation"),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                  BitmapDescriptor.hueBlue),
-              position: _currentP!),
-        },
-      ),
     );
   }
 
-  Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-
-    _serviceEnabled = await _locationController.serviceEnabled();
-    if (_serviceEnabled) {
-      _serviceEnabled = await _locationController.requestService();
+  Widget buildContainer(String text, int number) {
+    if (text.length <= 27 * 6) {
+      return Container(
+        padding: const EdgeInsets.all(20),
+        width: MediaQuery.of(context).size.width - 20,
+        decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xff126863), width: 3),
+            color: const Color(0xffD6E7F7),
+            borderRadius: BorderRadius.circular(15)),
+        margin: const EdgeInsets.all(10),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      );
     } else {
-      return;
+      return Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xff126863), width: 3),
+            color: const Color(0xffD6E7F7),
+            borderRadius: BorderRadius.circular(15)),
+        margin: const EdgeInsets.all(10),
+        child: Column(children: [
+          Text(
+            "${text.characters.take((27 * 6) - 3)}...",
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ]),
+      );
     }
+  }
 
-    _permissionGranted = await _locationController.hasPermission();
+  SingleChildScrollView buildSingleChildScrollView() {
+    DataBaseHelperFilters dbHelper = new DataBaseHelperFilters();
+    Future<Database> database = dbHelper.initDB();
 
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _locationController.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-
-    _locationController.onLocationChanged
-        .listen((LocationData currentLocation) {
-      if (currentLocation.latitude != null &&
-          currentLocation.longitude != null) {
-        setState(() {
-          _currentP =
-              LatLng(currentLocation.latitude!, currentLocation.longitude!);
-          print(_currentP);
-        });
-      }
-    });
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          /*?*/
+        ],
+      ),
+    );
   }
 
   _navigate(int index){
@@ -101,7 +95,7 @@ class _MapPageState extends State<MapPage> {
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xff5B92C6),
-      currentIndex: 3,
+      currentIndex: 2,
       onTap: _navigate,
       selectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
@@ -181,5 +175,4 @@ class _MapPageState extends State<MapPage> {
       ],
     );
   }
-
 }

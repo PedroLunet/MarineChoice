@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/mappage.dart';
+import 'package:marinechoice/dbhelperfilters.dart';
+import 'package:marinechoice/pages/recipespage.dart';
+import 'package:sqflite/sqflite.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,6 +27,7 @@ class _HomePage extends State<HomePage> {
   }
 
   SingleChildScrollView buildSingleChildScrollView() {
+
     return SingleChildScrollView(
         child: Column(
           children: [
@@ -73,6 +77,10 @@ class _HomePage extends State<HomePage> {
         case 0:
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const HomePage()));
+          break;
+        case 2:
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const RecipesPage()));
           break;
         case 3:
           Navigator.of(context).push(
