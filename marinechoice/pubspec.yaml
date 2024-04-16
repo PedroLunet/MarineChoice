@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  bdd_framework: ^3.0.2
   google_maps_flutter: ^2.5.0
   location: ^6.0.1
 
