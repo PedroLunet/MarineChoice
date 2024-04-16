@@ -1,117 +1,39 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:marinechoice/dbhelperfilters.dart';
-import 'package:marinechoice/pages/recipeinfopage.dart';
+import 'package:marinechoice/pages/recipespage.dart';
 
 import '../models/recipe_model.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
+class RecipeInfoPage extends StatefulWidget {
+  final Recipe recipe;
 
-class RecipesPage extends StatefulWidget{
-  const RecipesPage({super.key});
+  const RecipeInfoPage({super.key, required this.recipe});
 
   @override
   State<StatefulWidget> createState() {
-    return _RecipesPage();
+    return _RecipeInfoPage();
   }
-
 
 
 }
 
-class _RecipesPage extends State<RecipesPage> {
+
+class _RecipeInfoPage extends State<RecipeInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    final titleController = TextEditingController();
-    final preparationController = TextEditingController();
-    final authorController = TextEditingController();
-
-
     return Scaffold(
       backgroundColor: const Color(0xffB4D8F9),
       appBar: buildAppBar(),
       bottomNavigationBar: buildBottomNavigationBar(),
-      body: buildSingleChildScrollView(),
+      body: buildSingleChildScrollView(widget.recipe),
     );
   }
 
-  Widget buildContainer(Recipe recipe, int number) {
-      return GestureDetector(
-        onTap: () =>{Navigator.of(context).push(MaterialPageRoute(builder: (context) => RecipeInfoPage(recipe:recipe)))},
-        child:Container(
-        padding: const EdgeInsets.all(20),
-        width: MediaQuery.of(context).size.width/2 - 20,
-        height: 110,
-        decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xffD6E7F7), width: 3),
-            color: const Color(0xffD6E7F7),
-            borderRadius: BorderRadius.circular(15)),
-        margin: const EdgeInsets.all(10),
-        child: Column(
-          children:[ Text(
-            recipe.title,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-            ),
-          ),]
-        ),
-      ),);
-
-  }
-
-  Widget buildSingleChildScrollView() {
-
-    return FutureBuilder<List<Recipe>?>(
-        future: DataBaseHelperFilters.getAllRecipes(),
-        builder: (context,snapshot){
-          if (snapshot.connectionState == ConnectionState.done){
-
-            print(snapshot.data);
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(30),
-                    child: const Text("Recommended",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                    )),
-                  ),
-                  Wrap(
-                    direction: Axis.horizontal,
-                  children: _getRecipes(snapshot.data)
-                ),]
-              ),
-            );
-          }else{
-            return const Center(child: CircularProgressIndicator());
-          }
-
-
-        });
-
-
-  }
-
- List<Widget> _getRecipes(List<Recipe>? recipes) {
-    List<Widget>  list = [];
-    if (recipes == null){
-      return list;
-    }else{
-      for (int i = 0; i < recipes.length; i++) {list.add(buildContainer(recipes[i],i));}
-    }
-    return list;
- }
-
-  _navigate(int index){
+  _navigate(int index) {
     switch (index) {
       case 0:
         Navigator.of(context).push(
@@ -126,7 +48,6 @@ class _RecipesPage extends State<RecipesPage> {
             MaterialPageRoute(builder: (context) => const MapPage()));
         break;
     }
-
   }
 
   BottomNavigationBar buildBottomNavigationBar() {
@@ -213,5 +134,42 @@ class _RecipesPage extends State<RecipesPage> {
     );
   }
 
+  SingleChildScrollView buildSingleChildScrollView(Recipe recipe) {
+    return SingleChildScrollView(
+      child: Column(
+          children: [
+      Container(
+      margin: const EdgeInsets.all(20),
+      child: Center(
+        child: Text(recipe.title.toString().trim(),
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    ),
+       Container(margin: const EdgeInsets.all(20),
+          child: Center(
+            child: Text(recipe.preparation.toString().trim(),
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w400,)
+    ),
+    ),
+       ),
+            Container(margin: const EdgeInsets.all(20),
+                child: Text(recipe.author.name.toString(),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,)
+                ),
+              ),
+    ],
+    ),
+    );
+  }
 
 }

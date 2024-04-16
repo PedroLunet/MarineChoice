@@ -23,6 +23,14 @@ class _MapPageState extends State<MapPage> {
   }
 
   @override
+  void dispose() {
+    double l =0;
+    double l1 =0;
+    var p = LatLng(l,l1);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
