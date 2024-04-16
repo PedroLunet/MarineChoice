@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 import "package:country_picker/country_picker.dart";
+import 'package:flutter/cupertino.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage();
+
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+
+  String _ageinit = '1';
+
+  List<String> _items() {
+    return List.generate(99, (index) => (index + 1).toString());
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +79,21 @@ class RegisterPage extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: DropdownButton<String>(
-                  value: 'age',
-                  onChanged: (String? newValue) {},
-                  items: <String>['age', 'country1', 'country2', 'country3']
-                      .map<DropdownMenuItem<String>>((String value) {
+                  value: _ageinit,
+                  icon: const Icon(Icons.arrow_downward),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _ageinit = newValue!;
+                    }
+                    );
+                  },
+                  items: _items().map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
                     );
                   }).toList(),
-                ),
+                )
               ),
               const SizedBox(height: 15),
               Container(

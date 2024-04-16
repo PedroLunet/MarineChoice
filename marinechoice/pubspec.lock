@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  awesome_number_picker:
+    dependency: "direct main"
+    description:
+      name: awesome_number_picker
+      sha256: e9d289499b04dd566a1a9a1eb68003c07cca5728d06edcd57961cbc4f06614ca
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   boolean_selector:
     dependency: transitive
     description:
