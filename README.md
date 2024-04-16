@@ -72,11 +72,11 @@ MarineChoice empowers seafood consumers by offering insights into harmful fishin
 
 ## Architecture and Design
 
-### Physical Architecture
+### Logical Design
 
 ![image-2](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/e36f1651-87b0-4700-8ab2-be8d79483422)
 
-### Logical Design
+### Physical Architecture
 
 ![image-1](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/6e90a0a0-3192-4b20-9035-2fa164c1a4f7)
 
