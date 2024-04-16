@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
-import 'package:csc_picker/csc_picker.dart';
+import 'package:country_list_pick/country_list_pick.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -21,9 +21,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController usernameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController confirmPasswordController = TextEditingController();
+    TextEditingController nameController = TextEditingController();
+    TextEditingController usernameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
+
 
     bool checkPassword() {
       String password = passwordController.text;
@@ -33,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
       body: Container(
-        color: Colors.blue[100],
+        color: Colors.green[100],
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,6 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 2),
               const Text(
                 'Register',
                 style: TextStyle(
@@ -54,16 +58,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 2),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
-                  controller: usernameController,
+                  controller: nameController,
                   decoration: const InputDecoration(
                     hintText: 'name',
                   ),
                 ),
               ),
+              const SizedBox(height: 2),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
@@ -73,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 2),
               Container(
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.symmetric(horizontal: 50),
@@ -94,27 +99,34 @@ class _RegisterPageState extends State<RegisterPage> {
                   }).toList(),
                 )
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 2),
               Container(
                 alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.symmetric(horizontal: 50),
-                child: CSCPicker(
-                  onCountryChanged: (value) {
-                    print(value);
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                child: CountryListPick(
+                  theme: CountryTheme(
+                    isShowFlag: true,
+                    isShowTitle: true,
+                    isShowCode: false,
+                    isDownIcon: true,
+                    showEnglishName: true,
+                  ),
+                  onChanged: (CountryCode? code) {
+                    print(code!.name);
                   },
-                  showStates: false,
-                  showCities: false,
                 ),
               ),
+              const SizedBox(height: 2),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
-                  controller: usernameController,
+                  controller: emailController,
                   decoration: const InputDecoration(
                     hintText: 'e-mail',
                   ),
                 ),
               ),
+              const SizedBox(height: 2),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
@@ -125,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 2),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
