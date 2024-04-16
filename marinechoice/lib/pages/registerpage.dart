@@ -78,6 +78,23 @@ class RegisterPage extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const HomePage()),
                     );
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Registration Successful'),
+                          content: const Text('You have successfully registered.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Close'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   } else {
                     // Handle password mismatch error
                     ScaffoldMessenger.of(context).showSnackBar(

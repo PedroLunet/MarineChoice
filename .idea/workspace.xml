@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30ab036b-69c6-4f1a-a985-de9583d30b85" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/marinechoice/lib/pages/registerpage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/lib/pages/loginpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/lib/pages/loginpage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marinechoice/lib/pages/registerpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/lib/pages/registerpage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
