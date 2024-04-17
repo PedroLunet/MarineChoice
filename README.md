@@ -123,4 +123,6 @@ Sprint 1 end:
 
 ![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/84a559a9-8d74-4208-a5bc-bce7a13fc765)
 
+[Release V1.0.0](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/releases/tag/Releasev1.0.0)
+
 
