@@ -33,8 +33,8 @@ CREATE TABLE FISH
     idFish integer PRIMARY KEY AUTOINCREMENT,
     name varchar(50),
     origin varchar(100),
-    sustainabilityRate float,
-    avgPricePerKg float
+    sustainabilityRate double,
+    avgPricePerKg double
 );
 
 
@@ -53,8 +53,8 @@ DROP TABLE IF EXISTS FISHAREA;
 CREATE TABLE FISHAREA
 (
     idAreaF integer,
-    latitude float,
-    longitude float,
+    latitude double,
+    longitude double,
     fish integer,
     FOREIGN KEY (fish) REFERENCES FISH(idFish),
     PRIMARY KEY (idAreaF)

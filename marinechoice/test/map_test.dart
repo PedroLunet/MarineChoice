@@ -33,4 +33,20 @@ void main() {
       expect(find.text('Loading...'), findsOneWidget);
     });
   });
-}
+
+  group('MapPage', () {
+    testWidgets('build returns correct widget tree', (WidgetTester tester) async {
+      final widget = MaterialApp(
+        home: MapPage(),
+      );
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Scaffold), findsOneWidget);
+      expect(find.byType(AppBar), findsOneWidget);
+      expect(find.byType(BottomNavigationBar), findsOneWidget);
+      expect(find.byType(GoogleMap), findsOneWidget);
+    });
+  });
+  }
+

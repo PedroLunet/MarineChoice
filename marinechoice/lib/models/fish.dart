@@ -6,8 +6,8 @@ class Fish{
   final int? idFish;
   final String? name;
   final String? origin;
-  final Float? sustainabilityRate;
-  final Float? avgPricePerKg;
+  final double sustainabilityRate;
+  final double avgPricePerKg;
 
   /* idFish integer PRIMARY KEY AUTOINCREMENT,
     name varchar(50),
