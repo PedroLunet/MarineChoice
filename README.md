@@ -16,7 +16,7 @@ You can find here details about the MarineChoice, from a high-level vision to lo
     - [Physical architecture](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#physical-architecture)
     - [Vertical prototype](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#vertical-prototype)
 - [Project Management](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#project-management)
-    - [Iteration retrospective meeting (V1.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#iteration-retrospective-meeting-(v1.0.0))
+    - [Iteration retrospective meeting (V1.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#iteration-retrospective-meeting-v100)
 
 Contributions are expected to be made exclusively by the initial team, but we may open them to the community, after the course, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
