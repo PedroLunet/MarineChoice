@@ -16,6 +16,7 @@ You can find here details about the MarineChoice, from a high-level vision to lo
     - [Physical architecture](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#physical-architecture)
     - [Vertical prototype](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#vertical-prototype)
 - [Project Management](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#project-management)
+    - [Iteration retrospective meeting (V1.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#iteration-retrospective-meeting-v100)
 
 Contributions are expected to be made exclusively by the initial team, but we may open them to the community, after the course, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
@@ -91,6 +92,35 @@ In this prototype we have implemented a few simple features, like allowing the u
 
 ## Project Management
 
+# Iteration retrospective meeting (V1.0.0)
+#6 - Interactive map feature allowing users to view protected areas to monitor overfishing.<br>
+#5 - Interactive map showcasing various fishes' original fishing locations.<br>
+#7 - Recipe list feature displaying sustainable fish recipes for user convenience.<br>
+#8 - Detailed recipe information view to provide users with cooking instructions.<br>
+
+
+## What went well?
+- We have successfully implemented all planned features and resolved identified issues in accordance with the outlined objectives.
+- We worked well together as a team, supporting each other's strengths and weaknesses, which helped us achieve our goals effectively.
+
+## What should we do differently?
+- We should have organized our priorities better to manage our resources more efficiently.
+- We should have started working earlier to get things done more smoothly.
+- We should have implemented better organization within the codebase.
+
+## What still puzzles me?
+- Despite our efforts, we encountered ongoing challenges with the architectures.
+- We encountered difficulties with the acceptance tests.
+- - We were not able to complete unit testing.
+
+# Board
+
 Sprint 1 beginning:
+
 ![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/3efa67e3-0c0c-4170-b65a-194aab3da556)
+
+Sprint 1 end:
+
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/84a559a9-8d74-4208-a5bc-bce7a13fc765)
+
 
