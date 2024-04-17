@@ -111,7 +111,7 @@ In this prototype we have implemented a few simple features, like allowing the u
 ## What still puzzles me?
 - Despite our efforts, we encountered ongoing challenges with the architectures.
 - We encountered difficulties with the acceptance tests.
-- - We were not able to complete unit testing.
+- We were not able to complete unit testing.
 
 # Board
 
