@@ -1,7 +1,6 @@
 import 'dart:core';
 import 'dart:ffi';
 
-import 'package:flutter/cupertino.dart';
 import 'package:marinechoice/models/user.dart';
 
 class Recipe {
@@ -39,8 +38,4 @@ class Recipe {
     'permanentPost' : permanentPost
   };
 
-  @override
-  String toString() {
-    return 'Título: $title\nPreparação: $preparation\nAutor: ${author.name}';
-  }
 }

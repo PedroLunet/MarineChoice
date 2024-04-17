@@ -3,7 +3,7 @@ import 'package:marinechoice/pages/homepage.dart';
 import 'package:marinechoice/pages/loginpage.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'dbhelperfilters.dart';
+import 'dbhelper.dart';
 
 void main() {
   runApp(const MyApp());

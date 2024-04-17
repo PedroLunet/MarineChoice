@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/mappage.dart';
-import 'package:marinechoice/dbhelperfilters.dart';
+import 'package:marinechoice/dbhelper.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:sqflite/sqflite.dart';
 

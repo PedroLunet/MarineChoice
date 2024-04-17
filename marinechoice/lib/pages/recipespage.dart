@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:marinechoice/dbhelperfilters.dart';
+import 'package:marinechoice/dbhelper.dart';
 import 'package:marinechoice/pages/recipeinfopage.dart';
 
 import '../models/recipe_model.dart';
@@ -46,7 +46,7 @@ class _RecipesPage extends State<RecipesPage> {
         child:Container(
         padding: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width/2 - 20,
-        height: 110,
+        height: 130,
         decoration: BoxDecoration(
             border: Border.all(color: const Color(0xffD6E7F7), width: 3),
             color: const Color(0xffD6E7F7),
