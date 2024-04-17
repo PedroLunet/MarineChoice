@@ -8,7 +8,7 @@ class Recipe {
   final String title;
   final double sustainability;
   final String cusineType;
-  final double rating;
+  final Float? rating;
   final bool permanentPost;
   final String preparation;
   final User author;
