@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'homepage.dart';
+import 'registerpage.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,11 @@ class LoginPage extends StatelessWidget {
       print('Username: $username, Password: $password');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const HomePage()));
+    }
+
+    void registerPressed() {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const RegisterPage()));
     }
 
     return Scaffold(
@@ -66,6 +72,10 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: loginPressed,
                 child: const Text('Login'),
+              ),
+              ElevatedButton(
+                onPressed: registerPressed,
+                child: const Text('Register'),
               ),
             ],
           ),

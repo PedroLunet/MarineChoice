@@ -72,7 +72,7 @@ MarineChoice empowers seafood consumers by offering insights into harmful fishin
 
 ## Architecture and Design
 
-### Logical Architecture
+### Logical Design
 
 ![image-2](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/e36f1651-87b0-4700-8ab2-be8d79483422)
 
@@ -91,4 +91,6 @@ In this prototype we have implemented a few simple features, like allowing the u
 
 ## Project Management
 
-![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/89967de9-0b6b-457c-a386-025769a1813d)
+Sprint 1 beginning:
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/3efa67e3-0c0c-4170-b65a-194aab3da556)
+

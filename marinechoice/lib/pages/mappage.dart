@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:marinechoice/models/fisharea_model.dart';
+import 'package:marinechoice/pages/recipespage.dart';
 
+import '../dbhelper.dart';
+import '../models/protarea_model.dart';
 import 'homepage.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
+
   @override
   State<MapPage> createState() => _MapPageState();
 }
@@ -14,36 +19,106 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   Location _locationController = new Location();
   LatLng? _currentP = null;
+  Future<Set<Marker>?>? _pointsFuture;
 
   @override
   void initState() {
     super.initState();
+    _pointsFuture = getPoints();
     getLocationUpdates();
+
+  }
+
+  Future<Set<Marker>?> getPoints() async {
+    try {
+      Set<Marker> set = {};
+      var protectedAreas = await DataBaseHelperFilters.getAllProtectedAreas();
+
+      if (protectedAreas == null) {
+        return set;
+      }
+
+      for (var element in protectedAreas) {
+        set.add(Marker(
+            infoWindow: InfoWindow(title: "Area Protegida",snippet: element.description),
+            markerId: MarkerId("p_area_${element.idAreaP}"),
+            icon:
+            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+            position: LatLng(element.latitude, element.longitude)));
+      }
+
+      var fishAreas = await DataBaseHelperFilters.getAllFishAreas();
+
+      if (fishAreas == null) {
+        return set;
+      }
+
+      for (var element in fishAreas) {
+        set.add(Marker(
+            infoWindow: InfoWindow(title: "Area de Pesca",snippet: "Pesca de ${element.fish.name}"),
+            markerId: MarkerId("f_area_${element.idAreaF}"),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueMagenta),
+            position: LatLng(element.latitude, element.longitude)));
+      }
+
+
+      return set;
+    } catch (e) {
+      print("Error fetching points: $e");
+      return null; // Return null to indicate error
+    }
+  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(),
-      bottomNavigationBar: buildBottomNavigationBar(),
-      body: _currentP == null
-          ? const Center(
-        child: Text("Loading...", style: TextStyle(fontSize: 40),),
-      )
-          : GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: _currentP!,
-          zoom: 3,
-        ),
-        markers: {
-          Marker(
-              markerId: MarkerId("_currentLocation"),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                  BitmapDescriptor.hueBlue),
-              position: _currentP!),
-        },
-      ),
-    );
+    return FutureBuilder<Set<Marker>?>(
+        future: _pointsFuture,
+        builder: (context, snapshot) {
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data != null) {
+              var set = snapshot.data!;
+              if (_currentP != null){
+                set.add(Marker(
+                    infoWindow: InfoWindow(title: "Localização Atual"),
+
+                    markerId: MarkerId("_currentLocation"),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+                    position: _currentP!));
+              }
+
+              return Scaffold(
+                appBar: buildAppBar(),
+                bottomNavigationBar: buildBottomNavigationBar(),
+                body: _currentP == null
+                    ? const Center(
+                  child: Text(
+                    "Loading...",
+                    style: TextStyle(fontSize: 40),
+                  ),
+                )
+                    : GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: _currentP!,
+                      zoom: 3,
+                    ),
+                    markers: set),
+              );
+            }
+
+
+          }
+          return const Center(child: CircularProgressIndicator(),);
+
+        });
+
   }
 
   Future<void> getLocationUpdates() async {
@@ -82,12 +157,16 @@ class _MapPageState extends State<MapPage> {
   _navigate(int index) {
     switch (index) {
       case 0:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const HomePage()));
+        break;
+      case 2:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const RecipesPage()));
         break;
       case 3:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const MapPage()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const MapPage()));
         break;
     }
   }
@@ -102,31 +181,55 @@ class _MapPageState extends State<MapPage> {
       items: [
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
-            'assets/icons/home.svg', height: 25, width: 30,),
-          label: ("HOME"),),
+            'assets/icons/home.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: ("HOME"),
+        ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
-            'assets/icons/fishing-rod.svg', height: 25, width: 30,),
-          label: ("FIND"),),
+            'assets/icons/fishing-rod.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: ("FIND"),
+        ),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/chef-hat.svg', height: 30, width: 30,),
+              'assets/icons/chef-hat.svg',
+              height: 30,
+              width: 30,
+            ),
             label: ("COOK")),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/map.svg', height: 30, width: 30,),
+              'assets/icons/map.svg',
+              height: 30,
+              width: 30,
+            ),
             label: ("MAP")),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/envelope-open.svg', height: 25, width: 30,),
+              'assets/icons/envelope-open.svg',
+              height: 25,
+              width: 30,
+            ),
             label: ("SHARE")),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/user.svg', height: 30, width: 30,),
+              'assets/icons/user.svg',
+              height: 30,
+              width: 30,
+            ),
             label: ("YOU")),
       ],
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900,),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900,),
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w900,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w900,
+      ),
     );
   }
 
@@ -147,7 +250,7 @@ class _MapPageState extends State<MapPage> {
         decoration: InputDecoration(
           suffixIcon: Padding(
               padding:
-              const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
+                  const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
               child: SvgPicture.asset('assets/icons/search.svg')),
           hintText: 'Search...',
           hintStyle: TextStyle(color: Colors.black87),
@@ -175,5 +278,4 @@ class _MapPageState extends State<MapPage> {
       ],
     );
   }
-
 }
