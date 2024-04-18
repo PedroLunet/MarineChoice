@@ -103,15 +103,20 @@ In this prototype we have implemented a few simple features, like allowing the u
 - We have successfully implemented all planned features and resolved identified issues in accordance with the outlined objectives.
 - We worked well together as a team, supporting each other's strengths and weaknesses, which helped us achieve our goals effectively.
 
-## What should we do differently?
+## What could have gone better?
 - We should have organized our priorities better to manage our resources more efficiently.
 - We should have started working earlier to get things done more smoothly.
 - We should have implemented better organization within the codebase.
 
-## What still puzzles me?
+## What still puzzles us?
 - Despite our efforts, we encountered ongoing challenges with the architectures.
 - We encountered difficulties with the acceptance tests.
 - We were not able to complete unit testing.
+
+## What are we going to do to improve?
+- We should always start a meeting by determining what we can do until our next meeting and who should do what.
+- We should schedule a metting for every saturday afternoon, so we can set up everything early in the sprint.
+- We should try to follow good coding practices, get rid of dead code and try to minimize repeated code.
 
 # Board
 
