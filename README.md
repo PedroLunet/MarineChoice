@@ -130,4 +130,11 @@ Sprint 1 end:
 
 [Release V1.0.0](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/releases/tag/Releasev1.0.0)
 
+#Board
+
+Sprint 2 beginning:
+
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/c97631af-9bd7-402a-8fc8-70514808585f)
+
+
 
