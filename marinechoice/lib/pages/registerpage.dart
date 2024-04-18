@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
       body: Container(
-        color: Colors.green[100],
+        color: Colors.blue[100],
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

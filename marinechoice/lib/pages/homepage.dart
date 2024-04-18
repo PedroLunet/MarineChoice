@@ -4,6 +4,7 @@ import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/dbhelper.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:animated_search_bar/animated_search_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   int selectedBox = -1;
+  String searchText="";
 
   @override
   Widget build(BuildContext context) {
@@ -176,27 +178,20 @@ class _HomePage extends State<HomePage> {
   AppBar buildAppBar() {
     return AppBar(
       flexibleSpace: Container(
-        margin: const EdgeInsets.only(left: 55, top: 30, right: 55, bottom: 5),
+        margin: const EdgeInsets.symmetric(horizontal: 50),
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-              colors: [Color(0xffD6E7F7), Color(0xffD6E7F7)],
-            )),
-      ),
-      title: TextField(
-        style: const TextStyle(color: Colors.black),
-        cursorColor: Colors.black87,
-        decoration: InputDecoration(
-          suffixIcon: Padding(
-              padding:
-                  const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
-              child: SvgPicture.asset('assets/icons/search.svg')),
-          hintText: 'Search...',
-          hintStyle: TextStyle(color: Colors.black87),
-          border: InputBorder.none,
+        child: AnimatedSearchBar(
+          label: "Search Something Here",
+          onChanged: (value) {
+            debugPrint("value on Change");
+            setState(() {
+              searchText = value;
+            });
+          },
         ),
       ),
+
+
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(

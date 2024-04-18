@@ -7,7 +7,8 @@
     <list default="true" id="30ab036b-69c6-4f1a-a985-de9583d30b85" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/lib/pages/registerpage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/lib/pages/registerpage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marinechoice/lib/pages/homepage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/lib/pages/homepage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marinechoice/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marinechoice/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marinechoice/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/pubspec.yaml" afterDir="false" />
     </list>
@@ -53,7 +54,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;registerpage&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/pedro/OneDrive - Universidade do Porto/Ambiente de Trabalho/2LEIC14T1&quot;,
