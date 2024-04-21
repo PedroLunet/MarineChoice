@@ -179,9 +179,11 @@ class _HomePage extends State<HomePage> {
     return AppBar(
       flexibleSpace: Container(
         margin: const EdgeInsets.symmetric(horizontal: 50),
-        alignment: Alignment.center,
+        alignment: Alignment.bottomCenter,
         child: AnimatedSearchBar(
-          label: "Search Something Here",
+          label: "Search",
+          labelAlignment: Alignment.center,
+          labelTextAlign: TextAlign.left,
           onChanged: (value) {
             debugPrint("value on Change");
             setState(() {

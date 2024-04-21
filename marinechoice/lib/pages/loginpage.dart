@@ -68,12 +68,26 @@ class LoginPage extends StatelessWidget {
                   obscureText: true, // Mask the password input
                 ),
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
+              const SizedBox(height: 25),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green[100]!),
+                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.teal[200]!)),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                ),
                 onPressed: loginPressed,
-                child: const Text('Login'),
+                child: const Text('Login',
+                    style: TextStyle(color: Colors.black),
+
+                ),
               ),
-              ElevatedButton(
+              const SizedBox(height: 10),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green[100]!),
+                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.teal[200]!)),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                ),
                 onPressed: registerPressed,
                 child: const Text('Register'),
               ),
