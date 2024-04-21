@@ -178,23 +178,30 @@ class _HomePage extends State<HomePage> {
   AppBar buildAppBar() {
     return AppBar(
       flexibleSpace: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 50),
-        alignment: Alignment.bottomCenter,
-        child: AnimatedSearchBar(
-          label: "Search",
-          labelAlignment: Alignment.center,
-          labelTextAlign: TextAlign.left,
-          onChanged: (value) {
-            debugPrint("value on Change");
-            setState(() {
-              searchText = value;
-            });
-          },
+        decoration: const BoxDecoration(
+          color: Color(0xffD6E7F7),
+          borderRadius: BorderRadius.all(Radius.circular(15),
+          ),
+        ),
+        margin: const EdgeInsets.only(top: 30, left: 50, right: 50, bottom: 5),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10.0), // Add your desired padding here
+          child: AnimatedSearchBar(
+            label: "Search",
+            height: 35,
+            labelAlignment: Alignment.center,
+            labelTextAlign: TextAlign.left,
+            onChanged: (value) {
+              debugPrint("value on Change");
+              setState(() {
+                searchText = value;
+              });
+            },
+          ),
         ),
       ),
 
-
-      backgroundColor: const Color(0xffB4D8F9),
+      backgroundColor: Colors.blue[100],
       actions: [
         GestureDetector(
           onTap: () {},

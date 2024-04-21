@@ -69,27 +69,28 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25),
-              TextButton(
+              ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green[100]!),
-                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.teal[200]!)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.blue[300]!)),
                   shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 ),
                 onPressed: loginPressed,
-                child: const Text('Login',
-                    style: TextStyle(color: Colors.black),
-
+                child: Text('Login',
+                    style: TextStyle(color: Colors.blue[900]!),
                 ),
               ),
               const SizedBox(height: 10),
-              TextButton(
+              ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green[100]!),
-                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.teal[200]!)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.blue[300]!)),
                   shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 ),
                 onPressed: registerPressed,
-                child: const Text('Register'),
+                child: Text('Register',
+                    style: TextStyle(color: Colors.blue[900]!),
+              ),
               ),
             ],
           ),
