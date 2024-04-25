@@ -165,8 +165,9 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 30),
               ElevatedButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  backgroundColor: MaterialStateProperty.all(const Color(0xff5B92C6)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.blue[300]!)),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 ),
                 onPressed: () {
                   if (checkPassword()) {

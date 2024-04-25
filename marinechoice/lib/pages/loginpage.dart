@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marinechoice/auth/auth_service.dart';
 
@@ -80,13 +77,9 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 25),
               TextButton(
                 style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.green[100]!),
-                  side: MaterialStateProperty.all<BorderSide>(
-                      BorderSide(width: 0, color: Colors.teal[200]!)),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.blue[300]!)),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 ),
                 onPressed: () async {
                   if (emailController.text.isNotEmpty &&
@@ -103,23 +96,20 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: const Text(
                   'Login',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.blue[900]!),
                 ),
               ),
               const SizedBox(height: 10),
-              TextButton(
+              ElevatedButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.green[100]!),
-                  side: MaterialStateProperty.all<BorderSide>(
-                      BorderSide(width: 0, color: Colors.teal[200]!)),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.blue[300]!)),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 ),
                 onPressed: registerPressed,
-                child: const Text('Register'),
+                child: Text('Register',
+                    style: TextStyle(color: Colors.blue[900]!),
+              ),
               ),
             ],
           ),
