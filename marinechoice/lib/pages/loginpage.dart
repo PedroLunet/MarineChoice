@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:marinechoice/auth/auth_service.dart';
 
@@ -94,9 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                     );
                   }
                 },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(color: Colors.blue[900]!),
+                child: const Text('Login',
+                  style: TextStyle(color: Color(0xff0d47a1)),
                 ),
               ),
               const SizedBox(height: 10),
