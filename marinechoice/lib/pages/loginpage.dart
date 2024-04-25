@@ -1,27 +1,36 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marinechoice/auth/auth_service.dart';
 
 import 'homepage.dart';
 import 'registerpage.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _auth = AuthService();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
-    void loginPressed() {
-      String username = usernameController.text;
-      String password = passwordController.text;
-      print('Username: $username, Password: $password');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const HomePage()));
-    }
-
     void registerPressed() {
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const RegisterPage()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const RegisterPage()));
     }
 
     return Scaffold(
@@ -51,9 +60,9 @@ class LoginPage extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
-                  controller: usernameController,
+                  controller: emailController,
                   decoration: const InputDecoration(
-                    hintText: 'Username',
+                    hintText: 'E-mail',
                   ),
                 ),
               ),
@@ -71,22 +80,43 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 25),
               TextButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green[100]!),
-                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.teal[200]!)),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.green[100]!),
+                  side: MaterialStateProperty.all<BorderSide>(
+                      BorderSide(width: 0, color: Colors.teal[200]!)),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                 ),
-                onPressed: loginPressed,
-                child: const Text('Login',
-                    style: TextStyle(color: Colors.black),
-
+                onPressed: () async {
+                  if (emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty) {
+                    _login();
+                  }
+                  else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('E-mail or password fields are empty.'),
+                      ),
+                    );
+                  }
+                },
+                child: const Text(
+                  'Login',
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
               const SizedBox(height: 10),
               TextButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green[100]!),
-                  side: MaterialStateProperty.all<BorderSide>(BorderSide(width: 0, color: Colors.teal[200]!)),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.green[100]!),
+                  side: MaterialStateProperty.all<BorderSide>(
+                      BorderSide(width: 0, color: Colors.teal[200]!)),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                 ),
                 onPressed: registerPressed,
                 child: const Text('Register'),
@@ -96,5 +126,23 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _login() async {
+    final user = await _auth.logInUserWithEmailAndPassword(
+        emailController.text, passwordController.text);
+
+    if (user != null) {
+      log("User logged in successfully!");
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const HomePage()));
+    }
+    else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('E-mail or password do not match.'),
+        ),
+      );
+    }
   }
 }

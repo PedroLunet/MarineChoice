@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111735632889",
+    "project_id": "marinechoice-b17c9",
+    "storage_bucket": "marinechoice-b17c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111735632889:android:031b2c2832dcf57c450328",
+        "android_client_info": {
+          "package_name": "com.example.marinechoice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUPJs9J88E0TC4n5K0rTq8-rO-wtL6p1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marinechoice/pages/SettingsPage.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/dbhelper.dart';
 import 'package:marinechoice/pages/recipespage.dart';
@@ -197,13 +198,16 @@ class _HomePage extends State<HomePage> {
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsPage()));
+          },
           child: Container(
             margin: const EdgeInsets.all(10),
             alignment: Alignment.center,
             width: 37,
             decoration: const BoxDecoration(
-              color: Color(0xffB4D8F9),
+              color: Colors.transparent,
             ),
             child: SvgPicture.asset(
               'assets/icons/settings.svg',

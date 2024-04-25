@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'package:marinechoice/auth/auth_service.dart';
+import 'package:marinechoice/pages/loginpage.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 
 
@@ -10,6 +13,23 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _auth = AuthService();
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+  }
 
   String _ageinit = '1';
 
@@ -21,12 +41,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController usernameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController confirmPasswordController = TextEditingController();
-
 
     bool checkPassword() {
       String password = passwordController.text;
@@ -64,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
-                    hintText: 'name',
+                    hintText: 'Name',
                   ),
                 ),
               ),
@@ -74,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextField(
                   controller: usernameController,
                   decoration: const InputDecoration(
-                    hintText: 'username',
+                    hintText: 'Username',
                   ),
                 ),
               ),
@@ -122,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
-                    hintText: 'e-mail',
+                    hintText: 'E-mail',
                   ),
                 ),
               ),
@@ -133,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    hintText: 'password',
+                    hintText: 'Password',
                   ),
                 ),
               ),
@@ -151,12 +165,15 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 30),
               ElevatedButton(
                 style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
                   backgroundColor: MaterialStateProperty.all(const Color(0xff5B92C6)),
                 ),
                 onPressed: () {
                   if (checkPassword()) {
+                    if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+                    _signup();
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const HomePage()),
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
                     showDialog(
                       context: context,
@@ -174,7 +191,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           ],
                         );
                       },
-                    );
+                    );}
+                    else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('E-mail or password fields are empty.'),
+                        ),
+                      );
+                    }
                   } else {
                     // Handle password mismatch error
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -191,5 +215,13 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  _signup() async{
+    final user = await _auth.createUserWithEmailAndPassword(emailController.text, passwordController.text);
+
+    if(user != null) {
+      log("User Created Successfully");
+    }
   }
 }
