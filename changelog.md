@@ -3,7 +3,7 @@
 ## [1.0.0] - 21-04-2024
 
 - Changed some buttons design;
-- Also change the search bar a bit.
+- Change the search bar.
 
 ## [1.0.1] - 25-04-2024
 
