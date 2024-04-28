@@ -20,5 +20,5 @@
 - Recipe data is now stored and pulled from the server;
 - Fish Areas data is now stored and pulled from the server;
 - Protected Areas data is now stored and pulled from the server;
-- Settings page now shows is accessible through every page;
+- Settings page now is accessible through every page;
 
