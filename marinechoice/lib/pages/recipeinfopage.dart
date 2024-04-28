@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 
 import '../models/recipe_model.dart';
+import 'SettingsPage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
@@ -114,7 +115,10 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsPage()));
+          },
           child: Container(
             margin: const EdgeInsets.all(10),
             alignment: Alignment.center,

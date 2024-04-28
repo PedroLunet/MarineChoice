@@ -8,6 +8,7 @@ import 'package:marinechoice/pages/recipespage.dart';
 import '../dbhelper.dart';
 import '../models/fisharea_model.dart';
 import '../models/protarea_model.dart';
+import 'SettingsPage.dart';
 import 'homepage.dart';
 
 class MapPage extends StatefulWidget {
@@ -257,7 +258,10 @@ class _MapPageState extends State<MapPage> {
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsPage()));
+          },
           child: Container(
             margin: const EdgeInsets.all(10),
             alignment: Alignment.center,
