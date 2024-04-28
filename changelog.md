@@ -22,4 +22,6 @@
 - Protected Areas data is now stored and pulled from the server;
 - Settings page now is accessible through every page;
 - Changed name of some buttons;
+- Removed local database;
+- Removed all models related to local database;
 
