@@ -1,9 +1,9 @@
 import "package:sqflite/sqflite.dart";
 import "package:path/path.dart";
 
-import "models/fisharea_model.dart";
-import "models/protarea_model.dart";
-import "models/recipe_model.dart";
+import "models/randof.dart";
+import "models/randop.dart";
+import "models/rando.dart";
 
 class DataBaseHelperFilters {
   static Future<Database> initDB() async {

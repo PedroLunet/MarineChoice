@@ -140,7 +140,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       Container(
       margin: const EdgeInsets.all(20),
       child: Center(
-        child: Text(recipe.title.toString().trim(),
+        child: Text(recipe.recipeData!.title!,
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 32,
@@ -151,7 +151,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
     ),
        Container(margin: const EdgeInsets.all(20),
           child: Center(
-            child: Text(recipe.preparation.toString().trim(),
+            child: Text(recipe.recipeData!.preparation!,
             textAlign: TextAlign.center,
             style: const TextStyle(
             fontSize: 15,
@@ -160,7 +160,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
     ),
        ),
             Container(margin: const EdgeInsets.all(20),
-                child: Text(recipe.author.name.toString(),
+                child: Text(recipe.recipeData!.author!,
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,)

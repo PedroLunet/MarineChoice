@@ -1,25 +1,22 @@
 import 'dart:core';
 
 class ProtArea {
-  final int? idAreaP;
-  final double latitude;
-  final double longitude;
-  final String description;
+  String? key;
+  ProtAreaData? protAreaData;
 
-  const ProtArea({required this.idAreaP, required this.latitude, required this.longitude,required this.description});
+  ProtArea({this.key, this.protAreaData});
+}
 
-  factory ProtArea.fromJson(Map<String, dynamic> json) => ProtArea (
-    idAreaP: json['idAreaP'],
-    latitude: json['latitude'],
-    longitude: json['longitude'],
-    description: json['description'],
-  );
+class ProtAreaData {
+  String? latitude;
+  String? longitude;
+  String? description;
 
-  Map<String, dynamic> toJson() => {
-    'idAreaP' : idAreaP,
-    'latitude' : latitude,
-    'longitude' : longitude,
-    'description' : description
-  };
+  ProtAreaData({required this.latitude, required this.longitude,required this.description});
 
+  ProtAreaData.fromJson(Map<dynamic, dynamic> json) {
+    latitude = json["latitude"];
+    longitude = json["longitude"];
+    description = json["description"];
+  }
 }

@@ -42,6 +42,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   firebase_core: ^2.30.1
   firebase_auth: ^4.19.4
+  firebase_database: ^10.5.4
   flutter_svg: ^2.0.10+1
   country_list_pick: ^1.0.1+6
   animated_search_bar: ^2.7.1
