@@ -4,8 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:marinechoice/pages/recipespage.dart';
-
-import '../dbhelper.dart';
 import '../models/fisharea_model.dart';
 import '../models/protarea_model.dart';
 import 'SettingsPage.dart';

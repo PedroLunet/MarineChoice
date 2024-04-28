@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:marinechoice/models/recipe_model.dart';
-import 'package:marinechoice/models/user.dart';
 
 void main() {
   group('Recipe model test', () {

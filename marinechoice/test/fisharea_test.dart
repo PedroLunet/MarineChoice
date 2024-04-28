@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:marinechoice/models/fisharea_model.dart';
-import 'package:marinechoice/models/fish.dart';
 
 void main() {
   group('FishArea model test', () {
