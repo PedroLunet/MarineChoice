@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/SettingsPage.dart';
 import 'package:marinechoice/pages/mappage.dart';
-import 'package:marinechoice/dbhelper.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:animated_search_bar/animated_search_bar.dart';
@@ -106,7 +105,7 @@ class _HomePage extends State<HomePage> {
           label: ("HOME"),),
         BottomNavigationBarItem(
           icon: SvgPicture.asset('assets/icons/fishing-rod.svg', height: 25, width: 30,),
-          label: ("FIND"),),
+          label: ("FISH"),),
         BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/chef-hat.svg', height: 30, width: 30,),
             label: ("COOK")),
@@ -115,7 +114,7 @@ class _HomePage extends State<HomePage> {
             label: ("MAP")),
         BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/envelope-open.svg', height: 25, width: 30,),
-            label: ("SHARE")),
+            label: ("POST")),
         BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/user.svg', height: 30, width: 30,),
             label: ("YOU")),

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 
 import '../models/recipe_model.dart';
+import 'SettingsPage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
@@ -64,7 +65,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
             'assets/icons/fishing-rod.svg', height: 25, width: 30,),
-          label: ("FIND"),),
+          label: ("FISH"),),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/chef-hat.svg', height: 30, width: 30,),
@@ -76,7 +77,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/envelope-open.svg', height: 25, width: 30,),
-            label: ("SHARE")),
+            label: ("POST")),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/user.svg', height: 30, width: 30,),
@@ -114,7 +115,10 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsPage()));
+          },
           child: Container(
             margin: const EdgeInsets.all(10),
             alignment: Alignment.center,
@@ -140,7 +144,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       Container(
       margin: const EdgeInsets.all(20),
       child: Center(
-        child: Text(recipe.title.toString().trim(),
+        child: Text(recipe.recipeData!.title!,
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 32,
@@ -151,7 +155,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
     ),
        Container(margin: const EdgeInsets.all(20),
           child: Center(
-            child: Text(recipe.preparation.toString().trim(),
+            child: Text(recipe.recipeData!.preparation!,
             textAlign: TextAlign.center,
             style: const TextStyle(
             fontSize: 15,
@@ -160,7 +164,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
     ),
        ),
             Container(margin: const EdgeInsets.all(20),
-                child: Text(recipe.author.name.toString(),
+                child: Text(recipe.recipeData!.author!,
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,)

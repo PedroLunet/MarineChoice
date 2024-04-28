@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:marinechoice/models/user.dart';
 
 void main() {
   group('User model test', () {

@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:marinechoice/models/user.dart';
 import 'package:marinechoice/pages/recipeinfopage.dart';
 import 'package:marinechoice/models/recipe_model.dart';
 
