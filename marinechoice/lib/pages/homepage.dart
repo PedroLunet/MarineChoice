@@ -81,11 +81,11 @@ class _HomePage extends State<HomePage> {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const HomePage()));
           break;
-        case 1:
+        case 2:
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const RecipesPage()));
           break;
-        case 2:
+        case 3:
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const MapPage()));
           break;
@@ -104,6 +104,9 @@ class _HomePage extends State<HomePage> {
         BottomNavigationBarItem(
           icon: SvgPicture.asset('assets/icons/home.svg', height: 25, width: 30,),
           label: ("HOME"),),
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset('assets/icons/fishing-rod.svg', height: 25, width: 30,),
+          label: ("FISH"),),
         BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/chef-hat.svg', height: 30, width: 30,),
             label: ("COOK")),

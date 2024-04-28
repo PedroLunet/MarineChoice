@@ -158,11 +158,11 @@ class _MapPageState extends State<MapPage> {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const HomePage()));
         break;
-      case 1:
+      case 2:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const RecipesPage()));
         break;
-      case 2:
+      case 3:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const MapPage()));
         break;
@@ -172,7 +172,7 @@ class _MapPageState extends State<MapPage> {
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xff5B92C6),
-      currentIndex: 2,
+      currentIndex: 3,
       onTap: _navigate,
       selectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
@@ -184,6 +184,14 @@ class _MapPageState extends State<MapPage> {
             width: 30,
           ),
           label: ("HOME"),
+        ),
+        BottomNavigationBarItem(
+          icon: SvgPicture.asset(
+            'assets/icons/fishing-rod.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: ("FISH"),
         ),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
