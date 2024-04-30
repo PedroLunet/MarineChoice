@@ -45,7 +45,7 @@ class _MapPageState extends State<MapPage> {
             infoWindow: InfoWindow(title: "Area Protegida",snippet: element.protAreaData!.description!),
             markerId: MarkerId("p_area_${element.protAreaData!.description!}"),
             icon:
-            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
             position: LatLng(double.parse(element.protAreaData!.latitude!), double.parse(element.protAreaData!.longitude!))));
       }
 
@@ -54,7 +54,7 @@ class _MapPageState extends State<MapPage> {
             infoWindow: InfoWindow(title: "Area de Pesca",snippet: "Pesca de ${element.fishAreaData!.fish!}"),
             markerId: MarkerId("f_area_${element.fishAreaData!.fish!}"),
             icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueMagenta),
+                BitmapDescriptor.hueGreen),
             position: LatLng(double.parse(element.fishAreaData!.latitude!), double.parse(element.fishAreaData!.longitude!))));
       }
 
@@ -75,46 +75,78 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Set<Marker>?>(
-        future: _pointsFuture,
-        builder: (context, snapshot) {
-
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data != null) {
-              var set = snapshot.data!;
-              if (_currentP != null){
-                set.add(Marker(
-                    infoWindow: InfoWindow(title: "Localização Atual"),
-
-                    markerId: MarkerId("_currentLocation"),
-                    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-                    position: _currentP!));
-              }
-
-              return Scaffold(
-                appBar: buildAppBar(),
-                bottomNavigationBar: buildBottomNavigationBar(),
-                body: _currentP == null
-                    ? const Center(
-                  child: Text(
-                    "Loading...",
-                    style: TextStyle(fontSize: 40),
-                  ),
-                )
-                    : GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      target: _currentP!,
-                      zoom: 3,
-                    ),
-                    markers: set),
-              );
+      future: _pointsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.data != null) {
+            var set = snapshot.data!;
+            if (_currentP != null) {
+              set.add(Marker(
+                infoWindow: InfoWindow(title: "Localização Atual"),
+                markerId: MarkerId("_currentLocation"),
+                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+                position: _currentP!,
+              ));
             }
 
-
+            return Scaffold(
+              appBar: buildAppBar(),
+              bottomNavigationBar: buildBottomNavigationBar(),
+              body: Stack(
+                children: [
+                  GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: _currentP ?? LatLng(0, 0),
+                      zoom: 3,
+                    ),
+                    markers: set,
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    left: 20,
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.circle, color: Colors.red),
+                              SizedBox(width: 5),
+                              Text("Área Protegida"),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.circle, color: Colors.green),
+                              SizedBox(width: 5),
+                              Text("Área de Pesca"),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
           }
-          return const Center(child: CircularProgressIndicator(),);
-
-        });
-
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    );
   }
 
   Future<void> getLocationUpdates() async {
