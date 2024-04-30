@@ -15,6 +15,7 @@ class RecipeData {
   String? cusineType;
   String? rating;
   String? permanentPost;
+  List<String>? ingredient;
   String? preparation;
   String? author;
 
@@ -25,6 +26,7 @@ class RecipeData {
       required this.cusineType,
       required this.rating,
       required this.permanentPost,
+      required this.ingredient,
       required this.preparation,
       required this.author});
 
@@ -35,7 +37,22 @@ class RecipeData {
     cusineType = json["cusineType"];
     rating = json["rating"];
     permanentPost = json["permanentPost"];
+    ingredient = json["ingredient"]?.cast<String>();
     preparation = json["preparation"];
     author = json["author"];
   }
 }
+
+/*
+class Ingredient {
+  String? id;
+  String? ingredient;
+
+  Ingredient({required this.id, required this.ingredient});
+
+  Ingredient.fromJson(Map<dynamic, dynamic> json) {
+    id = json["id"];
+    ingredient = json["ingredient"];
+  }
+}
+ */
