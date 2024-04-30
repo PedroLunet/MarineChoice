@@ -25,3 +25,12 @@
 - Removed local database;
 - Removed all models related to local database;
 
+## [1.0.3] - 30-04-2024
+
+- Created the acceptance tests in feature files;
+- Assigned the .feature files to their respective user story;
+- Added legend to the map regarding which colors where the fishing areas and which were the protected areas;
+- Changed color of the markers;
+
+
+

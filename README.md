@@ -136,5 +136,12 @@ Sprint 2 beginning:
 
 ![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/c97631af-9bd7-402a-8fc8-70514808585f)
 
+# Sprint Reviews
+
+- Sprint 1
+In this sprint, we encountered a few mishaps. Notably, there were some errors, such as items not being properly assigned to the respective team members, and the release being incorrectly marked. Despite these challenges, we successfully completed all the tasks we had planned for this sprint and addressed some issues that had persisted from Sprint 0.
+
+- Sprint 2
+In this sprint, we successfully addressed the issues described previously and began drafting the changelog. We have completed the all of the user stories planned for this sprint.
 
 
