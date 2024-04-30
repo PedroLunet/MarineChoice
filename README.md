@@ -142,6 +142,6 @@ Sprint 2 beginning:
 In this sprint, we encountered a few mishaps. Notably, there were some errors, such as items not being properly assigned to the respective team members, and the release being incorrectly marked. Despite these challenges, we successfully completed all the tasks we had planned for this sprint and addressed some issues that had persisted from Sprint 0.
 
 - Sprint 2
-In this sprint, we successfully addressed the issues described previously and began drafting the changelog. We have completed the majority of the user stories planned for this sprint.
+In this sprint, we successfully addressed the issues described previously and began drafting the changelog. We have completed the all of the user stories planned for this sprint.
 
 
