@@ -244,9 +244,14 @@ class _RecipesPage extends State<RecipesPage> {
     var result = await _database.child("RECIPE").get();
 
     for (var recipe in result.children) {
-      RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
-      Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
-      recipeList.add(recipef);
+      try{
+        RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
+        Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
+        recipeList.add(recipef);
+      }catch(e){
+        print("Error: ${e.toString()}");
+      }
+
     }
   }
 }

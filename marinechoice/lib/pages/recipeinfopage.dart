@@ -140,39 +140,75 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
   SingleChildScrollView buildSingleChildScrollView(Recipe recipe) {
     return SingleChildScrollView(
       child: Column(
-          children: [
-      Container(
-      margin: const EdgeInsets.all(20),
-      child: Center(
-        child: Text(recipe.recipeData!.title!,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-    ),
-       Container(margin: const EdgeInsets.all(20),
-          child: Center(
-            child: Text(recipe.recipeData!.preparation!,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w400,)
-    ),
-    ),
-       ),
-            Container(margin: const EdgeInsets.all(20),
-                child: Text(recipe.recipeData!.author!,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,)
+        children: [
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: Center(
+              child: Text(
+                recipe.recipeData?.title ?? 'Title not available',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-    ],
-    ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: const Text(
+              "Ingredients:",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          // Check if recipeData and ingredients are not null before accessing them
+          if (recipe.recipeData != null && recipe.recipeData!.ingredient != null)
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: recipe.recipeData!.ingredient!.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(
+                    recipe.recipeData!.ingredient![index],
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                );
+              },
+            ),
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: Center(
+              child: Text(
+                recipe.recipeData?.preparation ?? 'Preparation not available',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: Text(
+              "Author: ${recipe.recipeData?.author ?? 'Author not available'}",
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+
+
 
 }

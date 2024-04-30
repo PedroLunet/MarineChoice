@@ -37,22 +37,13 @@ class RecipeData {
     cusineType = json["cusineType"];
     rating = json["rating"];
     permanentPost = json["permanentPost"];
-    ingredient = json["ingredient"]?.cast<String>();
+    ingredient = List<String>.from(json['ingredients']).toList();
     preparation = json["preparation"];
     author = json["author"];
   }
-}
 
-/*
-class Ingredient {
-  String? id;
-  String? ingredient;
-
-  Ingredient({required this.id, required this.ingredient});
-
-  Ingredient.fromJson(Map<dynamic, dynamic> json) {
-    id = json["id"];
-    ingredient = json["ingredient"];
+  @override
+  String toString() {
+    return 'RecipeData{id: $id, title: $title, sustainability: $sustainability, cusineType: $cusineType, rating: $rating, permanentPost: $permanentPost, ingredient: $ingredient, preparation: $preparation, author: $author}';
   }
 }
- */
