@@ -16,7 +16,7 @@ class RecipeData {
   String? rating;
   String? permanentPost;
   List<String>? ingredient;
-  String? preparation;
+  List<String>? preparation;
   String? author;
 
   RecipeData(
@@ -38,7 +38,7 @@ class RecipeData {
     rating = json["rating"];
     permanentPost = json["permanentPost"];
     ingredient = List<String>.from(json['ingredients']).toList();
-    preparation = json["preparation"];
+    preparation = List<String>.from(json['preparation']).toList();
     author = json["author"];
   }
 

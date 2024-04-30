@@ -183,17 +183,31 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
             ),
           Container(
             margin: const EdgeInsets.all(20),
-            child: Center(
-              child: Text(
-                recipe.recipeData?.preparation ?? 'Preparation not available',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
+            child: const Text(
+              "Preparation:",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
+          // Check if recipeData and ingredients are not null before accessing them
+          if (recipe.recipeData != null && recipe.recipeData!.preparation != null)
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: recipe.recipeData!.preparation!.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(
+                    recipe.recipeData!.preparation![index],
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                );
+              },
+            ),
           Container(
             margin: const EdgeInsets.all(20),
             child: Text(
