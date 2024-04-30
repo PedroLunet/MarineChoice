@@ -36,7 +36,7 @@ class _HomePage extends State<HomePage> {
             Container(
               margin: const EdgeInsets.all(20),
               child: const Text(
-                'WELCOME, John Doe',
+                'WELCOME',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 32,
