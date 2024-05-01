@@ -34,6 +34,6 @@
 - Added ingridients and cuisine types to the server;
 - Created ingredient and cuisine type items in the recipe model;
 - Converted preparation and ingridient types to a list of strings;
-
+- Updated the UI of the recipes page;
 
 
