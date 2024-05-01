@@ -136,6 +136,10 @@ Sprint 2 beginning:
 
 ![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/c97631af-9bd7-402a-8fc8-70514808585f)
 
+Sprint 2 end:
+
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/3c0fe27e-e9e6-4b3c-8d6a-f7148cb93174)
+
 # Sprint Reviews
 
 - Sprint 1
