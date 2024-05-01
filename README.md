@@ -17,6 +17,7 @@ You can find here details about the MarineChoice, from a high-level vision to lo
     - [Vertical prototype](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#vertical-prototype)
 - [Project Management](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#project-management)
     - [Iteration retrospective meeting (V1.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#iteration-retrospective-meeting-v100)
+    - - [Iteration retrospective meeting (V2.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#iteration-retrospective-meeting-v200)
 
 Contributions are expected to be made exclusively by the initial team, but we may open them to the community, after the course, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
@@ -117,6 +118,12 @@ In this prototype we have implemented a few simple features, like allowing the u
 - We should always start a meeting by determining what we can do until our next meeting and who should do what.
 - We should schedule a metting for every saturday afternoon, so we can set up everything early in the sprint.
 - We should try to follow good coding practices, get rid of dead code and try to minimize repeated code.
+
+# Iteration retrospective meeting (V2.0.0)
+[#7](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/7)  - Information about marine sustainability in home page. <br>
+[#8](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/8)  - Login  and register fully working. <br>
+[#6](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/6)  - Filters for ingredients in recipes.<br>
+[#5](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/5)  - Filters for types of cuisine in recipes.<br>
 
 # Board
 
