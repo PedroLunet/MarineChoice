@@ -93,10 +93,10 @@ In this prototype we have implemented a few simple features, like allowing the u
 ## Project Management
 
 # Iteration retrospective meeting (V1.0.0)
-#6 - Interactive map feature allowing users to view protected areas to monitor overfishing.<br>
-#5 - Interactive map showcasing various fishes' original fishing locations.<br>
-#7 - Recipe list feature displaying sustainable fish recipes for user convenience.<br>
-#8 - Detailed recipe information view to provide users with cooking instructions.<br>
+[#19](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/19) - Interactive map feature allowing users to view protected areas to monitor overfishing.<br>
+[#16](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/16) - Interactive map showcasing various fishes' original fishing locations.<br>
+[#17](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/17) - Recipe list feature displaying sustainable fish recipes for user convenience.<br>
+[#18](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/18) - Detailed recipe information view to provide users with cooking instructions.<br>
 
 
 ## What went well?
