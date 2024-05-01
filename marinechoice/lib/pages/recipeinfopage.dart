@@ -165,15 +165,15 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
             ),
           ),
           // Check if recipeData and ingredients are not null before accessing them
-          if (recipe.recipeData != null && recipe.recipeData!.ingredient != null)
+          if (recipe.recipeData != null && recipe.recipeData!.ingredients != null)
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: recipe.recipeData!.ingredient!.length,
+              itemCount: recipe.recipeData!.ingredients!.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                    recipe.recipeData!.ingredient![index],
+                    recipe.recipeData!.ingredients![index],
                     style: const TextStyle(
                       fontSize: 16,
                     ),

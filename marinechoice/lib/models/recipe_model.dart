@@ -15,7 +15,7 @@ class RecipeData {
   String? cusineType;
   String? rating;
   String? permanentPost;
-  List<String>? ingredient;
+  List<String>? ingredients;
   List<String>? preparation;
   String? author;
 
@@ -26,7 +26,7 @@ class RecipeData {
       required this.cusineType,
       required this.rating,
       required this.permanentPost,
-      required this.ingredient,
+      required this.ingredients,
       required this.preparation,
       required this.author});
 
@@ -37,13 +37,13 @@ class RecipeData {
     cusineType = json["cusineType"];
     rating = json["rating"];
     permanentPost = json["permanentPost"];
-    ingredient = List<String>.from(json['ingredients']).toList();
+    ingredients = List<String>.from(json['ingredients']).toList();
     preparation = List<String>.from(json['preparation']).toList();
     author = json["author"];
   }
 
   @override
   String toString() {
-    return 'RecipeData{id: $id, title: $title, sustainability: $sustainability, cusineType: $cusineType, rating: $rating, permanentPost: $permanentPost, ingredient: $ingredient, preparation: $preparation, author: $author}';
+    return 'RecipeData{id: $id, title: $title, sustainability: $sustainability, cusineType: $cusineType, rating: $rating, permanentPost: $permanentPost, ingredient: $ingredients, preparation: $preparation, author: $author}';
   }
 }
