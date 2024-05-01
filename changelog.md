@@ -31,6 +31,9 @@
 - Assigned the .feature files to their respective user story;
 - Added legend to the map regarding which colors where the fishing areas and which were the protected areas;
 - Changed color of the markers;
+- Added ingridients and cuisine types to the server;
+- Created ingredient and cuisine type items in the recipe model;
+- Converted preparation and ingridient types to a list of strings;
 
 
 
