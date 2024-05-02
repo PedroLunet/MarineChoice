@@ -125,6 +125,25 @@ In this prototype we have implemented a few simple features, like allowing the u
 [#6](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/6)  - Filters for ingredients in recipes.<br>
 [#5](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/5)  - Filters for types of cuisine in recipes.<br>
 
+## What went well?
+- We have successfully implemented all planned features and resolved identified issues in accordance with the outlined objectives.
+- We worked well together as a team, supporting each other's strengths and weaknesses, which helped us achieve our goals effectively.
+- We were able to better manage our time.
+
+## What could have gone better?
+- We struggled to balance the workload in this class with our remaining workload.
+- We weren't able to do one of our weekly meetings due to external issues.
+
+## What still puzzles us?
+- We were not able to complete unit testing.
+- We haven't figured out the full potential of the Realtime Database.
+
+## What are we going to do to improve?
+- We should strive to learn more about the resources we are using (firebase, flutter).
+- We should start working earlier, to achieve this we should push each other to work by working during meetings.
+- We should make sure to read all the delivery rules many times throught the sprint, so we don't miss information.
+
+
 # Board
 
 Sprint 1 beginning:
