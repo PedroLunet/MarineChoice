@@ -168,6 +168,16 @@ Sprint 2 end:
 
 [Release V2.0.0](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/releases/tag/ReleaseV2.0.0)
 
+# Board
+
+Sprint 3 beginning:
+
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/a1bdc559-e892-412d-a4ee-dc95287d548e)
+
+Sprint 3 end:
+
+
+
 # Sprint Reviews
 
 - Sprint 1
