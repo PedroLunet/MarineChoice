@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:marinechoice/auth/auth_service.dart';
 import 'package:marinechoice/pages/loginpage.dart';
@@ -126,7 +127,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     showEnglishName: true,
                   ),
                   onChanged: (CountryCode? code) {
-                    print(code!.name);
+                    if (kDebugMode) {
+                      print(code!.name);
+                    }
                   },
                 ),
               ),
