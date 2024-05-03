@@ -1,32 +1,32 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:marinechoice/pages/recipeinfopage.dart';
-import '../models/recipe_model.dart';
+import 'package:marinechoice/pages/recipespage.dart';
+
+import '../components/title_box.dart';
+import '../models/fish_model.dart';
 import 'settingspage.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
-class RecipesPage extends StatefulWidget {
-  const RecipesPage({super.key});
+class FishInfoPage extends StatefulWidget {
+  final Fish fish;
+
+  const FishInfoPage({super.key, required this.fish});
 
   @override
   State<StatefulWidget> createState() {
-    return _RecipesPage();
+    return _FishInfoPage();
   }
 }
 
-class _RecipesPage extends State<RecipesPage> {
-  final _database = FirebaseDatabase.instance.ref();
-
-  List<Recipe> recipeList = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
+class _FishInfoPage extends State<FishInfoPage> {
+  Map<String, Color> rates = {
+    "High": Colors.green,
+    "Medium": Colors.orange,
+    "Low": Colors.red
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -34,89 +34,8 @@ class _RecipesPage extends State<RecipesPage> {
       backgroundColor: const Color(0xffB4D8F9),
       appBar: buildAppBar(),
       bottomNavigationBar: buildBottomNavigationBar(),
-      body: buildSingleChildScrollView(),
+      body: buildSingleChildScrollView(widget.fish),
     );
-  }
-
-  Widget buildContainer(Recipe recipe, int number) {
-    if (recipeList.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
-    return GestureDetector(
-      onTap: () => {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RecipeInfoPage(recipe: recipe)))
-      },
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        width: MediaQuery.of(context).size.width / 2 - 20,
-        height: 130,
-        decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xffD6E7F7), width: 3),
-            color: const Color(0xffD6E7F7),
-            borderRadius: BorderRadius.circular(15)),
-        margin: const EdgeInsets.all(10),
-        child:
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(children: [
-
-              Text(
-                recipe.recipeData!.title!,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ]),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildSingleChildScrollView() {
-    return FutureBuilder<void>(
-        future: retrieveRecipeData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return SingleChildScrollView(
-              child: Column(children: [
-                Container(
-                  margin: const EdgeInsets.all(30),
-                  child: const Text("Recommended",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                      )),
-                ),
-                Wrap(
-                    direction: Axis.horizontal,
-                    children: _getRecipes(recipeList)),
-              ]),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
-  }
-
-  List<Widget> _getRecipes(List<Recipe> recipeList) {
-    List<Widget> list = [];
-
-    for (int i = 0; i < recipeList.length; i++) {
-      list.add(buildContainer(recipeList[i], i));
-    }
-
-    return list;
   }
 
   _navigate(int index) {
@@ -143,7 +62,7 @@ class _RecipesPage extends State<RecipesPage> {
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xff5B92C6),
-      currentIndex: 2,
+      currentIndex: 1,
       onTap: _navigate,
       selectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
@@ -220,7 +139,6 @@ class _RecipesPage extends State<RecipesPage> {
             ),
             child: SvgPicture.asset(
               'assets/icons/settings.svg',
-              height: 37,
               width: 37,
             ),
           ),
@@ -236,20 +154,78 @@ class _RecipesPage extends State<RecipesPage> {
     );
   }
 
-  Future<void> retrieveRecipeData() async {
-    var result = await _database.child("RECIPE").get();
+  Widget buildSingleChildScrollView(Fish fish) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 40,),
+            Center(
+              child: Text(
+                fish.fishData!.name!,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xff4A668A)
+                ),
+              ),
+            ),
+            Text(
+              fish.fishData!.origin!,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff5B92C6)
+              ),
+            ),
+            const SizedBox(height: 40,),
 
-    for (var recipe in result.children) {
-      try{
-        RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
-        Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
-        recipeList.add(recipef);
-      }catch(e){
-        if (kDebugMode) {
-          print("Error: ${e.toString()}");
-        }
-      }
+            Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xff5B92C6), width: 4),
+                  borderRadius: BorderRadius.circular(30),),
 
-    }
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Image.asset("assets/icons/placeholder.jpg", width: double.infinity,))),
+
+            const SizedBox(height: 40,),
+
+
+            TitleBox(title: "Fun Fact!", text: fish.fishData!.facts!),
+            const SizedBox(height: 40,),
+
+            TitleBox(title: "Average price per kilogram", text: fish.fishData!.avgPricePerKg!),
+            const SizedBox(height: 40,),
+
+            TitleBox(title: "Sustainability Rate", widget: getSustainabilityBadge(fish)),
+            SizedBox(height: 40,),
+
+          ],
+        ),
+      ),
+    );
   }
+
+
+ Widget getSustainabilityBadge(Fish fish){
+
+    return Container(
+      decoration: BoxDecoration(
+          color: rates[fish.fishData!.sustainabilityRate!],
+          borderRadius: BorderRadius.circular(50)),
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: Text(
+        fish.fishData!.sustainabilityRate!,
+        style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+            color: Colors.white),
+      ),
+    );
+
+ }
+
 }

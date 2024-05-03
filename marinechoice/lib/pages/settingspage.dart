@@ -54,7 +54,8 @@ class _SettingsPageState extends State<SettingsPage> {
             alignment: Alignment.center,
             width: 37,
             decoration: const BoxDecoration(
-              color: Color(0xffB4D8F9),
+
+              color: Colors.transparent,
             ),
             child: SvgPicture.asset(
               'assets/icons/settings.svg',
