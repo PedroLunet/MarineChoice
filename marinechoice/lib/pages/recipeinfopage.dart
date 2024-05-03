@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 
 import '../models/recipe_model.dart';
-import 'SettingsPage.dart';
+import 'settingspage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
@@ -108,7 +108,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
               const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
               child: SvgPicture.asset('assets/icons/search.svg')),
           hintText: 'Search...',
-          hintStyle: TextStyle(color: Colors.black87),
+          hintStyle: const TextStyle(color: Colors.black87),
           border: InputBorder.none,
         ),
       ),
@@ -168,7 +168,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
           if (recipe.recipeData != null && recipe.recipeData!.ingredients != null)
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: recipe.recipeData!.ingredients!.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -195,7 +195,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
           if (recipe.recipeData != null && recipe.recipeData!.preparation != null)
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: recipe.recipeData!.preparation!.length,
               itemBuilder: (context, index) {
                 return ListTile(

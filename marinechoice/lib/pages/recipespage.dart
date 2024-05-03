@@ -1,12 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipeinfopage.dart';
 
 import '../models/recipe_model.dart';
-import 'SettingsPage.dart';
+import 'settingspage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
@@ -41,7 +40,7 @@ class _RecipesPage extends State<RecipesPage> {
 
   Widget buildContainer(Recipe recipe, int number) {
     if (recipeList.isEmpty) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }
@@ -95,7 +94,7 @@ class _RecipesPage extends State<RecipesPage> {
               ]),
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -211,7 +210,7 @@ class _RecipesPage extends State<RecipesPage> {
                   const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
               child: SvgPicture.asset('assets/icons/search.svg')),
           hintText: 'Search...',
-          hintStyle: TextStyle(color: Colors.black87),
+          hintStyle: const TextStyle(color: Colors.black87),
           border: InputBorder.none,
         ),
       ),
@@ -249,7 +248,9 @@ class _RecipesPage extends State<RecipesPage> {
         Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
         recipeList.add(recipef);
       }catch(e){
-        print("Error: ${e.toString()}");
+        if (kDebugMode) {
+          print("Error: ${e.toString()}");
+        }
       }
 
     }

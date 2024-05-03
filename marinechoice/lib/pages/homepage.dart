@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:marinechoice/pages/SettingsPage.dart';
+import 'package:marinechoice/pages/settingspage.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:animated_search_bar/animated_search_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,14 +44,12 @@ class _HomePage extends State<HomePage> {
               ),
             ),
 
-            Container(
-              child: const Text(
-                'Did you know...',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                ),
+            const Text(
+              'Did you know...',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w700,
               ),
             ),
             buildContainer(
