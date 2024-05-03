@@ -135,8 +135,8 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       child: Column(
         children: [
           Container(
-            width: 400,
-            height: 200,
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.3,
 
             margin: const EdgeInsets.all(20),
             decoration: BoxDecoration(
