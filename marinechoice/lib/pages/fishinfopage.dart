@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 
+import '../components/getUploadImages.dart';
 import '../components/title_box.dart';
 import '../models/fish_model.dart';
 import 'settingspage.dart';
@@ -156,7 +158,7 @@ class _FishInfoPage extends State<FishInfoPage> {
 
   Widget buildSingleChildScrollView(Fish fish) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+      margin: const EdgeInsets.fromLTRB(40, 20, 40, 20),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -183,16 +185,36 @@ class _FishInfoPage extends State<FishInfoPage> {
             const SizedBox(height: 40,),
 
             Container(
+              margin: const EdgeInsets.fromLTRB(0,0,0,40),
                 decoration: BoxDecoration(
+
                   border: Border.all(color: const Color(0xff5B92C6), width: 4),
                   borderRadius: BorderRadius.circular(30),),
 
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Image.asset("assets/icons/placeholder.jpg", width: double.infinity,))),
+                  borderRadius: BorderRadius.circular(25),
 
-            const SizedBox(height: 40,),
-
+                  child: FutureBuilder<String?>(
+                    future: getImage(fish.fishData!.imagePath), // Ensure getImage returns a Future<String?>
+                    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError || snapshot.data == null) {
+                    if (kDebugMode) {
+                    print('Error loading image: ${snapshot.error}');
+                    }
+                    return const Center(child: Text('Failed to load image'));
+                    } else {
+                    return Image.network(
+                    snapshot.data!,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    //height: MediaQuery.of(context).size.height * 0.25,
+                    );
+                  }},
+                  ),
+                ),
+            ),
 
             TitleBox(title: "Fun Fact!", text: fish.fishData!.facts!),
             const SizedBox(height: 40,),

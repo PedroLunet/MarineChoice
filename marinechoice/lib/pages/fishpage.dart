@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/fishinfopage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 
+import '../components/getUploadImages.dart';
 import '../models/fish_model.dart';
 import 'settingspage.dart';
 import 'homepage.dart';
@@ -75,11 +76,28 @@ class _FishPage extends State<FishPage> {
               fontWeight: FontWeight.w700,
             ),
           ),
-
           ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset("assets/icons/placeholder.jpg", width: double.infinity,)),
-
+            borderRadius: BorderRadius.circular(10),
+            child: FutureBuilder<String?>(
+              future: getImage(fish.fishData!.imagePath), // Ensure getImage returns a Future<String?>
+              builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError || snapshot.data == null) {
+                  if (kDebugMode) {
+                    print('Error loading image: ${snapshot.error}');
+                  }
+                  return const Center(child: Text('Failed to load image'));
+                } else {
+                  return Image.network(
+                    snapshot.data!,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width / 2 - 20,
+                    height: MediaQuery.of(context).size.height / 8,
+                  );
+                }},
+            ),
+          ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             decoration: BoxDecoration(

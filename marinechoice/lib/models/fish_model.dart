@@ -14,6 +14,7 @@ class FishData {
   String? name;
   String? origin;
   String? sustainabilityRate;
+  String? imagePath;
 
 
   FishData(
@@ -21,7 +22,8 @@ class FishData {
         required this.facts,
         required this.name,
         required this.origin,
-        required this.sustainabilityRate,});
+        required this.sustainabilityRate,
+        required this.imagePath,});
 
   FishData.fromJson(Map<dynamic, dynamic> json) {
     avgPricePerKg = json["avgPricePerKg"];
@@ -29,6 +31,7 @@ class FishData {
     name = json["name"];
     origin = json["origin"];
     sustainabilityRate = json["sustainabiltyRate"];
+    imagePath = json["imagePath"];
   }
 
 }
