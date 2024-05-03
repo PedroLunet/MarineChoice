@@ -17,8 +17,8 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  Location _locationController = new Location();
-  LatLng? _currentP = null;
+  final Location _locationController = Location();
+  LatLng? _currentP;
   final _database = FirebaseDatabase.instance.ref();
   Future<Set<Marker>?>? _pointsFuture;
 
@@ -82,8 +82,8 @@ class _MapPageState extends State<MapPage> {
             var set = snapshot.data!;
             if (_currentP != null) {
               set.add(Marker(
-                infoWindow: InfoWindow(title: "Localização Atual"),
-                markerId: MarkerId("_currentLocation"),
+                infoWindow: const InfoWindow(title: "Localização Atual"),
+                markerId: const MarkerId("_currentLocation"),
                 icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
                 position: _currentP!,
               ));
@@ -96,7 +96,7 @@ class _MapPageState extends State<MapPage> {
                 children: [
                   GoogleMap(
                     initialCameraPosition: CameraPosition(
-                      target: _currentP ?? LatLng(0, 0),
+                      target: _currentP ?? const LatLng(0, 0),
                       zoom: 3,
                     ),
                     markers: set,
@@ -105,7 +105,7 @@ class _MapPageState extends State<MapPage> {
                     bottom: 20,
                     left: 20,
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -114,11 +114,11 @@ class _MapPageState extends State<MapPage> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 1,
                             blurRadius: 5,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
@@ -144,27 +144,27 @@ class _MapPageState extends State<MapPage> {
             );
           }
         }
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }
 
   Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
-    _serviceEnabled = await _locationController.serviceEnabled();
-    if (_serviceEnabled) {
-      _serviceEnabled = await _locationController.requestService();
+    serviceEnabled = await _locationController.serviceEnabled();
+    if (serviceEnabled) {
+      serviceEnabled = await _locationController.requestService();
     } else {
       return;
     }
 
-    _permissionGranted = await _locationController.hasPermission();
+    permissionGranted = await _locationController.hasPermission();
 
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _locationController.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await _locationController.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         return;
       }
     }
@@ -281,7 +281,7 @@ class _MapPageState extends State<MapPage> {
                   const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
               child: SvgPicture.asset('assets/icons/search.svg')),
           hintText: 'Search...',
-          hintStyle: TextStyle(color: Colors.black87),
+          hintStyle: const TextStyle(color: Colors.black87),
           border: InputBorder.none,
         ),
       ),
