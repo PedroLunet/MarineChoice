@@ -1,7 +1,5 @@
 import 'package:bdd_framework/bdd_framework.dart';
 //import 'package:bdd_widget_test/bdd_widget_test.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:marinechoice/pages/loginpage.dart';
 
 void main() {
   var feature = BddFeature('Logging in');

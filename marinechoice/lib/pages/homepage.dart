@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/settingspage.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
-
 import 'fishpage.dart';
+import 'package:animated_search_bar/animated_search_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

@@ -275,6 +275,7 @@ class _MapPageState extends State<MapPage> {
 
   AppBar buildAppBar() {
     return AppBar(
+
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
