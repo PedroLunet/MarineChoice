@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 
 
 void main() {
@@ -36,7 +35,7 @@ void main() {
 
   group('MapPage', () {
     testWidgets('build returns correct widget tree', (WidgetTester tester) async {
-      final widget = MaterialApp(
+      const widget = MaterialApp(
         home: MapPage(),
       );
       await tester.pumpWidget(widget);

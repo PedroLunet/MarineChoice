@@ -18,6 +18,7 @@ class RecipeData {
   List<String>? ingredients;
   List<String>? preparation;
   String? author;
+  String? imagePath;
 
   RecipeData(
       {required this.id,
@@ -28,7 +29,8 @@ class RecipeData {
       required this.permanentPost,
       required this.ingredients,
       required this.preparation,
-      required this.author});
+      required this.author,
+      required this.imagePath});
 
   RecipeData.fromJson(Map<dynamic, dynamic> json) {
     id = json["id"];
@@ -40,10 +42,12 @@ class RecipeData {
     ingredients = List<String>.from(json['ingredients']).toList();
     preparation = List<String>.from(json['preparation']).toList();
     author = json["author"];
+    imagePath = json["imagePath"];
   }
+
 
   @override
   String toString() {
-    return 'RecipeData{id: $id, title: $title, sustainability: $sustainability, cusineType: $cusineType, rating: $rating, permanentPost: $permanentPost, ingredient: $ingredients, preparation: $preparation, author: $author}';
+    return 'RecipeData{id: $id, title: $title, sustainability: $sustainability, cusineType: $cusineType, rating: $rating, permanentPost: $permanentPost, ingredient: $ingredients, preparation: $preparation, author: $author, imagePath: $imagePath}';
   }
 }

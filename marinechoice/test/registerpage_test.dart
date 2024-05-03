@@ -6,7 +6,7 @@ void main() {
   group('RegisterPage', () {
     testWidgets('build returns correct widget tree', (WidgetTester tester) async {
 
-      final widget = MaterialApp(
+      const widget = MaterialApp(
         home: RegisterPage(),
       );
 

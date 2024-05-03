@@ -1,6 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:bdd_framework/bdd_framework.dart';
-import 'package:marinechoice/pages/mappage.dart';
 
 void main() {
   var feature = BddFeature('MapPage widget');
