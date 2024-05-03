@@ -10,12 +10,13 @@ import 'SettingsPage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
-FirebaseStorage firebaseStorage = FirebaseStorage.instanceFor(bucket: 'gs://marinechoice-b17c9.appspot.com');
-
+//FirebaseStorage firebaseStorage = FirebaseStorage.instanceFor(bucket: 'gs://marinechoice-b17c9.appspot.com');
+Reference get firebaseStorage => FirebaseStorage.instanceFor().ref();
 Future<String?> getImage(Recipe recipe) async{
   print(recipe.recipeData!.imagePath);
   try {
-    Reference urlRef = firebaseStorage.ref().child('${recipe.recipeData!.imagePath}');
+    Reference urlRef = firebaseStorage
+        .child('${recipe.recipeData!.imagePath}');
     var imgUrl = await urlRef.getDownloadURL();
     return imgUrl;
   } catch(e){
