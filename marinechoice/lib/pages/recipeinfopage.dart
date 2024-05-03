@@ -1,34 +1,13 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipespage.dart';
+import '../components/getUploadImages.dart';
 import '../models/recipe_model.dart';
 import 'settingspage.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
-
-//FirebaseStorage firebaseStorage = FirebaseStorage.instanceFor(bucket: 'gs://marinechoice-b17c9.appspot.com');
-Reference get firebaseStorage => FirebaseStorage.instanceFor().ref();
-Future<String?> getImage(Recipe recipe) async{
-  if (kDebugMode) {
-    print(recipe.recipeData!.imagePath);
-  }
-  try {
-    Reference urlRef = firebaseStorage
-        .child('${recipe.recipeData!.imagePath}');
-    var imgUrl = await urlRef.getDownloadURL();
-    return imgUrl;
-  } catch(e){
-    if (kDebugMode) {
-      print("Failed to get image URL: $e");
-    }
-    return null;
-  }
-
-}
-
 
 class RecipeInfoPage extends StatefulWidget {
   final Recipe recipe;
@@ -175,7 +154,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: FutureBuilder<String?>(
-                  future: getImage(recipe), // Ensure getImage returns a Future<String?>
+                  future: getImage(recipe.recipeData!.imagePath), // Ensure getImage returns a Future<String?>
                   builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
@@ -187,7 +166,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                     } else {
                       return Image.network(
                           snapshot.data!,
-                          fit: BoxFit.cover, // Ensures the image covers the container space
+                          fit: BoxFit.cover,
                           width: double.infinity, // Ensures image width matches the container
                           height: double.infinity, // Ensures image height matches the container
                       );
