@@ -1,14 +1,37 @@
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipespage.dart';
-
 import '../models/recipe_model.dart';
 import 'settingspage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
+//FirebaseStorage firebaseStorage = FirebaseStorage.instanceFor(bucket: 'gs://marinechoice-b17c9.appspot.com');
+Reference get firebaseStorage => FirebaseStorage.instanceFor().ref();
+Future<String?> getImage(Recipe recipe) async{
+  if (kDebugMode) {
+    print(recipe.recipeData!.imagePath);
+  }
+  try {
+    Reference urlRef = firebaseStorage
+        .child('${recipe.recipeData!.imagePath}');
+    var imgUrl = await urlRef.getDownloadURL();
+    return imgUrl;
+  } catch(e){
+    if (kDebugMode) {
+      print("Failed to get image URL: $e");
+    }
+    return null;
+  }
+
+}
+
+
 class RecipeInfoPage extends StatefulWidget {
   final Recipe recipe;
+  
 
   const RecipeInfoPage({super.key, required this.recipe});
 
@@ -16,6 +39,7 @@ class RecipeInfoPage extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _RecipeInfoPage();
   }
+
 
 
 }
@@ -142,6 +166,46 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       child: Column(
         children: [
           Container(
+            width: 400,
+            height: 200,
+
+            margin: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: FutureBuilder<String?>(
+                  future: getImage(recipe), // Ensure getImage returns a Future<String?>
+                  builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError || snapshot.data == null) {
+                      if (kDebugMode) {
+                        print('Error loading image: ${snapshot.error}');
+                      }
+                      return const Center(child: Text('Failed to load image'));
+                    } else {
+                      return Image.network(
+                          snapshot.data!,
+                          fit: BoxFit.cover, // Ensures the image covers the container space
+                          width: double.infinity, // Ensures image width matches the container
+                          height: double.infinity, // Ensures image height matches the container
+                      );
+                    }},
+                 ),
+              ),
+          ),
+          Container(
             margin: const EdgeInsets.all(20),
             child: Center(
               child: Text(
@@ -222,6 +286,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       ),
     );
   }
+
 
 
 
