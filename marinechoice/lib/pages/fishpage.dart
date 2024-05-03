@@ -2,26 +2,33 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:marinechoice/pages/recipeinfopage.dart';
-import '../models/recipe_model.dart';
+import 'package:marinechoice/pages/fishinfopage.dart';
+import 'package:marinechoice/pages/recipespage.dart';
+
+import '../models/fish_model.dart';
 import 'settingspage.dart';
-import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
-class RecipesPage extends StatefulWidget {
-  const RecipesPage({super.key});
+class FishPage extends StatefulWidget {
+  const FishPage({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _RecipesPage();
+    return _FishPage();
   }
 }
 
-class _RecipesPage extends State<RecipesPage> {
+class _FishPage extends State<FishPage> {
   final _database = FirebaseDatabase.instance.ref();
 
-  List<Recipe> recipeList = [];
+  List<Fish> fishList = [];
+
+  Map<String,Color> rates= {
+    "High" : Colors.green,
+    "Medium" : Colors.orange,
+    "Low" : Colors.red
+  };
 
   @override
   void initState() {
@@ -38,8 +45,8 @@ class _RecipesPage extends State<RecipesPage> {
     );
   }
 
-  Widget buildContainer(Recipe recipe, int number) {
-    if (recipeList.isEmpty) {
+  Widget buildContainer(Fish fish, int number) {
+    if (fishList.isEmpty) {
       return const Center(
         child: CircularProgressIndicator(),
       );
@@ -48,48 +55,64 @@ class _RecipesPage extends State<RecipesPage> {
     return GestureDetector(
       onTap: () => {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RecipeInfoPage(recipe: recipe)))
+            builder: (context) => FishInfoPage(fish: fish)))
       },
       child: Container(
         padding: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width / 2 - 20,
-        height: 130,
         decoration: BoxDecoration(
             border: Border.all(color: const Color(0xffD6E7F7), width: 3),
             color: const Color(0xffD6E7F7),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
-        child:
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(children: [
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+          Text(
+            fish.fishData!.name!,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
 
-              Text(
-                recipe.recipeData!.title!,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
+          ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset("assets/icons/placeholder.jpg", width: double.infinity,)),
+
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            decoration: BoxDecoration(
+              color: rates[fish.fishData!.sustainabilityRate!],
+              borderRadius: BorderRadius.circular(50)
+            ),
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child:Text(
+              fish.fishData!.sustainabilityRate!,
+              style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white
               ),
-            ]),
-          ],
-        ),
+            ),
+            ),
+
+
+        ]),
       ),
     );
   }
 
   Widget buildSingleChildScrollView() {
     return FutureBuilder<void>(
-        future: retrieveRecipeData(),
+        future: retrieveFishData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return SingleChildScrollView(
               child: Column(children: [
                 Container(
                   margin: const EdgeInsets.all(30),
-                  child: const Text("Recommended",
+                  child: const Text("Fish and their sustainability rating",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 32,
@@ -98,7 +121,7 @@ class _RecipesPage extends State<RecipesPage> {
                 ),
                 Wrap(
                     direction: Axis.horizontal,
-                    children: _getRecipes(recipeList)),
+                    children: _getFish(fishList)),
               ]),
             );
           } else {
@@ -109,11 +132,11 @@ class _RecipesPage extends State<RecipesPage> {
         });
   }
 
-  List<Widget> _getRecipes(List<Recipe> recipeList) {
+  List<Widget> _getFish(List<Fish> fishList) {
     List<Widget> list = [];
 
-    for (int i = 0; i < recipeList.length; i++) {
-      list.add(buildContainer(recipeList[i], i));
+    for (int i = 0; i < fishList.length; i++) {
+      list.add(buildContainer(fishList[i], i));
     }
 
     return list;
@@ -143,7 +166,7 @@ class _RecipesPage extends State<RecipesPage> {
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xff5B92C6),
-      currentIndex: 2,
+      currentIndex: 1,
       onTap: _navigate,
       selectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
@@ -236,14 +259,14 @@ class _RecipesPage extends State<RecipesPage> {
     );
   }
 
-  Future<void> retrieveRecipeData() async {
-    var result = await _database.child("RECIPE").get();
+  Future<void> retrieveFishData() async {
+    var result = await _database.child("FISH").get();
 
-    for (var recipe in result.children) {
+    for (var fish in result.children) {
       try{
-        RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
-        Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
-        recipeList.add(recipef);
+        FishData fishData = FishData.fromJson(fish.value as Map);
+        Fish fishF = Fish(key: fish.key, fishData: fishData);
+        fishList.add(fishF);
       }catch(e){
         if (kDebugMode) {
           print("Error: ${e.toString()}");
@@ -252,4 +275,5 @@ class _RecipesPage extends State<RecipesPage> {
 
     }
   }
+
 }

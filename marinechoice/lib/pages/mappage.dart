@@ -8,6 +8,7 @@ import 'package:marinechoice/pages/recipespage.dart';
 import '../models/fisharea_model.dart';
 import '../models/protarea_model.dart';
 import 'settingspage.dart';
+import 'fishpage.dart';
 import 'homepage.dart';
 
 class MapPage extends StatefulWidget {
@@ -34,31 +35,33 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<Set<Marker>?> getPoints() async {
-
     try {
       Set<Marker> set = {};
       await retrieveMapData();
 
-
-
       for (var element in protAreaList) {
         set.add(Marker(
-            infoWindow: InfoWindow(title: "Area Protegida",snippet: element.protAreaData!.description!),
+            infoWindow: InfoWindow(
+                title: "Area Protegida",
+                snippet: element.protAreaData!.description!),
             markerId: MarkerId("p_area_${element.protAreaData!.description!}"),
             icon:
-            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-            position: LatLng(double.parse(element.protAreaData!.latitude!), double.parse(element.protAreaData!.longitude!))));
+                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+            position: LatLng(double.parse(element.protAreaData!.latitude!),
+                double.parse(element.protAreaData!.longitude!))));
       }
 
       for (var element in fisAreaList) {
         set.add(Marker(
-            infoWindow: InfoWindow(title: "Area de Pesca",snippet: "Pesca de ${element.fishAreaData!.fish!}"),
+            infoWindow: InfoWindow(
+                title: "Area de Pesca",
+                snippet: "Pesca de ${element.fishAreaData!.fish!}"),
             markerId: MarkerId("f_area_${element.fishAreaData!.fish!}"),
             icon: BitmapDescriptor.defaultMarkerWithHue(
                 BitmapDescriptor.hueGreen),
-            position: LatLng(double.parse(element.fishAreaData!.latitude!), double.parse(element.fishAreaData!.longitude!))));
+            position: LatLng(double.parse(element.fishAreaData!.latitude!),
+                double.parse(element.fishAreaData!.longitude!))));
       }
-
 
       return set;
     } catch (e) {
@@ -68,7 +71,6 @@ class _MapPageState extends State<MapPage> {
       return null; // Return null to indicate error
     }
   }
-
 
   @override
   void dispose() {
@@ -87,14 +89,15 @@ class _MapPageState extends State<MapPage> {
               set.add(Marker(
                 infoWindow: const InfoWindow(title: "Localização Atual"),
                 markerId: const MarkerId("_currentLocation"),
-                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+                icon: BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueBlue),
                 position: _currentP!,
               ));
             }
 
             return Scaffold(
-              appBar: buildAppBar(),
               bottomNavigationBar: buildBottomNavigationBar(),
+              appBar: buildAppBar(),
               body: Stack(
                 children: [
                   GoogleMap(
@@ -193,6 +196,10 @@ class _MapPageState extends State<MapPage> {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const HomePage()));
         break;
+      case 1:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const FishPage()));
+        break;
       case 2:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const RecipesPage()));
@@ -268,28 +275,7 @@ class _MapPageState extends State<MapPage> {
 
   AppBar buildAppBar() {
     return AppBar(
-      flexibleSpace: Container(
-        margin: const EdgeInsets.only(left: 55, top: 30, right: 55, bottom: 5),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-              colors: [Color(0xffD6E7F7), Color(0xffD6E7F7)],
-            )),
-      ),
-      title: TextField(
-        style: const TextStyle(color: Colors.black),
-        cursorColor: Colors.black87,
-        decoration: InputDecoration(
-          suffixIcon: Padding(
-              padding:
-                  const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
-              child: SvgPicture.asset('assets/icons/search.svg')),
-          hintText: 'Search...',
-          hintStyle: const TextStyle(color: Colors.black87),
-          border: InputBorder.none,
-        ),
-      ),
+
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
@@ -302,7 +288,7 @@ class _MapPageState extends State<MapPage> {
             alignment: Alignment.center,
             width: 37,
             decoration: const BoxDecoration(
-              color: Color(0xffB4D8F9),
+              color: Colors.transparent,
             ),
             child: SvgPicture.asset(
               'assets/icons/settings.svg',
@@ -312,16 +298,23 @@ class _MapPageState extends State<MapPage> {
           ),
         )
       ],
+      title: const Center(
+        child: Text(
+          "MarineChoice",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
     );
   }
 
   Future<void> retrieveMapData() async {
-
     var fishAreas = await _database.child("FISHAREA").get();
 
-    for(var fishArea in fishAreas.children){
+    for (var fishArea in fishAreas.children) {
       FishAreaData fishAreaData = FishAreaData.fromJson(fishArea.value as Map);
-      FishArea fishAreaF = FishArea(key: fishArea.key, fishAreaData: fishAreaData);
+      FishArea fishAreaF =
+          FishArea(key: fishArea.key, fishAreaData: fishAreaData);
       fisAreaList.add(fishAreaF);
     }
 
@@ -331,15 +324,15 @@ class _MapPageState extends State<MapPage> {
 
     var protAreas = await _database.child("PROTAREA").get();
 
-    for(var protArea in protAreas.children){
+    for (var protArea in protAreas.children) {
       ProtAreaData protAreaData = ProtAreaData.fromJson(protArea.value as Map);
-      ProtArea protAreaf = ProtArea(key: protArea.key, protAreaData: protAreaData);
+      ProtArea protAreaf =
+          ProtArea(key: protArea.key, protAreaData: protAreaData);
       protAreaList.add(protAreaf);
     }
 
     if (kDebugMode) {
       print("List $protAreaList");
     }
-
   }
 }

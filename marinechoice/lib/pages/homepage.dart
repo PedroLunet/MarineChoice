@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/settingspage.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
+import 'fishpage.dart';
 import 'package:animated_search_bar/animated_search_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,17 +33,6 @@ class _HomePage extends State<HomePage> {
     return SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: const Text(
-                'WELCOME',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
 
             const Text(
               'Did you know...',
@@ -71,22 +61,25 @@ class _HomePage extends State<HomePage> {
   }
 
 
-  _navigate(int index){
-      switch (index) {
-        case 0:
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const HomePage()));
-          break;
-        case 2:
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const RecipesPage()));
-          break;
-        case 3:
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const MapPage()));
-          break;
-      }
-
+  _navigate(int index) {
+    switch (index) {
+      case 0:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const HomePage()));
+        break;
+      case 1:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const FishPage()));
+        break;
+      case 2:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const RecipesPage()));
+        break;
+      case 3:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const MapPage()));
+        break;
+    }
   }
 
   BottomNavigationBar buildBottomNavigationBar() {
@@ -171,26 +164,8 @@ class _HomePage extends State<HomePage> {
       );
     }
   }
-
   AppBar buildAppBar() {
     return AppBar(
-      flexibleSpace: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 50),
-        alignment: Alignment.bottomCenter,
-        child: AnimatedSearchBar(
-          label: "Search",
-          labelAlignment: Alignment.center,
-          labelTextAlign: TextAlign.left,
-          onChanged: (value) {
-            debugPrint("value on Change");
-            setState(() {
-              searchText = value;
-            });
-          },
-        ),
-      ),
-
-
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
@@ -213,6 +188,16 @@ class _HomePage extends State<HomePage> {
           ),
         )
       ],
+      title: const Center(
+        child: Text(
+          "MarineChoice",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
     );
+
+
+
   }
 }

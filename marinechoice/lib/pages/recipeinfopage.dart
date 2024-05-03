@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import '../models/recipe_model.dart';
 import 'settingspage.dart';
+import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
@@ -60,16 +61,20 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
   _navigate(int index) {
     switch (index) {
       case 0:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const HomePage()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const HomePage()));
+        break;
+      case 1:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const FishPage()));
         break;
       case 2:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const RecipesPage()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const RecipesPage()));
         break;
       case 3:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const MapPage()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const MapPage()));
         break;
     }
   }
@@ -114,28 +119,6 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
 
   AppBar buildAppBar() {
     return AppBar(
-      flexibleSpace: Container(
-        margin: const EdgeInsets.only(left: 55, top: 30, right: 55, bottom: 5),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-              colors: [Color(0xffD6E7F7), Color(0xffD6E7F7)],
-            )),
-      ),
-      title: TextField(
-        style: const TextStyle(color: Colors.black),
-        cursorColor: Colors.black87,
-        decoration: InputDecoration(
-          suffixIcon: Padding(
-              padding:
-              const EdgeInsets.only(left: 20, top: 5, right: 0, bottom: 5),
-              child: SvgPicture.asset('assets/icons/search.svg')),
-          hintText: 'Search...',
-          hintStyle: const TextStyle(color: Colors.black87),
-          border: InputBorder.none,
-        ),
-      ),
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
@@ -148,7 +131,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
             alignment: Alignment.center,
             width: 37,
             decoration: const BoxDecoration(
-              color: Color(0xffB4D8F9),
+              color: Colors.transparent,
             ),
             child: SvgPicture.asset(
               'assets/icons/settings.svg',
@@ -158,6 +141,13 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
           ),
         )
       ],
+      title: const Center(
+        child: Text(
+          "MarineChoice",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
     );
   }
 
