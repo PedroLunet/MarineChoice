@@ -36,4 +36,14 @@
 - Converted preparation and ingridient types to a list of strings;
 - Updated the UI of the recipes page;
 
+## [2.0.1] - 03-05-2024
+
+- Added images to server;
+- Added Fish to server;
+- Created fish models;
+- Created fish information page;
+- Created fish page;
+- Displayed fish on the fish page and fish info page;
+- Displayed images in recipe info page;
+- Fixed warnings for better performance;
 
