@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipeinfopage.dart';
 import '../models/recipe_model.dart';
 import 'settingspage.dart';
@@ -136,6 +137,10 @@ class _RecipesPage extends State<RecipesPage> {
       case 3:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const MapPage()));
+        break;
+      case 4:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const PostPage()));
         break;
     }
   }

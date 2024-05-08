@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:marinechoice/auth/auth_service.dart';
 import 'package:marinechoice/pages/loginpage.dart';
 import 'package:country_list_pick/country_list_pick.dart';
+import 'package:marinechoice/pages/postpage.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -16,7 +17,6 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _auth = AuthService();
 
-  TextEditingController nameController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -25,7 +25,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void dispose() {
     super.dispose();
-    nameController.dispose();
     usernameController.dispose();
     emailController.dispose();
     passwordController.dispose();
@@ -73,17 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 2),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 50),
-                child: TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    hintText: 'Name',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 10),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
@@ -93,47 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 2),
-              Container(
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.symmetric(horizontal: 50),
-                child: DropdownButton<String>(
-                  value: _ageinit,
-                  icon: const Icon(Icons.arrow_downward),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _ageinit = newValue!;
-                    }
-                    );
-                  },
-                  items: _items().map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                )
-              ),
-              const SizedBox(height: 2),
-              Container(
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: CountryListPick(
-                  theme: CountryTheme(
-                    isShowFlag: true,
-                    isShowTitle: true,
-                    isShowCode: false,
-                    isDownIcon: true,
-                    showEnglishName: true,
-                  ),
-                  onChanged: (CountryCode? code) {
-                    if (kDebugMode) {
-                      print(code!.name);
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 10),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
@@ -143,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 10),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
@@ -154,14 +103,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 10),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
                   controller: confirmPasswordController,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    hintText: 'confirm password',
+                    hintText: 'Confirm password',
                   ),
                 ),
               ),

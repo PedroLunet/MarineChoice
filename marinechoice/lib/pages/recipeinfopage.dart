@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import '../components/getUploadImages.dart';
 import '../models/recipe_model.dart';
@@ -54,6 +55,10 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       case 3:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const MapPage()));
+        break;
+      case 4:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const PostPage()));
         break;
     }
   }
