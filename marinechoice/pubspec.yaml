@@ -48,6 +48,8 @@ dependencies:
   country_list_pick: ^1.0.1+6
   animated_search_bar: ^2.7.1
   image_picker: ^1.1.1
+  shared_preferences: ^2.2.3
+  cloud_firestore: ^4.17.3
 
 dev_dependencies:
   flutter_test:
