@@ -47,3 +47,9 @@
 - Displayed images in recipe info page;
 - Fixed warnings for better performance;
 
+## [2.0.1] - 08-05-2024
+
+- Created post page
+- User can now insert recipes into the recipe page
+- User can now insert images into the recipe page
+- Changed the layout of recipes

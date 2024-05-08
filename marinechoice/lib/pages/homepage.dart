@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/settingspage.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'fishpage.dart';
-import 'package:animated_search_bar/animated_search_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -78,6 +78,10 @@ class _HomePage extends State<HomePage> {
       case 3:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const MapPage()));
+        break;
+      case 4:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const PostPage()));
         break;
     }
   }
@@ -182,7 +186,6 @@ class _HomePage extends State<HomePage> {
             ),
             child: SvgPicture.asset(
               'assets/icons/settings.svg',
-              height: 37,
               width: 37,
             ),
           ),
@@ -196,8 +199,9 @@ class _HomePage extends State<HomePage> {
         ),
       ),
     );
-
-
-
   }
+
+
+
 }
+

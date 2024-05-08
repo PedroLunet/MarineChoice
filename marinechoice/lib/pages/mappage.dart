@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import '../models/fisharea_model.dart';
 import '../models/protarea_model.dart';
@@ -207,6 +208,10 @@ class _MapPageState extends State<MapPage> {
       case 3:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const MapPage()));
+        break;
+      case 4:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const PostPage()));
         break;
     }
   }
