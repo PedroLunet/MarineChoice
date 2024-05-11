@@ -11,6 +11,7 @@ class RecipeData {
   String? title;
   String? cusineType;
   String? rating;
+  List<String>? fish;
   List<String>? ingredients;
   List<String>? preparation;
   String? author;
@@ -20,6 +21,7 @@ class RecipeData {
       {required this.title,
       required this.cusineType,
       required this.rating,
+        required this.fish,
       required this.ingredients,
       required this.preparation,
       required this.author,
@@ -28,6 +30,7 @@ class RecipeData {
   RecipeData.fromJson(Map<dynamic, dynamic> json) {
     title = json["title"];
     cusineType = json["cusineType"];
+    fish = List<String>.from(json['fish']).toList();
     ingredients = List<String>.from(json['ingredients']).toList();
     preparation = List<String>.from(json['preparation']).toList();
     author = json["author"];
