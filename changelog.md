@@ -49,7 +49,14 @@
 
 ## [2.0.1] - 08-05-2024
 
-- Created post page
-- User can now insert recipes into the recipe page
-- User can now insert images into the recipe page
-- Changed the layout of recipes
+- Created post page;
+- User can now insert recipes into the recipe page;
+- User can now insert images into the recipe page;
+- Changed the layout of recipes;
+
+## [2.0.2] - 11-05-2024
+
+- Added a way for the user to rate a recipe;
+- Ratings are now going to the server;
+- Added a way for the user to see the rating of a recipe;
+- Rating now changes automatically the moment the user rates it;
