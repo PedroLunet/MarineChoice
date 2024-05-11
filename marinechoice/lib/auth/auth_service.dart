@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
@@ -29,6 +30,13 @@ class AuthService {
           email: email, password: password);
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('username', cred.user!.displayName!);
+      final SharedPreferences prefsEmail = await SharedPreferences.getInstance();
+      await prefsEmail.setString('email', cred.user!.email!);
+      
+      if (kDebugMode) {
+        log("This is a log.");
+        log(cred.user!.email!);
+      }
 
       return cred.user;
     } catch (e) {
@@ -42,6 +50,8 @@ class AuthService {
       await _auth.signOut();
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.remove('username');
+      final SharedPreferences prefsEmail = await SharedPreferences.getInstance();
+      await prefsEmail.remove('email');
     } catch (e) {
       log("Something went wrong");
     }
