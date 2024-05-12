@@ -57,8 +57,8 @@ class _RecipesPage extends State<RecipesPage> {
         width: MediaQuery.of(context).size.width / 2 - 20,
         height: 130,
         decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xffD6E7F7), width: 3),
-            color: const Color(0xffD6E7F7),
+            border: Border.all(color: const Color(0xff4A668A), width: 3),
+            color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child:
@@ -73,6 +73,7 @@ class _RecipesPage extends State<RecipesPage> {
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
               ),
             ]),
@@ -96,6 +97,7 @@ class _RecipesPage extends State<RecipesPage> {
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w700,
+                          color: Color(0xff4A668A),
                       )),
                 ),
                 Wrap(

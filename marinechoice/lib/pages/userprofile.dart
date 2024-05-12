@@ -193,8 +193,8 @@ class _UserProfileState extends State<UserProfile> {
         width: MediaQuery.of(context).size.width / 2 - 20,
         height: 130,
         decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xffD6E7F7), width: 3),
-            color: const Color(0xffD6E7F7),
+            border: Border.all(color: const Color(0xff4A668A), width: 3),
+            color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Column(
@@ -207,6 +207,7 @@ class _UserProfileState extends State<UserProfile> {
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
               ),
             ]),
@@ -232,6 +233,7 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w900,
+                      color: Color(0xff4A668A),
                     ),
                   ),
                 ),
@@ -255,9 +257,10 @@ class _UserProfileState extends State<UserProfile> {
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,
+                      color: Color(0xff4A668A),
                     )),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Wrap(
                     direction: Axis.horizontal,
@@ -312,7 +315,9 @@ class _UserProfileState extends State<UserProfile> {
         }
       }
     }
-    print(recipeList.toString());
+    if (kDebugMode) {
+      print(recipeList.toString());
+    }
 
   }
 }

@@ -11,6 +11,7 @@ import 'package:marinechoice/pages/recipespage.dart';
 import 'package:marinechoice/pages/userprofile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/getUploadImages.dart';
+import '../components/title_box.dart';
 import '../models/rating_model.dart';
 import '../models/recipe_model.dart';
 import 'settingspage.dart';
@@ -264,23 +265,69 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
             child: Column(
               children: [
                 Container(
+                  margin: const EdgeInsets.all(20),
+                  child: Center(
+                    child: Text(
+                      recipe.recipeData?.title ?? 'Title not available',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff4A668A)
+                      ),
+                    ),
+                  ),
+                ),
+                _avg != null
+                    ? Column(
+                  children: [
+                    RatingBar.builder(
+                      initialRating: _avg!,
+                      minRating: 0,
+                      allowHalfRating: true,
+                      tapOnlyMode: true,
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.sailing_outlined,
+                        color: Colors.amber,
+                      ),
+                      ignoreGestures: true,
+                      onRatingUpdate:
+                          (double value) {}, // Disable user interaction
+                    ),
+                  ],
+                )
+                    : Column(
+                  children: [
+                    RatingBar.builder(
+                      initialRating: 0,
+                      minRating: 0,
+                      allowHalfRating: true,
+                      tapOnlyMode: true,
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.sailing_outlined,
+                        color: Colors.amber,
+                      ),
+                      ignoreGestures: true,
+                      onRatingUpdate:
+                          (double value) {}, // Disable user interaction
+                    ),
+                    const Text("This recipe has no ratings yet."),
+                  ],
+                ),
+
+                const SizedBox(height: 40,),
+
+                Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.3,
-                  margin: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.fromLTRB(0,0,0,40),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
+
+                    border: Border.all(color: const Color(0xff5B92C6), width: 4),
+                    borderRadius: BorderRadius.circular(30),),
+
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(25),
                     child: FutureBuilder<String?>(
                       future: getImage(recipe.recipeData!.imagePath),
                       // Ensure getImage returns a Future<String?>
@@ -311,152 +358,109 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.all(20),
-                  child: Center(
-                    child: Text(
-                      recipe.recipeData?.title ?? 'Title not available',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-                _avg != null
-                    ? Column(
-                        children: [
-                          RatingBar.builder(
-                            initialRating: _avg!,
-                            minRating: 0,
-                            allowHalfRating: true,
-                            tapOnlyMode: true,
-                            itemBuilder: (context, _) => const Icon(
-                              Icons.sailing_outlined,
-                              color: Colors.amber,
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 300,
+                        margin: EdgeInsets.all(40),
+                          child: TitleBox(
+                            title: "Fish used for this recipe",
+                            widget: Container(
+                              child: (recipe.recipeData != null && recipe.recipeData!.fish != null)
+                                  ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: recipe.recipeData!.fish!.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    title: Text(
+                                      recipe.recipeData!.fish![index],
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                                  : const Text("No fish were inserted into the database, something went wrong.")
                             ),
-                            ignoreGestures: true,
-                            onRatingUpdate:
-                                (double value) {}, // Disable user interaction
                           ),
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          RatingBar.builder(
-                            initialRating: 0,
-                            minRating: 0,
-                            allowHalfRating: true,
-                            tapOnlyMode: true,
-                            itemBuilder: (context, _) => const Icon(
-                              Icons.sailing_outlined,
-                              color: Colors.amber,
-                            ),
-                            ignoreGestures: true,
-                            onRatingUpdate:
-                                (double value) {}, // Disable user interaction
-                          ),
-                          const Text("This recipe has no ratings yet."),
-                        ],
                       ),
-
+                        Container(
+                          width: 300,
+                            margin: EdgeInsets.all(40),
+                            child: TitleBox(
+                              title: "Ingredients",
+                              widget: Container(
+                                  child: (recipe.recipeData != null && recipe.recipeData!.ingredients != null)
+                                      ? ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: recipe.recipeData!.ingredients!.length,
+                                    itemBuilder: (context, index) {
+                                      return ListTile(
+                                        title: Text(
+                                          recipe.recipeData!.ingredients![index],
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                      : const Text("No ingredients were inserted into the database, something went wrong.")
+                              ),
+                            ),
+                              ),
+                    ],
+                  ),
+                ),
                 Container(
-                  margin: const EdgeInsets.all(20),
-                  child: const Text(
-                    "Fish used for this recipe:",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+                  margin: EdgeInsets.all(40),
+                  child: TitleBox(
+                    title: "Preparation",
+                    widget: Container(
+                        child: (recipe.recipeData != null && recipe.recipeData!.preparation != null)
+                            ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: recipe.recipeData!.preparation!.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(
+                                recipe.recipeData!.preparation![index],
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                            : const Text("No steps were inserted into the database, something went wrong.")
                     ),
                   ),
                 ),
-                if (recipe.recipeData != null &&
-                    recipe.recipeData!.fish != null)
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: recipe.recipeData!.fish!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          recipe.recipeData!.fish![index],
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                Container(
-                  margin: const EdgeInsets.all(20),
-                  child: const Text(
-                    "Ingredients:",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                // Check if recipeData and ingredients are not null before accessing them
-                if (recipe.recipeData != null &&
-                    recipe.recipeData!.ingredients != null)
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: recipe.recipeData!.ingredients!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          recipe.recipeData!.ingredients![index],
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                Container(
-                  margin: const EdgeInsets.all(20),
-                  child: const Text(
-                    "Preparation:",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                // Check if recipeData and ingredients are not null before accessing them
-                if (recipe.recipeData != null &&
-                    recipe.recipeData!.preparation != null)
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: recipe.recipeData!.preparation!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          recipe.recipeData!.preparation![index],
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
                 Container(
                   margin: const EdgeInsets.all(20),
                   child: Text(
                     "Author: ${recipe.recipeData?.author ?? 'Author not available'}",
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 15,
                       fontWeight: FontWeight.w600,
+                        color: Color(0xff4A668A)
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const Text("Rate this recipe:"),
+                const Text("Rate this recipe:",
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xff4A668A)
+                  ),),
                 const SizedBox(
                   height: 20,
                 ),
@@ -478,7 +482,11 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                                 (double value) {}, // Disable user interaction
                           ),
                           const SizedBox(height: 10),
-                          const Text("Thank you for rating!"),
+                          const Text("Thank you for rating!",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Color(0xff4A668A)
+                            ),),
                         ],
                       )
                     : Column(

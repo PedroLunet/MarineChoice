@@ -41,6 +41,7 @@ class _HomePage extends State<HomePage> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w700,
+                color:Color(0xff4A668A),
               ),
             ),
             buildContainer(
@@ -130,8 +131,8 @@ class _HomePage extends State<HomePage> {
         padding: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width - 20,
         decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xff126863), width: 3),
-            color: const Color(0xffD6E7F7),
+            border: Border.all(color: const Color(0xff4A668A), width: 3),
+            color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Text(
@@ -139,6 +140,7 @@ class _HomePage extends State<HomePage> {
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w400,
+            color: Colors.white,
           ),
         ),
       );
@@ -146,8 +148,8 @@ class _HomePage extends State<HomePage> {
       return Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xff126863), width: 3),
-            color: const Color(0xffD6E7F7),
+            border: Border.all(color: const Color(0xff4A668A), width: 3),
+            color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Column(children: [
@@ -156,6 +158,7 @@ class _HomePage extends State<HomePage> {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w400,
+              color: Colors.white,
             ),
           ),
           TextButton(
@@ -168,6 +171,7 @@ class _HomePage extends State<HomePage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
+                    color: Color(0xffB4D8F9),
                   )))
         ]),
       );
