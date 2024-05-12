@@ -1,13 +1,7 @@
 import 'dart:developer';
-
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:marinechoice/auth/auth_service.dart';
 import 'package:marinechoice/pages/loginpage.dart';
-import 'package:country_list_pick/country_list_pick.dart';
-import 'package:marinechoice/pages/postpage.dart';
-import 'package:marinechoice/models/user_model.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -32,13 +26,6 @@ class _RegisterPageState extends State<RegisterPage> {
     passwordController.dispose();
     confirmPasswordController.dispose();
   }
-
-  String _ageinit = '1';
-
-  List<String> _items() {
-    return List.generate(99, (index) => (index + 1).toString());
-  }
-
 
 
   @override

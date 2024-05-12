@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/fishinfopage.dart';
 import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
+import 'package:marinechoice/pages/userprofile.dart';
 
 import '../components/getUploadImages.dart';
 import '../models/fish_model.dart';
@@ -182,6 +183,10 @@ class _FishPage extends State<FishPage> {
       case 4:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const PostPage()));
+        break;
+      case 5:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const UserProfile()));
         break;
     }
   }

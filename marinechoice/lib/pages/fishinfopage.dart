@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
+import 'package:marinechoice/pages/userprofile.dart';
 
 import '../components/getUploadImages.dart';
 import '../components/title_box.dart';
@@ -62,6 +62,10 @@ class _FishInfoPage extends State<FishInfoPage> {
       case 4:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const PostPage()));
+        break;
+      case 5:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const UserProfile()));
         break;
     }
   }
@@ -167,7 +171,7 @@ class _FishInfoPage extends State<FishInfoPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
             Center(
               child: Text(
                 fish.fishData!.name!,
@@ -228,7 +232,7 @@ class _FishInfoPage extends State<FishInfoPage> {
             const SizedBox(height: 40,),
 
             TitleBox(title: "Sustainability Rate", widget: getSustainabilityBadge(fish)),
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
 
           ],
         ),

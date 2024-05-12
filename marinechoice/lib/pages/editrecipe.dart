@@ -2,31 +2,36 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:image_picker/image_picker.dart';
+import 'package:marinechoice/pages/postpage.dart';
+import 'package:marinechoice/pages/recipeinfopage.dart';
 import 'package:marinechoice/pages/settingspage.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:marinechoice/pages/userprofile.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../components/getUploadImages.dart';
 import '../models/fish_model.dart';
+import '../models/recipe_model.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
 
-class PostPage extends StatefulWidget {
-  const PostPage({super.key});
+class EditPage extends StatefulWidget {
+  const EditPage({super.key, required this.recipe});
+
+  final Recipe recipe;
 
   @override
   State<StatefulWidget> createState() {
-    return _PostPage();
+    return _EditPage();
   }
 }
 
-class _PostPage extends State<PostPage> {
+class _EditPage extends State<EditPage> {
   final _database = FirebaseDatabase.instance.ref();
   int selectedBox = -1;
   String searchText = "";
@@ -35,11 +40,11 @@ class _PostPage extends State<PostPage> {
   Uint8List? image;
   late Future<void> getInfo;
 
-  final TextEditingController _titleController = TextEditingController();
+  late TextEditingController _titleController;
   String _cuisineType = '';
-  final List<String> _selectedIngredients = [];
-  final List<String> _selectedFishes = [];
-  final List<String> _recipeSteps = [];
+  List<String> _selectedIngredients = [];
+  List<String> _selectedFishes = [];
+  List<String> _recipeSteps = [];
 
   final databaseReference = FirebaseDatabase.instance.ref();
 
@@ -57,7 +62,15 @@ class _PostPage extends State<PostPage> {
 
   @override
   void initState() {
+    _titleController =
+        TextEditingController(text: widget.recipe.recipeData!.title!);
+    _cuisineType = widget.recipe.recipeData!.cusineType!;
+    _selectedIngredients = widget.recipe.recipeData!.ingredients!;
+    _selectedFishes = widget.recipe.recipeData!.fish!;
+    _recipeSteps = widget.recipe.recipeData!.preparation!;
+    imagePath = widget.recipe.recipeData!.imagePath!;
     getInfo = getAllInfo();
+
     super.initState();
   }
 
@@ -66,7 +79,7 @@ class _PostPage extends State<PostPage> {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: SizedBox(
-        height: 60,
+        height: 60, // Adjust the height as needed
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: items.map((item) {
@@ -160,51 +173,48 @@ class _PostPage extends State<PostPage> {
                         _availableFishes, _selectedFishes, (selectedItem) {}),
                   ),
                   const Text('Recipe Steps:', style: TextStyle(fontSize: 18)),
-            ReorderableListView(
-              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              onReorder: (oldIndex, newIndex) {
-                setState(() {
-                  if (newIndex > oldIndex) {
-                    newIndex -= 1;
-                  }
-                    final String item = _recipeSteps.removeAt(oldIndex);
-                    _recipeSteps.insert(newIndex, item);
-
-                });
-              },
-              children: _recipeSteps.asMap().entries.map((entry) {
-                int index = entry.key;
-                final TextEditingController controller = TextEditingController(text: entry.value);
-                return ListTile(
-                  key: ValueKey(index),
-                  title: TextFormField(
-                    controller: controller,
-                    decoration: InputDecoration(
-                      labelText: 'Step ${index + 1}',
-                    ),
-                    onChanged: (value) {
+                  ReorderableListView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    // Disable scrolling
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    onReorder: (oldIndex, newIndex) {
                       setState(() {
-                        _recipeSteps[index] = value;
+                        if (newIndex > oldIndex) {
+                          newIndex -= 1;
+                        }
+                        final String item = _recipeSteps.removeAt(oldIndex);
+                        _recipeSteps.insert(newIndex, item);
                       });
                     },
-                  ),
-                  leading: const Icon(Icons.reorder),
-                  trailing: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _recipeSteps.removeAt(index);
-                      });
-                    },
-                    icon: const Icon(Icons.close, color: Colors.red),
-                  ),
-                );
-              }).toList(),
-            ),
-
-            const SizedBox(
-                    height: 20,
+                    children: _recipeSteps.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      final TextEditingController controller =
+                          TextEditingController(text: entry.value);
+                      return ListTile(
+                        key: ValueKey(index),
+                        title: TextFormField(
+                          controller: controller,
+                          decoration: InputDecoration(
+                            labelText: 'Step ${index + 1}',
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              _recipeSteps[index] = value;
+                            });
+                          },
+                        ),
+                        leading: const Icon(Icons.reorder),
+                        trailing: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _recipeSteps.removeAt(index);
+                            });
+                          },
+                          icon: const Icon(Icons.close, color: Colors.red),
+                        ),
+                      );
+                    }).toList(),
                   ),
                   ElevatedButton(
                     onPressed: _addStep,
@@ -293,7 +303,7 @@ class _PostPage extends State<PostPage> {
                       child: Container(
                         padding: const EdgeInsets.all(30),
                         child: uploading
-                            ? const Center(child: CircularProgressIndicator())
+                            ? const CircularProgressIndicator()
                             : const Text(
                                 'Pick Image',
                                 style: TextStyle(
@@ -311,15 +321,13 @@ class _PostPage extends State<PostPage> {
                           _selectedIngredients.isNotEmpty &&
                           _selectedFishes.isNotEmpty &&
                           _recipeSteps.isNotEmpty) {
-                        insertData(
+                        updateData(
                             _titleController.text,
                             _cuisineType,
                             _selectedIngredients,
                             _selectedFishes,
                             _recipeSteps,
                             imagePath);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const UserProfile()));
                       }
                     },
                     style: ButtonStyle(
@@ -336,7 +344,7 @@ class _PostPage extends State<PostPage> {
                       ),
                     ),
                     child: const Text(
-                      'Post Recipe',
+                      'Edit Recipe',
                     ),
                   ),
                   const SizedBox(
@@ -473,38 +481,48 @@ class _PostPage extends State<PostPage> {
     );
   }
 
-  Future<void> insertData(
+  Future<void> updateData(
       String title,
       String cuisineType,
       List<String> ingredients,
       List<String> fishes,
       List<String> steps,
       String imagePath) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? username = prefs.getString('username');
-    if (username == null) {
-      throw Exception("Username null");
-    }
-    databaseReference.child("RECIPE").push().set({
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("RECIPE/${widget.recipe.key}");
+
+    await ref.update({
       'title': title,
       'cusineType': cuisineType,
       'ingredients': ingredients,
       'preparation': steps,
       'fish': fishes,
       'imagePath': imagePath,
-      'author': username,
     });
-    _titleController.clear();
-    _cuisineType = '';
-    _selectedIngredients.clear();
-    _selectedFishes.clear();
-    _recipeSteps.clear();
+
+    DataSnapshot updatedRecipe = await ref.get();
+
+    RecipeData recipeData = RecipeData.fromJson(updatedRecipe.value as Map);
+    Recipe recipe = Recipe(key: updatedRecipe.key, recipeData: recipeData);
+
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => RecipeInfoPage(recipe: recipe)));
   }
 
   Future<void> getAllInfo() async {
     await retrieveIngredients();
     await retrieveFishData();
     await retrieveCuisineType();
+    await getImageBytes();
+  }
+
+  Future<void> getImageBytes() async {
+    String? downloadUrl = await getImage(imagePath);
+    http.Response response = await http.get(
+      Uri.parse(downloadUrl!),
+    );
+
+    image = response.bodyBytes;
   }
 
   Future<void> retrieveIngredients() async {
