@@ -4,6 +4,7 @@ import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/settingspage.dart';
 import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
+import 'package:marinechoice/pages/userprofile.dart';
 import 'fishpage.dart';
 
 class HomePage extends StatefulWidget {
@@ -82,6 +83,10 @@ class _HomePage extends State<HomePage> {
       case 4:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const PostPage()));
+        break;
+      case 5:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const UserProfile()));
         break;
     }
   }

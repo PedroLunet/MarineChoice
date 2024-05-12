@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:marinechoice/pages/editrecipe.dart';
 import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
+import 'package:marinechoice/pages/userprofile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/getUploadImages.dart';
 import '../models/rating_model.dart';
@@ -31,6 +32,7 @@ class RecipeInfoPage extends StatefulWidget {
 class _RecipeInfoPage extends State<RecipeInfoPage> {
   double? _rating;
   double? _avg;
+  String user = "";
   late Future<void> calculateAndLoad;
   final _database = FirebaseDatabase.instance.ref();
   List<Rating> ratingList = [];
@@ -94,13 +96,18 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
         }
       }
     }
-
-    _avg = sum / counter;
+    if(counter == 0 && sum == 0) {
+      _avg = null;
+    }
+    else {
+      _avg = sum / counter;
+    }
 
     log(_avg.toString());
   }
 
   Future<void> _calculateAndLoad() async {
+    await getUserData();
     await  _loadRating();
     await _calculateAvg();
   }
@@ -136,6 +143,10 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       case 4:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const PostPage()));
+        break;
+      case 5:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const UserProfile()));
         break;
     }
   }
@@ -502,7 +513,32 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                         ],
                       ),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
+                ),
+                if(recipe.recipeData!.author! == user)
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(  MaterialPageRoute(builder: (context) => EditPage(recipe: widget.recipe)));
+
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                      shadowColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7.0),
+                            side: BorderSide(color: Colors.grey[600]!)),
+                      ),
+                    ),
+                    child: const Text(
+                      'Edit Recipe',),
+                  ),
+
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),
@@ -510,8 +546,8 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
         });
   }
 
-  void saveRatingToDatabase(
-      String rating, String userEmail, String recipeTitle) {
+  Future<void> saveRatingToDatabase(
+      String rating, String userEmail, String recipeTitle) async {
     // Get a reference to your Firebase Realtime Database
     DatabaseReference reference = FirebaseDatabase.instance.ref();
 
@@ -531,5 +567,19 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
         print('Failed to save rating: $error');
       }
     });
+    await _calculateAndLoad();
+    setState(() {
+    });
   }
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? username = prefs.getString('username');
+    if (username == null) {
+      throw Exception("Username null");
+    }
+
+    user = username;
+  }
+
 }
