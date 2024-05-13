@@ -66,3 +66,4 @@
 - Created a user profile;
 - Users can now see their recipes in the user profile;
 - Added a way for a user to edit their recipes;
+- Changed style of some pages;
