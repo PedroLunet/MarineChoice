@@ -64,8 +64,8 @@ class _FishPage extends State<FishPage> {
         padding: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width / 2 - 20,
         decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xffD6E7F7), width: 3),
-            color: const Color(0xffD6E7F7),
+            border: Border.all(color: const Color(0xff4A668A), width: 3),
+            color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Column(
@@ -76,8 +76,10 @@ class _FishPage extends State<FishPage> {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
+              color: Colors.white,
             ),
           ),
+          const SizedBox(height: 10,),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: FutureBuilder<String?>(
@@ -100,6 +102,7 @@ class _FishPage extends State<FishPage> {
                 }},
             ),
           ),
+              const SizedBox(height: 10,),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             decoration: BoxDecoration(
@@ -137,6 +140,7 @@ class _FishPage extends State<FishPage> {
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w700,
+                        color: Color(0xff4A668A),
                       )),
                 ),
                 Wrap(
