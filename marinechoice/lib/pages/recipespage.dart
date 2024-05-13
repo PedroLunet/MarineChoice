@@ -79,44 +79,48 @@ class _RecipesPageState extends State<RecipesPage> {
   }
 
   void _showFilterDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Select Fish"),
-          content: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                for (var fish in allFishes) // Iterate through the list of fishes
-                  CheckboxListTile(
-                    title: Text(fish), // Display fish name
-                    value: selectedFishes.contains(fish),
-                    onChanged: (bool? value) {
-                      setState(() {
-                        if (value!) {
-                          selectedFishes.add(fish);
-                        } else {
-                          selectedFishes.remove(fish);
-                        }
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return StatefulBuilder(  // Add this
+        builder: (BuildContext context, StateSetter setState) {
+          return AlertDialog(
+            title: Text("Select Fish"),
+            content: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  for (var fish in allFishes) // Iterate through the list of fishes
+                    CheckboxListTile(
+                      title: Text(fish), // Display fish name
+                      value: selectedFishes.contains(fish),
+                      onChanged: (bool? value) {
+                        setState(() {  // This will now rebuild the AlertDialog
+                          if (value!) {
+                            selectedFishes.add(fish);
+                          } else {
+                            selectedFishes.remove(fish);
+                          }
+                        });
                         filterRecipes();
-                      });
-                    },
-                  ),
-              ],
+                      },
+                    ),
+                ],
+              ),
             ),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              child: Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+            actions: <Widget>[
+              ElevatedButton(
+                child: Text("Close"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
 
 
   void filterRecipes() {
@@ -301,29 +305,31 @@ class _RecipesPageState extends State<RecipesPage> {
   }
 
   Future<void> retrieveRecipeData() async {
-    var result = await _database.child("RECIPE").get();
+  var result = await _database.child("RECIPE").get();
 
-    for (var recipe in result.children) {
-      try {
-        RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
-        Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
-        allRecipes.add(recipef); // Add recipes to allRecipes instead of recipeList
+  for (var recipe in result.children) {
+    try {
+      RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
+      Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
+      allRecipes.add(recipef); // Add recipes to allRecipes instead of recipeList
 
-        // Add fish to allFishes list
-        if (recipeData.fish != null) {
-          for (var fish in recipeData.fish!) {
-            if (!allFishes.contains(fish)) {
-              allFishes.add(fish);
-            }
+      // Add fish to allFishes list
+      if (recipeData.fish != null) {
+        for (var fish in recipeData.fish!) {
+          if (!allFishes.contains(fish)) {
+            allFishes.add(fish);
           }
         }
-      } catch (e) {
-        if (kDebugMode) {
-          print("Error: ${e.toString()}");
-        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error: ${e.toString()}");
       }
     }
   }
+
+  filterRecipes();
+}
 
   Future<List<String>> retrieveFishData() async {
     List<String> fishes = [];
