@@ -26,6 +26,8 @@ class _RecipesPageState extends State<RecipesPage> {
   List<Recipe> recipeList = [];
   List<Recipe> allRecipes = [];
   List<String> selectedIngredients = [];
+  List<String> allFishes = [];
+  List<String> selectedFishes = [];
 
   @override
   void initState() {
@@ -81,39 +83,25 @@ class _RecipesPageState extends State<RecipesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Select Ingredients"),
+          title: Text("Select Fish"),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                CheckboxListTile(
-                  title: Text("Ingredient 1"),
-                  value: selectedIngredients.contains("Ingredient 1"),
-                  onChanged: (bool? value) {
-                    setState(() {
-                      if (value!) {
-                        selectedIngredients.add("Ingredient 1");
-                      } else {
-                        selectedIngredients.remove("Ingredient 1");
-                      }
-                      filterRecipes();
-                    });
-                  },
-                ),
-                CheckboxListTile(
-                  title: Text("Ingredient 2"),
-                  value: selectedIngredients.contains("Ingredient 2"),
-                  onChanged: (bool? value) {
-                    setState(() {
-                      if (value!) {
-                        selectedIngredients.add("Ingredient 2");
-                      } else {
-                        selectedIngredients.remove("Ingredient 2");
-                      }
-                      filterRecipes();
-                    });
-                  },
-                ),
-                // Add more CheckboxListTile widgets for other ingredients
+                for (var fish in allFishes) // Iterate through the list of fishes
+                  CheckboxListTile(
+                    title: Text(fish), // Display fish name
+                    value: selectedFishes.contains(fish),
+                    onChanged: (bool? value) {
+                      setState(() {
+                        if (value!) {
+                          selectedFishes.add(fish);
+                        } else {
+                          selectedFishes.remove(fish);
+                        }
+                        filterRecipes();
+                      });
+                    },
+                  ),
               ],
             ),
           ),
@@ -130,47 +118,45 @@ class _RecipesPageState extends State<RecipesPage> {
     );
   }
 
+
   void filterRecipes() {
     setState(() {
       recipeList.clear();
       for (var recipe in allRecipes) {
-        if (selectedIngredients.every((ingredient) =>
-            recipe.ingredients.contains(ingredient))) {
+        bool matchesIngredients = selectedIngredients.every((ingredient) =>
+            recipe.recipeData!.ingredients!.contains(ingredient));
+        bool matchesFishes = selectedFishes.isEmpty || selectedFishes.any((fish) =>
+            recipe.recipeData!.fish!.contains(fish));
+
+        if (matchesIngredients && matchesFishes) {
           recipeList.add(recipe);
         }
       }
     });
   }
 
+
   Widget buildSingleChildScrollView() {
-    return FutureBuilder<void>(
-        future: retrieveRecipeData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return SingleChildScrollView(
-              child: Column(children: [
-                Container(
-                  margin: const EdgeInsets.all(30),
-                  child: const Text("Recommended",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xff4A668A),
-                      )),
-                ),
-                Wrap(
-                    direction: Axis.horizontal,
-                    children: _getRecipes(recipeList)),
-              ]),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+    return SingleChildScrollView(
+      child: Column(children: [
+        Container(
+          margin: const EdgeInsets.all(30),
+          child: const Text("Recommended",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff4A668A),
+              )),
+        ),
+        Wrap(
+          direction: Axis.horizontal,
+          children: _getRecipes(recipeList),
+        ),
+      ]),
+    );
   }
+
 
   List<Widget> _getRecipes(List<Recipe> recipeList) {
     List<Widget> list = [];
@@ -321,7 +307,16 @@ class _RecipesPageState extends State<RecipesPage> {
       try {
         RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
         Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
-        recipeList.add(recipef); // Add recipes to allRecipes instead of recipeList
+        allRecipes.add(recipef); // Add recipes to allRecipes instead of recipeList
+
+        // Add fish to allFishes list
+        if (recipeData.fish != null) {
+          for (var fish in recipeData.fish!) {
+            if (!allFishes.contains(fish)) {
+              allFishes.add(fish);
+            }
+          }
+        }
       } catch (e) {
         if (kDebugMode) {
           print("Error: ${e.toString()}");
@@ -329,4 +324,28 @@ class _RecipesPageState extends State<RecipesPage> {
       }
     }
   }
+
+  Future<List<String>> retrieveFishData() async {
+    List<String> fishes = [];
+    var result = await _database.child("RECIPE").get();
+
+    for (var recipe in result.children) {
+      try {
+        RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
+        if (recipeData.ingredients != null) {
+          for (var ingredient in recipeData.ingredients!) {
+            if (!fishes.contains(ingredient)) {
+              fishes.add(ingredient);
+            }
+          }
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error: ${e.toString()}");
+        }
+      }
+    }
+    return fishes;
+  }
+
 }

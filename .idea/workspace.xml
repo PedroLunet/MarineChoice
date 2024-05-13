@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30ab036b-69c6-4f1a-a985-de9583d30b85" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/lib/models/recipe_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/lib/models/recipe_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marinechoice/lib/pages/recipespage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/lib/pages/recipespage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marinechoice/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/marinechoice/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
