@@ -82,19 +82,19 @@ class _RecipesPageState extends State<RecipesPage> {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return StatefulBuilder(  // Add this
+      return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           return AlertDialog(
             title: Text("Select Fish"),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  for (var fish in allFishes) // Iterate through the list of fishes
+                  for (var fish in allFishes)
                     CheckboxListTile(
-                      title: Text(fish), // Display fish name
+                      title: Text(fish),
                       value: selectedFishes.contains(fish),
                       onChanged: (bool? value) {
-                        setState(() {  // This will now rebuild the AlertDialog
+                        setState(() {
                           if (value!) {
                             selectedFishes.add(fish);
                           } else {
@@ -108,6 +108,15 @@ class _RecipesPageState extends State<RecipesPage> {
               ),
             ),
             actions: <Widget>[
+              ElevatedButton(
+                child: Text("Clear"),
+                onPressed: () {
+                  setState(() {
+                    selectedFishes.clear();
+                  });
+                  filterRecipes();
+                },
+              ),
               ElevatedButton(
                 child: Text("Close"),
                 onPressed: () {
