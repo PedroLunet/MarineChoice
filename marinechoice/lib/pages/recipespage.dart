@@ -12,22 +12,27 @@ import 'homepage.dart';
 import 'mappage.dart';
 
 class RecipesPage extends StatefulWidget {
-  const RecipesPage({super.key});
+  const RecipesPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _RecipesPage();
+    return _RecipesPageState();
   }
 }
 
-class _RecipesPage extends State<RecipesPage> {
+class _RecipesPageState extends State<RecipesPage> {
   final _database = FirebaseDatabase.instance.ref();
 
   List<Recipe> recipeList = [];
+  List<Recipe> allRecipes = [];
+  List<String> selectedIngredients = [];
+  List<String> allFishes = [];
+  List<String> selectedFishes = [];
 
   @override
   void initState() {
     super.initState();
+    retrieveRecipeData();
   }
 
   @override
@@ -40,9 +45,145 @@ class _RecipesPage extends State<RecipesPage> {
     );
   }
 
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: const Color(0xffB4D8F9),
+      actions: [
+        GestureDetector(
+          onTap: () {
+            _showFilterDialog();
+          },
+          child: Container(
+            margin: const EdgeInsets.all(10),
+            alignment: Alignment.center,
+            width: 37,
+            decoration: const BoxDecoration(
+              color: Colors.transparent,
+            ),
+            child: Icon(
+              Icons.filter_list,
+              size: 30,
+              color: Colors.white,
+            ),
+          ),
+        )
+      ],
+      title: const Center(
+        child: Text(
+          "MarineChoice",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+  }
+
+  void _showFilterDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return AlertDialog(
+            title: Text("Select Fish"),
+            content: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  for (var fish in allFishes)
+                    CheckboxListTile(
+                      title: Text(fish),
+                      value: selectedFishes.contains(fish),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          if (value!) {
+                            selectedFishes.add(fish);
+                          } else {
+                            selectedFishes.remove(fish);
+                          }
+                        });
+                        filterRecipes();
+                      },
+                    ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                child: Text("Clear"),
+                onPressed: () {
+                  setState(() {
+                    selectedFishes.clear();
+                  });
+                  filterRecipes();
+                },
+              ),
+              ElevatedButton(
+                child: Text("Close"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
+
+
+  void filterRecipes() {
+    setState(() {
+      recipeList.clear();
+      for (var recipe in allRecipes) {
+        bool matchesIngredients = selectedIngredients.every((ingredient) =>
+            recipe.recipeData!.ingredients!.contains(ingredient));
+        bool matchesFishes = selectedFishes.isEmpty || selectedFishes.any((fish) =>
+            recipe.recipeData!.fish!.contains(fish));
+
+        if (matchesIngredients && matchesFishes) {
+          recipeList.add(recipe);
+        }
+      }
+    });
+  }
+
+
+  Widget buildSingleChildScrollView() {
+    return SingleChildScrollView(
+      child: Column(children: [
+        Container(
+          margin: const EdgeInsets.all(30),
+          child: const Text("Recommended",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff4A668A),
+              )),
+        ),
+        Wrap(
+          direction: Axis.horizontal,
+          children: _getRecipes(recipeList),
+        ),
+      ]),
+    );
+  }
+
+
+  List<Widget> _getRecipes(List<Recipe> recipeList) {
+    List<Widget> list = [];
+
+    for (int i = 0; i < recipeList.length; i++) {
+      list.add(buildContainer(recipeList[i], i));
+    }
+
+    return list;
+  }
+
   Widget buildContainer(Recipe recipe, int number) {
     if (recipeList.isEmpty) {
-      return const Center(
+      return Center(
         child: CircularProgressIndicator(),
       );
     }
@@ -61,12 +202,10 @@ class _RecipesPage extends State<RecipesPage> {
             color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
-        child:
-        Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(children: [
-
               Text(
                 recipe.recipeData!.title!,
                 textAlign: TextAlign.center,
@@ -81,75 +220,6 @@ class _RecipesPage extends State<RecipesPage> {
         ),
       ),
     );
-  }
-
-  Widget buildSingleChildScrollView() {
-    return FutureBuilder<void>(
-        future: retrieveRecipeData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return SingleChildScrollView(
-              child: Column(children: [
-                Container(
-                  margin: const EdgeInsets.all(30),
-                  child: const Text("Recommended",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w700,
-                          color: Color(0xff4A668A),
-                      )),
-                ),
-                Wrap(
-                    direction: Axis.horizontal,
-                    children: _getRecipes(recipeList)),
-              ]),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
-  }
-
-  List<Widget> _getRecipes(List<Recipe> recipeList) {
-    List<Widget> list = [];
-
-    for (int i = 0; i < recipeList.length; i++) {
-      list.add(buildContainer(recipeList[i], i));
-    }
-
-    return list;
-  }
-
-  _navigate(int index) {
-    switch (index) {
-      case 0:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const HomePage()));
-        break;
-      case 1:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const FishPage()));
-        break;
-      case 2:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const RecipesPage()));
-        break;
-      case 3:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const MapPage()));
-        break;
-      case 4:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const PostPage()));
-        break;
-      case 5:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const UserProfile()));
-        break;
-    }
   }
 
   BottomNavigationBar buildBottomNavigationBar() {
@@ -214,54 +284,83 @@ class _RecipesPage extends State<RecipesPage> {
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      backgroundColor: const Color(0xffB4D8F9),
-      actions: [
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const SettingsPage()));
-          },
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            alignment: Alignment.center,
-            width: 37,
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: SvgPicture.asset(
-              'assets/icons/settings.svg',
-              height: 37,
-              width: 37,
-            ),
-          ),
-        )
-      ],
-      title: const Center(
-        child: Text(
-          "MarineChoice",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
-      ),
-    );
+  _navigate(int index) {
+    switch (index) {
+      case 0:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const HomePage()));
+        break;
+      case 1:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const FishPage()));
+        break;
+      case 2:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const RecipesPage()));
+        break;
+      case 3:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const MapPage()));
+        break;
+      case 4:
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const PostPage()));
+        break;
+      case 5:
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const UserProfile()));
+        break;
+    }
   }
 
   Future<void> retrieveRecipeData() async {
+  var result = await _database.child("RECIPE").get();
+
+  for (var recipe in result.children) {
+    try {
+      RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
+      Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
+      allRecipes.add(recipef); // Add recipes to allRecipes instead of recipeList
+
+      // Add fish to allFishes list
+      if (recipeData.fish != null) {
+        for (var fish in recipeData.fish!) {
+          if (!allFishes.contains(fish)) {
+            allFishes.add(fish);
+          }
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error: ${e.toString()}");
+      }
+    }
+  }
+
+  filterRecipes();
+}
+
+  Future<List<String>> retrieveFishData() async {
+    List<String> fishes = [];
     var result = await _database.child("RECIPE").get();
 
     for (var recipe in result.children) {
-      try{
+      try {
         RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
-        Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
-        recipeList.add(recipef);
-      }catch(e){
+        if (recipeData.ingredients != null) {
+          for (var ingredient in recipeData.ingredients!) {
+            if (!fishes.contains(ingredient)) {
+              fishes.add(ingredient);
+            }
+          }
+        }
+      } catch (e) {
         if (kDebugMode) {
           print("Error: ${e.toString()}");
         }
       }
-
     }
+    return fishes;
   }
+
 }
