@@ -10,6 +10,7 @@ import 'package:marinechoice/pages/recipespage.dart';
 import 'package:marinechoice/pages/settingspage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../components/getUploadImages.dart';
 import '../models/recipe_model.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
@@ -191,26 +192,48 @@ class _UserProfileState extends State<UserProfile> {
       child: Container(
         padding: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width / 2 - 20,
-        height: 130,
+        height: 130 + MediaQuery.of(context).size.height / 8,
         decoration: BoxDecoration(
             border: Border.all(color: const Color(0xff4A668A), width: 3),
             color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,  // Align items to start
           children: [
-            Column(children: [
-              Text(
-                recipe.recipeData!.title!,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+            Text(
+              recipe.recipeData!.title!,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
-            ]),
+            ),
+            const Spacer(),  // This will push the following widget to the bottom
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: FutureBuilder<String?>(
+                future: getImage(recipe.recipeData!.imagePath),  // Ensure getImage returns a Future<String?>
+                builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError || snapshot.data == null) {
+                    if (kDebugMode) {
+                      print('Error loading image: ${snapshot.error}');
+                    }
+                    return const Center(child: Text('Failed to load image'));
+                  } else {
+                    return Image.network(
+                      snapshot.data!,
+                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width / 2 - 20,
+                      height: MediaQuery.of(context).size.height / 8,
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),
