@@ -160,50 +160,48 @@ class _PostPage extends State<PostPage> {
                         _availableFishes, _selectedFishes, (selectedItem) {}),
                   ),
                   const Text('Recipe Steps:', style: TextStyle(fontSize: 18)),
-            ReorderableListView(
-              physics: const NeverScrollableScrollPhysics(), // Disable scrolling
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              onReorder: (oldIndex, newIndex) {
-                setState(() {
-                  if (newIndex > oldIndex) {
-                    newIndex -= 1;
-                  }
-                    final String item = _recipeSteps.removeAt(oldIndex);
-                    _recipeSteps.insert(newIndex, item);
-
-                });
-              },
-              children: _recipeSteps.asMap().entries.map((entry) {
-                int index = entry.key;
-                final TextEditingController controller = TextEditingController(text: entry.value);
-                return ListTile(
-                  key: ValueKey(index),
-                  title: TextFormField(
-                    controller: controller,
-                    decoration: InputDecoration(
-                      labelText: 'Step ${index + 1}',
-                    ),
-                    onChanged: (value) {
+                  ReorderableListView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    // Disable scrolling
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    onReorder: (oldIndex, newIndex) {
                       setState(() {
-                        _recipeSteps[index] = value;
+                        if (newIndex > oldIndex) {
+                          newIndex -= 1;
+                        }
+                        final String item = _recipeSteps.removeAt(oldIndex);
+                        _recipeSteps.insert(newIndex, item);
                       });
                     },
+                    children: _recipeSteps.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      final TextEditingController controller =
+                          TextEditingController(text: entry.value);
+                      return ListTile(
+                        key: ValueKey(index),
+                        title: TextFormField(
+                          controller: controller,
+                          decoration: InputDecoration(
+                            labelText: 'Step ${index + 1}',
+                          ),
+                          onChanged: (value) {
+                            _recipeSteps[entry.key] = value;
+                          },
+                        ),
+                        leading: const Icon(Icons.reorder),
+                        trailing: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _recipeSteps.removeAt(index);
+                            });
+                          },
+                          icon: const Icon(Icons.close, color: Colors.red),
+                        ),
+                      );
+                    }).toList(),
                   ),
-                  leading: const Icon(Icons.reorder),
-                  trailing: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _recipeSteps.removeAt(index);
-                      });
-                    },
-                    icon: const Icon(Icons.close, color: Colors.red),
-                  ),
-                );
-              }).toList(),
-            ),
-
-            const SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
