@@ -6,13 +6,13 @@ import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipeinfopage.dart';
 import 'package:marinechoice/pages/userprofile.dart';
 import '../models/recipe_model.dart';
-import 'settingspage.dart';
+import '../components/getUploadImages.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
 
 class RecipesPage extends StatefulWidget {
-  const RecipesPage({Key? key}) : super(key: key);
+  const RecipesPage({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -60,7 +60,7 @@ class _RecipesPageState extends State<RecipesPage> {
             decoration: const BoxDecoration(
               color: Colors.transparent,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.filter_list,
               size: 30,
               color: Colors.white,
@@ -85,7 +85,7 @@ class _RecipesPageState extends State<RecipesPage> {
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           return AlertDialog(
-            title: Text("Select Fish"),
+            title: const Text("Select Fish"),
             content: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -109,7 +109,7 @@ class _RecipesPageState extends State<RecipesPage> {
             ),
             actions: <Widget>[
               ElevatedButton(
-                child: Text("Clear"),
+                child: const Text("Clear"),
                 onPressed: () {
                   setState(() {
                     selectedFishes.clear();
@@ -118,7 +118,7 @@ class _RecipesPageState extends State<RecipesPage> {
                 },
               ),
               ElevatedButton(
-                child: Text("Close"),
+                child: const Text("Close"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -183,7 +183,7 @@ class _RecipesPageState extends State<RecipesPage> {
 
   Widget buildContainer(Recipe recipe, int number) {
     if (recipeList.isEmpty) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }
@@ -196,26 +196,48 @@ class _RecipesPageState extends State<RecipesPage> {
       child: Container(
         padding: const EdgeInsets.all(20),
         width: MediaQuery.of(context).size.width / 2 - 20,
-        height: 130,
+        height: 130 + MediaQuery.of(context).size.height / 8,
         decoration: BoxDecoration(
             border: Border.all(color: const Color(0xff4A668A), width: 3),
             color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,  // Align items to start
           children: [
-            Column(children: [
-              Text(
-                recipe.recipeData!.title!,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+            Text(
+              recipe.recipeData!.title!,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
-            ]),
+            ),
+            Spacer(),  // This will push the following widget to the bottom
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: FutureBuilder<String?>(
+                future: getImage(recipe.recipeData!.imagePath),  // Ensure getImage returns a Future<String?>
+                builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError || snapshot.data == null) {
+                    if (kDebugMode) {
+                      print('Error loading image: ${snapshot.error}');
+                    }
+                    return const Center(child: Text('Failed to load image'));
+                  } else {
+                    return Image.network(
+                      snapshot.data!,
+                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width / 2 - 20,
+                      height: MediaQuery.of(context).size.height / 8,
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),
