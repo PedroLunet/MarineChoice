@@ -30,7 +30,10 @@ class _FishPage extends State<FishPage> {
   Map<String, Color> rates = {
     "High": Colors.green,
     "Medium": Colors.orange,
-    "Low": Colors.red
+    "Low": Colors.red,
+    "Alta": Colors.green,
+    "Média": Colors.orange,
+    "Baixa": Colors.red
   };
 
   @override
