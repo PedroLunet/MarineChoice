@@ -6,7 +6,7 @@ import 'package:marinechoice/pages/fishinfopage.dart';
 import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:marinechoice/pages/userprofile.dart';
-
+import 'package:marinechoice/globals.dart' as globals;
 import '../components/getUploadImages.dart';
 import '../models/fish_model.dart';
 import 'settingspage.dart';
@@ -27,10 +27,10 @@ class _FishPage extends State<FishPage> {
 
   List<Fish> fishList = [];
 
-  Map<String,Color> rates= {
-    "High" : Colors.green,
-    "Medium" : Colors.orange,
-    "Low" : Colors.red
+  Map<String, Color> rates = {
+    "High": Colors.green,
+    "Medium": Colors.orange,
+    "Low": Colors.red
   };
 
   @override
@@ -57,8 +57,8 @@ class _FishPage extends State<FishPage> {
 
     return GestureDetector(
       onTap: () => {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FishInfoPage(fish: fish)))
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => FishInfoPage(fish: fish)))
       },
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -68,9 +68,7 @@ class _FishPage extends State<FishPage> {
             color: const Color(0xff4A668A),
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
             fish.fishData!.name!,
             style: const TextStyle(
@@ -79,11 +77,14 @@ class _FishPage extends State<FishPage> {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: FutureBuilder<String?>(
-              future: getImage(fish.fishData!.imagePath), // Ensure getImage returns a Future<String?>
+              future: getImage(fish.fishData!
+                  .imagePath), // Ensure getImage returns a Future<String?>
               builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -99,28 +100,27 @@ class _FishPage extends State<FishPage> {
                     width: MediaQuery.of(context).size.width / 2 - 20,
                     height: MediaQuery.of(context).size.height / 8,
                   );
-                }},
+                }
+              },
             ),
           ),
-              const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             decoration: BoxDecoration(
-              color: rates[fish.fishData!.sustainabilityRate!],
-              borderRadius: BorderRadius.circular(50)
-            ),
+                color: rates[fish.fishData!.sustainabilityRate!],
+                borderRadius: BorderRadius.circular(50)),
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-            child:Text(
+            child: Text(
               fish.fishData!.sustainabilityRate!,
               style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Colors.white
-              ),
+                  color: Colors.white),
             ),
-            ),
-
-
+          ),
         ]),
       ),
     );
@@ -143,9 +143,7 @@ class _FishPage extends State<FishPage> {
                         color: Color(0xff4A668A),
                       )),
                 ),
-                Wrap(
-                    direction: Axis.horizontal,
-                    children: _getFish(fishList)),
+                Wrap(direction: Axis.horizontal, children: _getFish(fishList)),
               ]),
             );
           } else {
@@ -292,20 +290,20 @@ class _FishPage extends State<FishPage> {
   }
 
   Future<void> retrieveFishData() async {
-    var result = await _database.child("FISH").get();
+    var result =
+        await _database.child(globals.selectedLanguage).child("FISH").get();
 
     for (var fish in result.children) {
-      try{
-        FishData fishData = FishData.fromJson(fish.value as Map);
+      try {
+        FishData fishData =
+            FishData.fromJson(fish.value as Map, globals.selectedLanguage);
         Fish fishF = Fish(key: fish.key, fishData: fishData);
         fishList.add(fishF);
-      }catch(e){
+      } catch (e) {
         if (kDebugMode) {
           print("Error: ${e.toString()}");
         }
       }
-
     }
   }
-
 }

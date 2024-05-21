@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-group('Fish model test', () {
+  group('Fish model test', () {
     test('Fish is correctly created from JSON', () {
       var json = {
         'idFish': 1,
@@ -11,7 +11,7 @@ group('Fish model test', () {
         'avgPricePerKg': 20.0,
       };
 
-      var fish = Fish.fromJson(json);
+      var fish = Fish.fromJson(json, 'en');
 
       expect(fish.idFish, 1);
       expect(fish.name, 'Tuna');

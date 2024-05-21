@@ -17,6 +17,7 @@ import '../models/recipe_model.dart';
 import 'settingspage.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
+import 'package:marinechoice/globals.dart' as globals;
 import 'mappage.dart';
 
 class RecipeInfoPage extends StatefulWidget {
@@ -46,7 +47,8 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
   }
 
   Future<void> _loadRating() async {
-    var result = await _database.child("RATING").get();
+    var result =
+        await _database.child(globals.selectedLanguage).child("RATING").get();
 
     final SharedPreferences prefsEmail = await SharedPreferences.getInstance();
     String? email = prefsEmail.getString('email');
@@ -56,7 +58,8 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
 
     for (var rating in result.children) {
       try {
-        RatingData ratingData = RatingData.fromJson(rating.value as Map);
+        RatingData ratingData =
+            RatingData.fromJson(rating.value as Map, globals.selectedLanguage);
         Rating ratingf = Rating(key: rating.key, ratingData: ratingData);
         if (ratingf.ratingData!.user_email == email &&
             ratingf.ratingData!.recipe_title ==
@@ -75,14 +78,16 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
   }
 
   Future<void> _calculateAvg() async {
-    var result = await _database.child("RATING").get();
+    var result =
+        await _database.child(globals.selectedLanguage).child("RATING").get();
 
     double counter = 0;
     double sum = 0;
 
     for (var rating in result.children) {
       try {
-        RatingData ratingData = RatingData.fromJson(rating.value as Map);
+        RatingData ratingData =
+            RatingData.fromJson(rating.value as Map, globals.selectedLanguage);
 
         Rating ratingf = Rating(key: rating.key, ratingData: ratingData);
 
@@ -97,10 +102,9 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
         }
       }
     }
-    if(counter == 0 && sum == 0) {
+    if (counter == 0 && sum == 0) {
       _avg = null;
-    }
-    else {
+    } else {
       _avg = sum / counter;
     }
 
@@ -109,7 +113,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
 
   Future<void> _calculateAndLoad() async {
     await getUserData();
-    await  _loadRating();
+    await _loadRating();
     await _calculateAvg();
   }
 
@@ -273,59 +277,60 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                       style: const TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xff4A668A)
-                      ),
+                          color: Color(0xff4A668A)),
                     ),
                   ),
                 ),
                 _avg != null
                     ? Column(
-                  children: [
-                    RatingBar.builder(
-                      initialRating: _avg!,
-                      minRating: 0,
-                      allowHalfRating: true,
-                      tapOnlyMode: true,
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.sailing_outlined,
-                        color: Colors.amber,
-                      ),
-                      ignoreGestures: true,
-                      onRatingUpdate:
-                          (double value) {}, // Disable user interaction
-                    ),
-                  ],
-                )
+                        children: [
+                          RatingBar.builder(
+                            initialRating: _avg!,
+                            minRating: 0,
+                            allowHalfRating: true,
+                            tapOnlyMode: true,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.sailing_outlined,
+                              color: Colors.amber,
+                            ),
+                            ignoreGestures: true,
+                            onRatingUpdate:
+                                (double value) {}, // Disable user interaction
+                          ),
+                        ],
+                      )
                     : Column(
-                  children: [
-                    RatingBar.builder(
-                      initialRating: 0,
-                      minRating: 0,
-                      allowHalfRating: true,
-                      tapOnlyMode: true,
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.sailing_outlined,
-                        color: Colors.amber,
+                        children: [
+                          RatingBar.builder(
+                            initialRating: 0,
+                            minRating: 0,
+                            allowHalfRating: true,
+                            tapOnlyMode: true,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.sailing_outlined,
+                              color: Colors.amber,
+                            ),
+                            ignoreGestures: true,
+                            onRatingUpdate:
+                                (double value) {}, // Disable user interaction
+                          ),
+                          const Text("This recipe has no ratings yet."),
+                        ],
                       ),
-                      ignoreGestures: true,
-                      onRatingUpdate:
-                          (double value) {}, // Disable user interaction
-                    ),
-                    const Text("This recipe has no ratings yet."),
-                  ],
-                ),
 
-                const SizedBox(height: 40,),
+                const SizedBox(
+                  height: 40,
+                ),
 
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.3,
-                  margin: const EdgeInsets.fromLTRB(0,0,0,40),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                   decoration: BoxDecoration(
-
-                    border: Border.all(color: const Color(0xff5B92C6), width: 4),
-                    borderRadius: BorderRadius.circular(30),),
-
+                    border:
+                        Border.all(color: const Color(0xff5B92C6), width: 4),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
                     child: FutureBuilder<String?>(
@@ -365,55 +370,62 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                       Container(
                         width: 300,
                         margin: EdgeInsets.all(40),
-                          child: TitleBox(
-                            title: "Fish used for this recipe",
-                            widget: Container(
-                              child: (recipe.recipeData != null && recipe.recipeData!.fish != null)
+                        child: TitleBox(
+                          title: "Fish used for this recipe",
+                          widget: Container(
+                              child: (recipe.recipeData != null &&
+                                      recipe.recipeData!.fish != null)
                                   ? ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: recipe.recipeData!.fish!.length,
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    title: Text(
-                                      recipe.recipeData!.fish![index],
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                                  : const Text("No fish were inserted into the database, something went wrong.")
-                            ),
-                          ),
-                      ),
-                        Container(
-                          width: 300,
-                            margin: EdgeInsets.all(40),
-                            child: TitleBox(
-                              title: "Ingredients",
-                              widget: Container(
-                                  child: (recipe.recipeData != null && recipe.recipeData!.ingredients != null)
-                                      ? ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: recipe.recipeData!.ingredients!.length,
-                                    itemBuilder: (context, index) {
-                                      return ListTile(
-                                        title: Text(
-                                          recipe.recipeData!.ingredients![index],
-                                          style: const TextStyle(
-                                            fontSize: 16,
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount:
+                                          recipe.recipeData!.fish!.length,
+                                      itemBuilder: (context, index) {
+                                        return ListTile(
+                                          title: Text(
+                                            recipe.recipeData!.fish![index],
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  )
-                                      : const Text("No ingredients were inserted into the database, something went wrong.")
-                              ),
-                            ),
-                              ),
+                                        );
+                                      },
+                                    )
+                                  : const Text(
+                                      "No fish were inserted into the database, something went wrong.")),
+                        ),
+                      ),
+                      Container(
+                        width: 300,
+                        margin: EdgeInsets.all(40),
+                        child: TitleBox(
+                          title: "Ingredients",
+                          widget: Container(
+                              child: (recipe.recipeData != null &&
+                                      recipe.recipeData!.ingredients != null)
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: recipe
+                                          .recipeData!.ingredients!.length,
+                                      itemBuilder: (context, index) {
+                                        return ListTile(
+                                          title: Text(
+                                            recipe.recipeData!
+                                                .ingredients![index],
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : const Text(
+                                      "No ingredients were inserted into the database, something went wrong.")),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -422,24 +434,26 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                   child: TitleBox(
                     title: "Preparation",
                     widget: Container(
-                        child: (recipe.recipeData != null && recipe.recipeData!.preparation != null)
+                        child: (recipe.recipeData != null &&
+                                recipe.recipeData!.preparation != null)
                             ? ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: recipe.recipeData!.preparation!.length,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Text(
-                                recipe.recipeData!.preparation![index],
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            );
-                          },
-                        )
-                            : const Text("No steps were inserted into the database, something went wrong.")
-                    ),
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount:
+                                    recipe.recipeData!.preparation!.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    title: Text(
+                                      recipe.recipeData!.preparation![index],
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                            : const Text(
+                                "No steps were inserted into the database, something went wrong.")),
                   ),
                 ),
                 Container(
@@ -447,20 +461,18 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                   child: Text(
                     "Author: ${recipe.recipeData?.author ?? 'Author not available'}",
                     style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                        color: Color(0xff4A668A)
-                    ),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff4A668A)),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const Text("Rate this recipe:",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Color(0xff4A668A)
-                  ),),
+                const Text(
+                  "Rate this recipe:",
+                  style: TextStyle(fontSize: 15, color: Color(0xff4A668A)),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -482,11 +494,11 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                                 (double value) {}, // Disable user interaction
                           ),
                           const SizedBox(height: 10),
-                          const Text("Thank you for rating!",
+                          const Text(
+                            "Thank you for rating!",
                             style: TextStyle(
-                                fontSize: 15,
-                                color: Color(0xff4A668A)
-                            ),),
+                                fontSize: 15, color: Color(0xff4A668A)),
+                          ),
                         ],
                       )
                     : Column(
@@ -523,18 +535,20 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                if(recipe.recipeData!.author! == user)
+                if (recipe.recipeData!.author! == user)
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(  MaterialPageRoute(builder: (context) => EditPage(recipe: widget.recipe)));
-
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              EditPage(recipe: widget.recipe)));
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue[200]!),
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                          MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black),
                       shadowColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent),
+                          MaterialStateProperty.all<Color>(Colors.transparent),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(7.0),
@@ -542,7 +556,8 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                       ),
                     ),
                     child: const Text(
-                      'Edit Recipe',),
+                      'Edit Recipe',
+                    ),
                   ),
 
                 const SizedBox(
@@ -560,7 +575,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
     DatabaseReference reference = FirebaseDatabase.instance.ref();
 
     // Insert the rating into the database under the 'RATING' node
-    reference.child('RATING').push().set({
+    reference.child(globals.selectedLanguage).child('RATING').push().set({
       'rating': rating,
       'user_email': userEmail,
       'recipe_title': recipeTitle,
@@ -576,8 +591,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       }
     });
     await _calculateAndLoad();
-    setState(() {
-    });
+    setState(() {});
   }
 
   Future<void> getUserData() async {
@@ -589,5 +603,4 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
 
     user = username;
   }
-
 }

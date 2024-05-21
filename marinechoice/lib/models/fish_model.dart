@@ -5,7 +5,6 @@ class Fish {
   FishData? fishData;
 
   Fish({this.key, this.fishData});
-
 }
 
 class FishData {
@@ -16,16 +15,17 @@ class FishData {
   String? sustainabilityRate;
   String? imagePath;
 
+  FishData({
+    required this.avgPricePerKg,
+    required this.facts,
+    required this.name,
+    required this.origin,
+    required this.sustainabilityRate,
+    required this.imagePath,
+  });
 
-  FishData(
-      {required this.avgPricePerKg,
-        required this.facts,
-        required this.name,
-        required this.origin,
-        required this.sustainabilityRate,
-        required this.imagePath,});
-
-  FishData.fromJson(Map<dynamic, dynamic> json) {
+  FishData.fromJson(Map<dynamic, dynamic> json, String language) {
+    var data = json[language];
     avgPricePerKg = json["avgPricePerKg"];
     facts = json["facts"];
     name = json["name"];
@@ -33,5 +33,4 @@ class FishData {
     sustainabilityRate = json["sustainabiltyRate"];
     imagePath = json["imagePath"];
   }
-
 }

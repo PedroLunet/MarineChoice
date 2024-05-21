@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/fish_model.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
+import 'package:marinechoice/globals.dart' as globals;
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -248,10 +249,13 @@ class _PostPage extends State<PostPage> {
                         image = await file?.readAsBytes();
 
                         Reference refRoot = FirebaseStorage.instance.ref();
-                        Reference referenceDirImages = refRoot.child("recipes");
+                        Reference referenceDirImages = refRoot
+                            .child(globals.selectedLanguage)
+                            .child("recipes");
 
-                        Reference referenceImgtoUpload =
-                            referenceDirImages.child('${file?.name}');
+                        Reference referenceImgtoUpload = referenceDirImages
+                            .child(globals.selectedLanguage)
+                            .child('${file?.name}');
 
                         try {
                           await referenceImgtoUpload.putFile(File(file!.path));
@@ -483,7 +487,11 @@ class _PostPage extends State<PostPage> {
     if (username == null) {
       throw Exception("Username null");
     }
-    databaseReference.child("RECIPE").push().set({
+    databaseReference
+        .child(globals.selectedLanguage)
+        .child("RECIPE")
+        .push()
+        .set({
       'title': title,
       'cusineType': cuisineType,
       'ingredients': ingredients,
@@ -506,7 +514,10 @@ class _PostPage extends State<PostPage> {
   }
 
   Future<void> retrieveIngredients() async {
-    var result = await _database.child("INGREDIENTS").get();
+    var result = await _database
+        .child(globals.selectedLanguage)
+        .child("INGREDIENTS")
+        .get();
 
     for (var ingredient in result.children) {
       try {
@@ -520,7 +531,10 @@ class _PostPage extends State<PostPage> {
   }
 
   Future<void> retrieveCuisineType() async {
-    var result = await _database.child("CUISINETYPE").get();
+    var result = await _database
+        .child(globals.selectedLanguage)
+        .child("CUISINETYPE")
+        .get();
 
     for (var cuisineType in result.children) {
       try {
@@ -534,11 +548,13 @@ class _PostPage extends State<PostPage> {
   }
 
   Future<void> retrieveFishData() async {
-    var result = await _database.child("FISH").get();
+    var result =
+        await _database.child(globals.selectedLanguage).child("FISH").get();
 
     for (var fish in result.children) {
       try {
-        FishData fishData = FishData.fromJson(fish.value as Map);
+        FishData fishData =
+            FishData.fromJson(fish.value as Map, globals.selectedLanguage);
         Fish fishF = Fish(key: fish.key, fishData: fishData);
         _availableFishes.add(fishF.fishData!.name!);
       } catch (e) {

@@ -10,6 +10,7 @@ import '../components/getUploadImages.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
+import 'package:marinechoice/globals.dart' as globals;
 
 class RecipesPage extends StatefulWidget {
   const RecipesPage({super.key});
@@ -79,58 +80,57 @@ class _RecipesPageState extends State<RecipesPage> {
   }
 
   void _showFilterDialog() {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
-          return AlertDialog(
-            title: const Text("Select Fish"),
-            content: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  for (var fish in allFishes)
-                    CheckboxListTile(
-                      title: Text(fish),
-                      value: selectedFishes.contains(fish),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          if (value!) {
-                            selectedFishes.add(fish);
-                          } else {
-                            selectedFishes.remove(fish);
-                          }
-                        });
-                        filterRecipes();
-                      },
-                    ),
-                ],
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: const Text("Select Fish"),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    for (var fish in allFishes)
+                      CheckboxListTile(
+                        title: Text(fish),
+                        value: selectedFishes.contains(fish),
+                        onChanged: (bool? value) {
+                          setState(() {
+                            if (value!) {
+                              selectedFishes.add(fish);
+                            } else {
+                              selectedFishes.remove(fish);
+                            }
+                          });
+                          filterRecipes();
+                        },
+                      ),
+                  ],
+                ),
               ),
-            ),
-            actions: <Widget>[
-              ElevatedButton(
-                child: const Text("Clear"),
-                onPressed: () {
-                  setState(() {
-                    selectedFishes.clear();
-                  });
-                  filterRecipes();
-                },
-              ),
-              ElevatedButton(
-                child: const Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    },
-  );
-}
-
+              actions: <Widget>[
+                ElevatedButton(
+                  child: const Text("Clear"),
+                  onPressed: () {
+                    setState(() {
+                      selectedFishes.clear();
+                    });
+                    filterRecipes();
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text("Close"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
 
   void filterRecipes() {
     setState(() {
@@ -138,8 +138,9 @@ class _RecipesPageState extends State<RecipesPage> {
       for (var recipe in allRecipes) {
         bool matchesIngredients = selectedIngredients.every((ingredient) =>
             recipe.recipeData!.ingredients!.contains(ingredient));
-        bool matchesFishes = selectedFishes.isEmpty || selectedFishes.any((fish) =>
-            recipe.recipeData!.fish!.contains(fish));
+        bool matchesFishes = selectedFishes.isEmpty ||
+            selectedFishes
+                .any((fish) => recipe.recipeData!.fish!.contains(fish));
 
         if (matchesIngredients && matchesFishes) {
           recipeList.add(recipe);
@@ -147,7 +148,6 @@ class _RecipesPageState extends State<RecipesPage> {
       }
     });
   }
-
 
   Widget buildSingleChildScrollView() {
     return SingleChildScrollView(
@@ -169,7 +169,6 @@ class _RecipesPageState extends State<RecipesPage> {
       ]),
     );
   }
-
 
   List<Widget> _getRecipes(List<Recipe> recipeList) {
     List<Widget> list = [];
@@ -203,7 +202,7 @@ class _RecipesPageState extends State<RecipesPage> {
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,  // Align items to start
+          mainAxisAlignment: MainAxisAlignment.start, // Align items to start
           children: [
             Text(
               recipe.recipeData!.title!,
@@ -214,12 +213,14 @@ class _RecipesPageState extends State<RecipesPage> {
                 color: Colors.white,
               ),
             ),
-            Spacer(),  // This will push the following widget to the bottom
+            Spacer(), // This will push the following widget to the bottom
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: FutureBuilder<String?>(
-                future: getImage(recipe.recipeData!.imagePath),  // Ensure getImage returns a Future<String?>
-                builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                future: getImage(recipe.recipeData!
+                    .imagePath), // Ensure getImage returns a Future<String?>
+                builder:
+                    (BuildContext context, AsyncSnapshot<String?> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError || snapshot.data == null) {
@@ -329,46 +330,51 @@ class _RecipesPageState extends State<RecipesPage> {
             .push(MaterialPageRoute(builder: (context) => const PostPage()));
         break;
       case 5:
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const UserProfile()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const UserProfile()));
         break;
     }
   }
 
   Future<void> retrieveRecipeData() async {
-  var result = await _database.child("RECIPE").get();
-
-  for (var recipe in result.children) {
-    try {
-      RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
-      Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
-      allRecipes.add(recipef); // Add recipes to allRecipes instead of recipeList
-
-      // Add fish to allFishes list
-      if (recipeData.fish != null) {
-        for (var fish in recipeData.fish!) {
-          if (!allFishes.contains(fish)) {
-            allFishes.add(fish);
-          }
-        }
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print("Error: ${e.toString()}");
-      }
-    }
-  }
-
-  filterRecipes();
-}
-
-  Future<List<String>> retrieveFishData() async {
-    List<String> fishes = [];
-    var result = await _database.child("RECIPE").get();
+    var result =
+        await _database.child(globals.selectedLanguage).child("RECIPE").get();
 
     for (var recipe in result.children) {
       try {
-        RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
+        RecipeData recipeData =
+            RecipeData.fromJson(recipe.value as Map, globals.selectedLanguage);
+        Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
+        allRecipes
+            .add(recipef); // Add recipes to allRecipes instead of recipeList
+
+        // Add fish to allFishes list
+        if (recipeData.fish != null) {
+          for (var fish in recipeData.fish!) {
+            if (!allFishes.contains(fish)) {
+              allFishes.add(fish);
+            }
+          }
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error: ${e.toString()}");
+        }
+      }
+    }
+
+    filterRecipes();
+  }
+
+  Future<List<String>> retrieveFishData() async {
+    List<String> fishes = [];
+    var result =
+        await _database.child(globals.selectedLanguage).child("RECIPE").get();
+
+    for (var recipe in result.children) {
+      try {
+        RecipeData recipeData =
+            RecipeData.fromJson(recipe.value as Map, globals.selectedLanguage);
         if (recipeData.ingredients != null) {
           for (var ingredient in recipeData.ingredients!) {
             if (!fishes.contains(ingredient)) {
@@ -384,5 +390,4 @@ class _RecipesPageState extends State<RecipesPage> {
     }
     return fishes;
   }
-
 }

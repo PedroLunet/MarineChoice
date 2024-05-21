@@ -12,9 +12,11 @@ class FishAreaData {
   String? longitude;
   String? fish;
 
-  FishAreaData({required this.latitude, required this.longitude,required this.fish});
+  FishAreaData(
+      {required this.latitude, required this.longitude, required this.fish});
 
-  FishAreaData.fromJson(Map<dynamic, dynamic> json) {
+  FishAreaData.fromJson(Map<dynamic, dynamic> json, String language) {
+    var data = json[language];
     latitude = json["latitude"];
     longitude = json["longitude"];
     fish = json["fish"];

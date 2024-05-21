@@ -12,10 +12,10 @@ class RatingData {
   String? recipe_title;
   String? user_email;
 
-
   RatingData(this.rating, this.recipe_title, this.user_email);
 
-  RatingData.fromJson(Map<dynamic, dynamic> json) {
+  RatingData.fromJson(Map<dynamic, dynamic> json, String language) {
+    var data = json[language];
     rating = json["rating"];
     recipe_title = json["recipe_title"];
     user_email = json["user_email"];

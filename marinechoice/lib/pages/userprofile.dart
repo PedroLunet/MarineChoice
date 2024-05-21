@@ -9,7 +9,7 @@ import 'package:marinechoice/pages/recipeinfopage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:marinechoice/pages/settingspage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:marinechoice/globals.dart' as globals;
 import '../components/getUploadImages.dart';
 import '../models/recipe_model.dart';
 import 'fishpage.dart';
@@ -39,7 +39,6 @@ class _UserProfileState extends State<UserProfile> {
   Future<void> retrieveData() async {
     await getUserData();
     await retrieveRecipeData();
-
   }
 
   @override
@@ -199,7 +198,7 @@ class _UserProfileState extends State<UserProfile> {
             borderRadius: BorderRadius.circular(15)),
         margin: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,  // Align items to start
+          mainAxisAlignment: MainAxisAlignment.start, // Align items to start
           children: [
             Text(
               recipe.recipeData!.title!,
@@ -210,12 +209,14 @@ class _UserProfileState extends State<UserProfile> {
                 color: Colors.white,
               ),
             ),
-            const Spacer(),  // This will push the following widget to the bottom
+            const Spacer(), // This will push the following widget to the bottom
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: FutureBuilder<String?>(
-                future: getImage(recipe.recipeData!.imagePath),  // Ensure getImage returns a Future<String?>
-                builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                future: getImage(recipe.recipeData!
+                    .imagePath), // Ensure getImage returns a Future<String?>
+                builder:
+                    (BuildContext context, AsyncSnapshot<String?> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError || snapshot.data == null) {
@@ -321,12 +322,13 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   Future<void> retrieveRecipeData() async {
-    var result = await _database.child("RECIPE").get();
-
+    var result =
+        await _database.child(globals.selectedLanguage).child("RECIPE").get();
 
     for (var recipe in result.children) {
       try {
-        RecipeData recipeData = RecipeData.fromJson(recipe.value as Map);
+        RecipeData recipeData =
+            RecipeData.fromJson(recipe.value as Map, globals.selectedLanguage);
         Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
 
         if (recipef.recipeData!.author! == user) {
@@ -341,6 +343,5 @@ class _UserProfileState extends State<UserProfile> {
     if (kDebugMode) {
       print(recipeList.toString());
     }
-
   }
 }

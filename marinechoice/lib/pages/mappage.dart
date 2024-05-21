@@ -11,6 +11,7 @@ import '../models/fisharea_model.dart';
 import '../models/protarea_model.dart';
 import 'settingspage.dart';
 import 'fishpage.dart';
+import 'package:marinechoice/globals.dart' as globals;
 import 'homepage.dart';
 
 class MapPage extends StatefulWidget {
@@ -285,7 +286,6 @@ class _MapPageState extends State<MapPage> {
 
   AppBar buildAppBar() {
     return AppBar(
-
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
@@ -319,10 +319,12 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> retrieveMapData() async {
-    var fishAreas = await _database.child("FISHAREA").get();
+    var fishAreas =
+        await _database.child(globals.selectedLanguage).child("FISHAREA").get();
 
     for (var fishArea in fishAreas.children) {
-      FishAreaData fishAreaData = FishAreaData.fromJson(fishArea.value as Map);
+      FishAreaData fishAreaData = FishAreaData.fromJson(
+          fishArea.value as Map, globals.selectedLanguage);
       FishArea fishAreaF =
           FishArea(key: fishArea.key, fishAreaData: fishAreaData);
       fisAreaList.add(fishAreaF);
@@ -332,10 +334,12 @@ class _MapPageState extends State<MapPage> {
       print("List $fisAreaList");
     }
 
-    var protAreas = await _database.child("PROTAREA").get();
+    var protAreas =
+        await _database.child(globals.selectedLanguage).child("PROTAREA").get();
 
     for (var protArea in protAreas.children) {
-      ProtAreaData protAreaData = ProtAreaData.fromJson(protArea.value as Map);
+      ProtAreaData protAreaData = ProtAreaData.fromJson(
+          protArea.value as Map, globals.selectedLanguage);
       ProtArea protAreaf =
           ProtArea(key: protArea.key, protAreaData: protAreaData);
       protAreaList.add(protAreaf);

@@ -21,15 +21,16 @@ class RecipeData {
 
   RecipeData(
       {required this.title,
-        required this.cusineType,
-        required this.rating,
-        required this.fish,
-        required this.ingredients,
-        required this.preparation,
-        required this.author,
-        required this.imagePath});
+      required this.cusineType,
+      required this.rating,
+      required this.fish,
+      required this.ingredients,
+      required this.preparation,
+      required this.author,
+      required this.imagePath});
 
-  RecipeData.fromJson(Map<dynamic, dynamic> json) {
+  RecipeData.fromJson(Map<dynamic, dynamic> json, String language) {
+    var data = json[language];
     title = json["title"];
     cusineType = json["cusineType"];
     rating = json["rating"];
@@ -38,6 +39,5 @@ class RecipeData {
     preparation = List<String>.from(json['preparation']).toList();
     author = json["author"];
     imagePath = json["imagePath"];
-
   }
 }

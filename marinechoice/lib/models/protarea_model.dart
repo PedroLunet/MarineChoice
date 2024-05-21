@@ -12,9 +12,13 @@ class ProtAreaData {
   String? longitude;
   String? description;
 
-  ProtAreaData({required this.latitude, required this.longitude,required this.description});
+  ProtAreaData(
+      {required this.latitude,
+      required this.longitude,
+      required this.description});
 
-  ProtAreaData.fromJson(Map<dynamic, dynamic> json) {
+  ProtAreaData.fromJson(Map<dynamic, dynamic> json, String language) {
+    var data = json[language];
     latitude = json["latitude"];
     longitude = json["longitude"];
     description = json["description"];

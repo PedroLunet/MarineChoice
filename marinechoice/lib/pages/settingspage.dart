@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/auth/auth_service.dart';
 import 'package:marinechoice/pages/loginpage.dart';
+import 'package:marinechoice/globals.dart' as globals;
 
 import 'homepage.dart';
 
@@ -30,7 +31,6 @@ class _SettingsPageState extends State<SettingsPage> {
       flexibleSpace: Container(
         margin: const EdgeInsets.symmetric(horizontal: 50),
         alignment: Alignment.bottomCenter,
-
         child: const Text(
           'Settings',
           textAlign: TextAlign.center,
@@ -39,10 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
             fontWeight: FontWeight.w400,
           ),
         ),
-
       ),
-
-
       backgroundColor: const Color(0xffB4D8F9),
       actions: [
         GestureDetector(
@@ -54,7 +51,6 @@ class _SettingsPageState extends State<SettingsPage> {
             alignment: Alignment.center,
             width: 37,
             decoration: const BoxDecoration(
-
               color: Colors.transparent,
             ),
             child: SvgPicture.asset(
@@ -68,25 +64,67 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-
   SingleChildScrollView body() {
     return SingleChildScrollView(
       child: Column(
         children: [
-      TextButton(
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.black,
-        padding: const EdgeInsets.all(40),
-        textStyle: const TextStyle(fontSize: 25, fontFamily: 'Poppins'),
+          TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.black,
+              padding: const EdgeInsets.all(40),
+              textStyle: const TextStyle(fontSize: 25, fontFamily: 'Poppins'),
+            ),
+            onPressed: () async {
+              _signout();
+            },
+            child: const Text("Sign Out"),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            "Select Language",
+            style: TextStyle(fontSize: 25, fontFamily: 'Poppins'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    globals.selectedLanguage = 'en';
+                  });
+                },
+                child: Text(
+                  "English",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    color: globals.selectedLanguage == 'en'
+                        ? Colors.blue
+                        : Colors.black,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    globals.selectedLanguage = 'pt';
+                  });
+                },
+                child: Text(
+                  "Português",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Poppins',
+                    color: globals.selectedLanguage == 'pt'
+                        ? Colors.blue
+                        : Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
-      onPressed: () async {
-        _signout();
-      },
-      child: const Text("Sign Out"),
-    )]
-    ,
-    )
-    ,
     );
   }
 
