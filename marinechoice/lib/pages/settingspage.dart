@@ -31,10 +31,10 @@ class _SettingsPageState extends State<SettingsPage> {
       flexibleSpace: Container(
         margin: const EdgeInsets.symmetric(horizontal: 50),
         alignment: Alignment.bottomCenter,
-        child: const Text(
-          'Settings',
+        child: Text(
+          AppLocalizations.of(context)!.settings,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.w400,
           ),
@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
             onPressed: () async {
               _signout();
             },
-            child: const Text("Sign Out"),
+            child: Text(AppLocalizations.of(context)!.sign_out),
           ),
           const SizedBox(height: 20),
           Text(
@@ -90,15 +90,15 @@ class _SettingsPageState extends State<SettingsPage> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    globals.selectedLanguage = 'en';
+                    globals.selectedLanguage.value = 'en';
                   });
                 },
                 child: Text(
-                  "English",
+                  AppLocalizations.of(context)!.eng,
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'Poppins',
-                    color: globals.selectedLanguage == 'en'
+                    color: globals.selectedLanguage.value == 'en'
                         ? Colors.blue
                         : Colors.black,
                   ),
@@ -107,15 +107,15 @@ class _SettingsPageState extends State<SettingsPage> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    globals.selectedLanguage = 'pt';
+                    globals.selectedLanguage.value = 'pt';
                   });
                 },
                 child: Text(
-                  "Português",
+                  AppLocalizations.of(context)!.por,
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'Poppins',
-                    color: globals.selectedLanguage == 'pt'
+                    color: globals.selectedLanguage.value == 'pt'
                         ? Colors.blue
                         : Colors.black,
                   ),

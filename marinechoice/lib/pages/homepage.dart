@@ -85,7 +85,7 @@ class _HomePage extends State<HomePage> {
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xff5B92C6),
-      currentIndex: 2,
+      currentIndex: 0,
       onTap: _navigate,
       selectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,

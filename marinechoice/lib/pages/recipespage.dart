@@ -338,13 +338,15 @@ class _RecipesPageState extends State<RecipesPage> {
   }
 
   Future<void> retrieveRecipeData() async {
-    var result =
-        await _database.child(globals.selectedLanguage).child("RECIPE").get();
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("RECIPE")
+        .get();
 
     for (var recipe in result.children) {
       try {
-        RecipeData recipeData =
-            RecipeData.fromJson(recipe.value as Map, globals.selectedLanguage);
+        RecipeData recipeData = RecipeData.fromJson(
+            recipe.value as Map, globals.selectedLanguage.value);
         Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
         allRecipes
             .add(recipef); // Add recipes to allRecipes instead of recipeList
@@ -369,13 +371,15 @@ class _RecipesPageState extends State<RecipesPage> {
 
   Future<List<String>> retrieveFishData() async {
     List<String> fishes = [];
-    var result =
-        await _database.child(globals.selectedLanguage).child("RECIPE").get();
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("RECIPE")
+        .get();
 
     for (var recipe in result.children) {
       try {
-        RecipeData recipeData =
-            RecipeData.fromJson(recipe.value as Map, globals.selectedLanguage);
+        RecipeData recipeData = RecipeData.fromJson(
+            recipe.value as Map, globals.selectedLanguage.value);
         if (recipeData.ingredients != null) {
           for (var ingredient in recipeData.ingredients!) {
             if (!fishes.contains(ingredient)) {

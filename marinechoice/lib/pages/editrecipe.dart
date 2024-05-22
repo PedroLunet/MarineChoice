@@ -268,11 +268,11 @@ class _EditPage extends State<EditPage> {
 
                         Reference refRoot = FirebaseStorage.instance.ref();
                         Reference referenceDirImages = refRoot
-                            .child(globals.selectedLanguage)
+                            .child(globals.selectedLanguage.value)
                             .child("recipes");
 
                         Reference referenceImgtoUpload = referenceDirImages
-                          ..child(globals.selectedLanguage)
+                          ..child(globals.selectedLanguage.value)
                               .child('${file?.name}');
 
                         try {
@@ -516,7 +516,7 @@ class _EditPage extends State<EditPage> {
     DataSnapshot updatedRecipe = await ref.get();
 
     RecipeData recipeData = RecipeData.fromJson(
-        updatedRecipe.value as Map, globals.selectedLanguage);
+        updatedRecipe.value as Map, globals.selectedLanguage.value);
     Recipe recipe = Recipe(key: updatedRecipe.key, recipeData: recipeData);
 
     Navigator.of(context).push(MaterialPageRoute(
@@ -541,7 +541,7 @@ class _EditPage extends State<EditPage> {
 
   Future<void> retrieveIngredients() async {
     var result = await _database
-        .child(globals.selectedLanguage)
+        .child(globals.selectedLanguage.value)
         .child("INGREDIENTS")
         .get();
 
@@ -558,7 +558,7 @@ class _EditPage extends State<EditPage> {
 
   Future<void> retrieveCuisineType() async {
     var result = await _database
-        .child(globals.selectedLanguage)
+        .child(globals.selectedLanguage.value)
         .child("CUISINETYPE")
         .get();
 
@@ -574,13 +574,15 @@ class _EditPage extends State<EditPage> {
   }
 
   Future<void> retrieveFishData() async {
-    var result =
-        await _database.child(globals.selectedLanguage).child("FISH").get();
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("FISH")
+        .get();
 
     for (var fish in result.children) {
       try {
-        FishData fishData =
-            FishData.fromJson(fish.value as Map, globals.selectedLanguage);
+        FishData fishData = FishData.fromJson(
+            fish.value as Map, globals.selectedLanguage.value);
         Fish fishF = Fish(key: fish.key, fishData: fishData);
         _availableFishes.add(fishF.fishData!.name!);
       } catch (e) {

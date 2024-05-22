@@ -44,7 +44,16 @@
     "statement3": "31% dos stocks globais de peixe estão sobre-explorados.",
     "statement4": "Em 2022, os gastos das famílias com produtos da pesca e aquacultura na UE-27 aumentaram quase 11% em comparação com 2021, acelerando a tendência de alta que começou em 2018.",
     "statement5": "A pesca ilegal, não reportada e não regulamentada poderá em breve atingir até 26 milhões de toneladas, mais de 30% da captura anual total do mundo.",
-    "read_more" : "Lê mais..."
+    "read_more" : "Lê mais...",
+    "settings" : "Definições",
+    "sign_out" : "Terminar Sessão",
+    "eng" : "Ingles",
+    "por" : "Português",
+    "protected_area" : "Área Protegida",
+    "fishing_area": "Área de Pesca",
+    "cur_loc" : "Localização Atual",
+    "to_fish" : "Pesca de"
+
 }
 
 

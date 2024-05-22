@@ -48,8 +48,10 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
   }
 
   Future<void> _loadRating() async {
-    var result =
-        await _database.child(globals.selectedLanguage).child("RATING").get();
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("RATING")
+        .get();
 
     final SharedPreferences prefsEmail = await SharedPreferences.getInstance();
     String? email = prefsEmail.getString('email');
@@ -59,8 +61,8 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
 
     for (var rating in result.children) {
       try {
-        RatingData ratingData =
-            RatingData.fromJson(rating.value as Map, globals.selectedLanguage);
+        RatingData ratingData = RatingData.fromJson(
+            rating.value as Map, globals.selectedLanguage.value);
         Rating ratingf = Rating(key: rating.key, ratingData: ratingData);
         if (ratingf.ratingData!.user_email == email &&
             ratingf.ratingData!.recipe_title ==
@@ -79,16 +81,18 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
   }
 
   Future<void> _calculateAvg() async {
-    var result =
-        await _database.child(globals.selectedLanguage).child("RATING").get();
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("RATING")
+        .get();
 
     double counter = 0;
     double sum = 0;
 
     for (var rating in result.children) {
       try {
-        RatingData ratingData =
-            RatingData.fromJson(rating.value as Map, globals.selectedLanguage);
+        RatingData ratingData = RatingData.fromJson(
+            rating.value as Map, globals.selectedLanguage.value);
 
         Rating ratingf = Rating(key: rating.key, ratingData: ratingData);
 
@@ -572,7 +576,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
     DatabaseReference reference = FirebaseDatabase.instance.ref();
 
     // Insert the rating into the database under the 'RATING' node
-    reference.child(globals.selectedLanguage).child('RATING').push().set({
+    reference.child(globals.selectedLanguage.value).child('RATING').push().set({
       'rating': rating,
       'user_email': userEmail,
       'recipe_title': recipeTitle,

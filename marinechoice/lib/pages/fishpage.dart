@@ -297,13 +297,15 @@ class _FishPage extends State<FishPage> {
   }
 
   Future<void> retrieveFishData() async {
-    var result =
-        await _database.child(globals.selectedLanguage).child("FISH").get();
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("FISH")
+        .get();
 
     for (var fish in result.children) {
       try {
-        FishData fishData =
-            FishData.fromJson(fish.value as Map, globals.selectedLanguage);
+        FishData fishData = FishData.fromJson(
+            fish.value as Map, globals.selectedLanguage.value);
         Fish fishF = Fish(key: fish.key, fishData: fishData);
         fishList.add(fishF);
       } catch (e) {

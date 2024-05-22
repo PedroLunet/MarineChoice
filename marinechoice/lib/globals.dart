@@ -1,3 +1,3 @@
-library my_prj.globals;
+import 'package:flutter/foundation.dart';
 
-String selectedLanguage = 'pt'; // Default to English
+ValueNotifier<String> selectedLanguage = ValueNotifier<String>('en');

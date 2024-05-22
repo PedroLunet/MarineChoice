@@ -11,8 +11,7 @@ Future<String?> getImage(String? imagePath) async {
     print(imagePath);
   }
   try {
-    Reference urlRef =
-        firebaseStorage.child(globals.selectedLanguage).child('${imagePath}');
+    Reference urlRef = firebaseStorage.child('${imagePath}');
     var imgUrl = await urlRef.getDownloadURL();
     return imgUrl;
   } catch (e) {

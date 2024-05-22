@@ -321,13 +321,15 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   Future<void> retrieveRecipeData() async {
-    var result =
-        await _database.child(globals.selectedLanguage).child("RECIPE").get();
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("RECIPE")
+        .get();
 
     for (var recipe in result.children) {
       try {
-        RecipeData recipeData =
-            RecipeData.fromJson(recipe.value as Map, globals.selectedLanguage);
+        RecipeData recipeData = RecipeData.fromJson(
+            recipe.value as Map, globals.selectedLanguage.value);
         Recipe recipef = Recipe(key: recipe.key, recipeData: recipeData);
 
         if (recipef.recipeData!.author! == user) {

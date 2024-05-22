@@ -46,7 +46,7 @@ class _MapPageState extends State<MapPage> {
       for (var element in protAreaList) {
         set.add(Marker(
             infoWindow: InfoWindow(
-                title: "Area Protegida",
+                title: AppLocalizations.of(context)!.protected_area,
                 snippet: element.protAreaData!.description!),
             markerId: MarkerId("p_area_${element.protAreaData!.description!}"),
             icon:
@@ -58,8 +58,9 @@ class _MapPageState extends State<MapPage> {
       for (var element in fisAreaList) {
         set.add(Marker(
             infoWindow: InfoWindow(
-                title: "Area de Pesca",
-                snippet: "Pesca de ${element.fishAreaData!.fish!}"),
+                title: AppLocalizations.of(context)!.fishing_area,
+                snippet: AppLocalizations.of(context)!.to_fish +
+                    ": ${element.fishAreaData!.fish!}"),
             markerId: MarkerId("f_area_${element.fishAreaData!.fish!}"),
             icon: BitmapDescriptor.defaultMarkerWithHue(
                 BitmapDescriptor.hueGreen),
@@ -91,7 +92,8 @@ class _MapPageState extends State<MapPage> {
             var set = snapshot.data!;
             if (_currentP != null) {
               set.add(Marker(
-                infoWindow: const InfoWindow(title: "Localização Atual"),
+                infoWindow:
+                    InfoWindow(title: AppLocalizations.of(context)!.cur_loc),
                 markerId: const MarkerId("_currentLocation"),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueBlue),
@@ -128,21 +130,22 @@ class _MapPageState extends State<MapPage> {
                           ),
                         ],
                       ),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.circle, color: Colors.red),
-                              SizedBox(width: 5),
-                              Text("Área Protegida"),
+                              const Icon(Icons.circle, color: Colors.red),
+                              const SizedBox(width: 5),
+                              Text(
+                                  AppLocalizations.of(context)!.protected_area),
                             ],
                           ),
                           Row(
                             children: [
-                              Icon(Icons.circle, color: Colors.green),
-                              SizedBox(width: 5),
-                              Text("Área de Pesca"),
+                              const Icon(Icons.circle, color: Colors.green),
+                              const SizedBox(width: 5),
+                              Text(AppLocalizations.of(context)!.fishing_area),
                             ],
                           ),
                         ],
@@ -324,12 +327,14 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> retrieveMapData() async {
-    var fishAreas =
-        await _database.child(globals.selectedLanguage).child("FISHAREA").get();
+    var fishAreas = await _database
+        .child(globals.selectedLanguage.value)
+        .child("FISHAREA")
+        .get();
 
     for (var fishArea in fishAreas.children) {
       FishAreaData fishAreaData = FishAreaData.fromJson(
-          fishArea.value as Map, globals.selectedLanguage);
+          fishArea.value as Map, globals.selectedLanguage.value);
       FishArea fishAreaF =
           FishArea(key: fishArea.key, fishAreaData: fishAreaData);
       fisAreaList.add(fishAreaF);
@@ -339,12 +344,14 @@ class _MapPageState extends State<MapPage> {
       print(AppLocalizations.of(context)!.list + fisAreaList.toString());
     }
 
-    var protAreas =
-        await _database.child(globals.selectedLanguage).child("PROTAREA").get();
+    var protAreas = await _database
+        .child(globals.selectedLanguage.value)
+        .child("PROTAREA")
+        .get();
 
     for (var protArea in protAreas.children) {
       ProtAreaData protAreaData = ProtAreaData.fromJson(
-          protArea.value as Map, globals.selectedLanguage);
+          protArea.value as Map, globals.selectedLanguage.value);
       ProtArea protAreaf =
           ProtArea(key: protArea.key, protAreaData: protAreaData);
       protAreaList.add(protAreaf);

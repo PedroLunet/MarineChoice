@@ -44,7 +44,17 @@
     "statement3": "31% of global fish stocks are overexploited.",
     "statement4": "In 2022, the household spending on fishery and aquaculture products in the EU-27 surged by nearly 11% compared to 2021, accelerating the upward trend that began in 2018.",
     "statement5": "Illegal, unreported, and unregulated fishing could soon reach up to 26 million tons, more than 30% of the total annual catch of the world.",
-    "read_more" : "Read more.."
+    "read_more" : "Read more..",
+    "settings" : "Settings",
+    "sign_out" : "Sign Out",
+    "eng" : "English",
+    "por" : "Portuguese",
+    "protected_area" : "Protected Area",
+    "fishing_area": "Fishing Area",
+    "cur_loc" :  "Current Location",
+    "to_fish" : "Fish for"
+
+
 }
     
     
