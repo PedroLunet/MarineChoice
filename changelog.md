@@ -67,3 +67,14 @@
 - Users can now see their recipes in the user profile;
 - Added a way for a user to edit their recipes;
 - Changed style of some pages;
+
+  ## [3.0.0] - 22-05-2024
+
+- Added language swap functionality between Portuguese and English.
+- Enabled users to edit their recipes.
+- Introduced viewing of recipe ratings for easier selection.
+- Implemented star rating system for recipes.
+- Added a list of sustainable fish for informed purchasing decisions.
+- Provided detailed information about fish species.
+- Enabled users to post their own recipes.
+- Allowed users to read and access recipes posted by others.
