@@ -12,6 +12,7 @@ import '../models/fish_model.dart';
 import 'settingspage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FishPage extends StatefulWidget {
   const FishPage({super.key});
@@ -210,7 +211,7 @@ class _FishPage extends State<FishPage> {
             height: 25,
             width: 30,
           ),
-          label: ("HOME"),
+          label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -218,7 +219,7 @@ class _FishPage extends State<FishPage> {
             height: 25,
             width: 30,
           ),
-          label: ("FISH"),
+          label: AppLocalizations.of(context)!.fish,
         ),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -226,28 +227,31 @@ class _FishPage extends State<FishPage> {
               height: 30,
               width: 30,
             ),
-            label: ("COOK")),
+            label: AppLocalizations.of(context)!.cook),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/map.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("MAP")),
+          icon: SvgPicture.asset(
+            'assets/icons/map.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.map,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/envelope-open.svg',
-              height: 25,
-              width: 30,
-            ),
-            label: ("POST")),
+          icon: SvgPicture.asset(
+            'assets/icons/envelope-open.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.post,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/user.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("YOU")),
+          icon: SvgPicture.asset(
+            'assets/icons/user.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.you,
+        ),
       ],
       selectedLabelStyle: const TextStyle(
         fontWeight: FontWeight.w900,

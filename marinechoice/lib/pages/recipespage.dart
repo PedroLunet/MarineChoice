@@ -10,6 +10,7 @@ import '../components/getUploadImages.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:marinechoice/globals.dart' as globals;
 
 class RecipesPage extends StatefulWidget {
@@ -86,7 +87,7 @@ class _RecipesPageState extends State<RecipesPage> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: const Text("Select Fish"),
+              title: Text(AppLocalizations.of(context)!.select_fish),
               content: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
@@ -110,7 +111,7 @@ class _RecipesPageState extends State<RecipesPage> {
               ),
               actions: <Widget>[
                 ElevatedButton(
-                  child: const Text("Clear"),
+                  child: Text(AppLocalizations.of(context)!.clear),
                   onPressed: () {
                     setState(() {
                       selectedFishes.clear();
@@ -119,7 +120,9 @@ class _RecipesPageState extends State<RecipesPage> {
                   },
                 ),
                 ElevatedButton(
-                  child: const Text("Close"),
+                  child: Text(
+                    AppLocalizations.of(context)!.close,
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -154,9 +157,9 @@ class _RecipesPageState extends State<RecipesPage> {
       child: Column(children: [
         Container(
           margin: const EdgeInsets.all(30),
-          child: const Text("Recommended",
+          child: Text(AppLocalizations.of(context)!.recommended,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w700,
                 color: Color(0xff4A668A),
@@ -254,49 +257,47 @@ class _RecipesPageState extends State<RecipesPage> {
       type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            'assets/icons/home.svg',
-            height: 25,
-            width: 30,
-          ),
-          label: ("HOME"),
-        ),
+            icon: SvgPicture.asset(
+              'assets/icons/home.svg',
+              height: 25,
+              width: 30,
+            ),
+            label: AppLocalizations.of(context)!.home),
         BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            'assets/icons/fishing-rod.svg',
-            height: 25,
-            width: 30,
-          ),
-          label: ("FISH"),
-        ),
+            icon: SvgPicture.asset(
+              'assets/icons/fishing-rod.svg',
+              height: 25,
+              width: 30,
+            ),
+            label: AppLocalizations.of(context)!.fish),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/chef-hat.svg',
               height: 30,
               width: 30,
             ),
-            label: ("COOK")),
+            label: AppLocalizations.of(context)!.cook),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/map.svg',
               height: 30,
               width: 30,
             ),
-            label: ("MAP")),
+            label: AppLocalizations.of(context)!.map),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/envelope-open.svg',
               height: 25,
               width: 30,
             ),
-            label: ("POST")),
+            label: AppLocalizations.of(context)!.post),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/user.svg',
               height: 30,
               width: 30,
             ),
-            label: ("YOU")),
+            label: AppLocalizations.of(context)!.you),
       ],
       selectedLabelStyle: const TextStyle(
         fontWeight: FontWeight.w900,

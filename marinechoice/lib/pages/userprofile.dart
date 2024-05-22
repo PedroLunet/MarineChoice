@@ -15,6 +15,7 @@ import '../models/recipe_model.dart';
 import 'fishpage.dart';
 import 'homepage.dart';
 import 'mappage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -123,49 +124,47 @@ class _UserProfileState extends State<UserProfile> {
       type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            'assets/icons/home.svg',
-            height: 25,
-            width: 30,
-          ),
-          label: ("HOME"),
-        ),
+            icon: SvgPicture.asset(
+              'assets/icons/home.svg',
+              height: 25,
+              width: 30,
+            ),
+            label: AppLocalizations.of(context)!.home),
         BottomNavigationBarItem(
-          icon: SvgPicture.asset(
-            'assets/icons/fishing-rod.svg',
-            height: 25,
-            width: 30,
-          ),
-          label: ("FISH"),
-        ),
+            icon: SvgPicture.asset(
+              'assets/icons/fishing-rod.svg',
+              height: 25,
+              width: 30,
+            ),
+            label: AppLocalizations.of(context)!.fish),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/chef-hat.svg',
               height: 30,
               width: 30,
             ),
-            label: ("COOK")),
+            label: AppLocalizations.of(context)!.cook),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/map.svg',
               height: 30,
               width: 30,
             ),
-            label: ("MAP")),
+            label: AppLocalizations.of(context)!.map),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/envelope-open.svg',
               height: 25,
               width: 30,
             ),
-            label: ("POST")),
+            label: AppLocalizations.of(context)!.post),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/user.svg',
               height: 30,
               width: 30,
             ),
-            label: ("YOU")),
+            label: AppLocalizations.of(context)!.you),
       ],
       selectedLabelStyle: const TextStyle(
         fontWeight: FontWeight.w900,
@@ -251,10 +250,10 @@ class _UserProfileState extends State<UserProfile> {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                 margin: const EdgeInsets.all(30),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    "Your profile",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.your_profile,
+                    style: const TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w900,
                       color: Color(0xff4A668A),
@@ -264,7 +263,7 @@ class _UserProfileState extends State<UserProfile> {
               ),
               Container(
                 margin: const EdgeInsets.all(30),
-                child: Text("Hello, $user!",
+                child: Text("${AppLocalizations.of(context)!.hello} $user!",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 32,
@@ -276,9 +275,9 @@ class _UserProfileState extends State<UserProfile> {
               ),
               Container(
                 margin: const EdgeInsets.all(30),
-                child: const Text("Here are the recipes you've posted so far:",
+                child: Text(AppLocalizations.of(context)!.posted_message,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,
                       color: Color(0xff4A668A),

@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipeinfopage.dart';
@@ -137,9 +137,9 @@ class _EditPage extends State<EditPage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.all(30),
-                    child: const Text("Write your recipe!",
+                    child: Text(AppLocalizations.of(context)!.write_recipe,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 32,
                         )),
@@ -148,12 +148,13 @@ class _EditPage extends State<EditPage> {
                     margin: const EdgeInsets.all(30),
                     child: TextFormField(
                       controller: _titleController,
-                      decoration: const InputDecoration(
-                        labelText: 'Recipe Title',
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.title_recipe,
                       ),
                     ),
                   ),
-                  const Text('Cuisine Type:', style: TextStyle(fontSize: 18)),
+                  Text(AppLocalizations.of(context)!.cuisine_type,
+                      style: const TextStyle(fontSize: 18)),
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
                     child: _buildFilterChips(_cuisineTypes, [_cuisineType],
@@ -161,19 +162,22 @@ class _EditPage extends State<EditPage> {
                       _cuisineType = selectedItem;
                     }),
                   ),
-                  const Text('Ingredients:', style: TextStyle(fontSize: 18)),
+                  Text(AppLocalizations.of(context)!.ingredients,
+                      style: const TextStyle(fontSize: 18)),
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
                     child: _buildFilterChips(_availableIngredients,
                         _selectedIngredients, (selectedItem) {}),
                   ),
-                  const Text('Fishes:', style: TextStyle(fontSize: 18)),
+                  Text(AppLocalizations.of(context)!.fishes,
+                      style: const TextStyle(fontSize: 18)),
                   Container(
                     margin: const EdgeInsets.fromLTRB(20, 10, 20, 30),
                     child: _buildFilterChips(
                         _availableFishes, _selectedFishes, (selectedItem) {}),
                   ),
-                  const Text('Recipe Steps:', style: TextStyle(fontSize: 18)),
+                  Text(AppLocalizations.of(context)!.recipe_steps,
+                      style: const TextStyle(fontSize: 18)),
                   ReorderableListView(
                     physics: const NeverScrollableScrollPhysics(),
                     // Disable scrolling
@@ -197,7 +201,9 @@ class _EditPage extends State<EditPage> {
                         title: TextFormField(
                           controller: controller,
                           decoration: InputDecoration(
-                            labelText: 'Step ${index + 1}',
+                            labelText: AppLocalizations.of(context)!.step +
+                                ' ' +
+                                (index + 1).toString(),
                           ),
                           onChanged: (value) {
                             setState(() {
@@ -232,7 +238,7 @@ class _EditPage extends State<EditPage> {
                             side: BorderSide(color: Colors.grey[600]!)),
                       ),
                     ),
-                    child: const Text('Add Step'),
+                    child: Text(AppLocalizations.of(context)!.add_step),
                   ),
                   const SizedBox(
                     height: 20,
@@ -275,8 +281,9 @@ class _EditPage extends State<EditPage> {
                           imagePath = referenceImgtoUpload.fullPath;
 
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Image Uploaded Successfully!'),
+                            SnackBar(
+                              content: Text(
+                                  AppLocalizations.of(context)!.image_uploaded),
                             ),
                           );
                         } catch (error) {
@@ -308,9 +315,9 @@ class _EditPage extends State<EditPage> {
                         padding: const EdgeInsets.all(30),
                         child: uploading
                             ? const CircularProgressIndicator()
-                            : const Text(
-                                'Pick Image',
-                                style: TextStyle(
+                            : Text(
+                                AppLocalizations.of(context)!.pick_image,
+                                style: const TextStyle(
                                     color: Color(0xff5B92C6),
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20),
@@ -347,9 +354,7 @@ class _EditPage extends State<EditPage> {
                             side: BorderSide(color: Colors.grey[600]!)),
                       ),
                     ),
-                    child: const Text(
-                      'Edit Recipe',
-                    ),
+                    child: Text(AppLocalizations.of(context)!.edit_recipe),
                   ),
                   const SizedBox(
                     height: 30,
@@ -404,7 +409,7 @@ class _EditPage extends State<EditPage> {
             height: 25,
             width: 30,
           ),
-          label: ("HOME"),
+          label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -412,36 +417,40 @@ class _EditPage extends State<EditPage> {
             height: 25,
             width: 30,
           ),
-          label: ("FISH"),
+          label: AppLocalizations.of(context)!.fish,
         ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/chef-hat.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("COOK")),
+          icon: SvgPicture.asset(
+            'assets/icons/chef-hat.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.cook,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/map.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("MAP")),
+          icon: SvgPicture.asset(
+            'assets/icons/map.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.map,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/envelope-open.svg',
-              height: 25,
-              width: 30,
-            ),
-            label: ("POST")),
+          icon: SvgPicture.asset(
+            'assets/icons/envelope-open.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.post,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/user.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("YOU")),
+          icon: SvgPicture.asset(
+            'assets/icons/user.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.you,
+        ),
       ],
       selectedLabelStyle: const TextStyle(
         fontWeight: FontWeight.w900,

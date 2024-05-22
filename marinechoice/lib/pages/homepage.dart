@@ -6,6 +6,7 @@ import 'package:marinechoice/pages/mappage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:marinechoice/pages/userprofile.dart';
 import 'fishpage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   int selectedBox = -1;
-  String searchText="";
+  String searchText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -30,38 +31,27 @@ class _HomePage extends State<HomePage> {
   }
 
   SingleChildScrollView buildSingleChildScrollView() {
-
     return SingleChildScrollView(
-        child: Column(
-          children: [
-
-            const Text(
-              'Did you know...',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w700,
-                color:Color(0xff4A668A),
-              ),
+      child: Column(
+        children: [
+          Text(
+            AppLocalizations.of(context)!.did_you_know,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w700,
+              color: Color(0xff4A668A),
             ),
-            buildContainer(
-                'To satisfy our appetite, we are catching more fish than the ocean can produce. We have reached a point where marine ecosystems and many local communities - especially in developing countries - are at risk. Overfishing has become the second largest threat to our oceans, after climate change, and soon there may be no more fish to catch, produce, or eat.',
-                0),
-            buildContainer(
-                '93% of fish stocks in the Mediterranean are overexploited.',
-                1),
-            buildContainer('31% of global fish stocks are overexploited.', 2),
-            buildContainer(
-                'In 2022, the household spending on fishery and aquaculture products in the EU-27 surged by nearly 11% compared to 2021, accelerating the upward trend that began in 2018.',
-                3),
-            buildContainer(
-                'Illegal, unreported, and unregulated fishing could soon reach up to 26 million tons, more than 30% of the total annual catch of the world.',
-                4),
-          ],
-        ),
-      );
+          ),
+          buildContainer(AppLocalizations.of(context)!.statement1, 0),
+          buildContainer(AppLocalizations.of(context)!.statement2, 1),
+          buildContainer(AppLocalizations.of(context)!.statement3, 2),
+          buildContainer(AppLocalizations.of(context)!.statement4, 3),
+          buildContainer(AppLocalizations.of(context)!.statement5, 4),
+        ],
+      ),
+    );
   }
-
 
   _navigate(int index) {
     switch (index) {
@@ -95,35 +85,68 @@ class _HomePage extends State<HomePage> {
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: const Color(0xff5B92C6),
-      currentIndex: 0,
+      currentIndex: 2,
       onTap: _navigate,
       selectedItemColor: Colors.white,
       type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
-          icon: SvgPicture.asset('assets/icons/home.svg', height: 25, width: 30,),
-          label: ("HOME"),),
+          icon: SvgPicture.asset(
+            'assets/icons/home.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.home,
+        ),
         BottomNavigationBarItem(
-          icon: SvgPicture.asset('assets/icons/fishing-rod.svg', height: 25, width: 30,),
-          label: ("FISH"),),
+          icon: SvgPicture.asset(
+            'assets/icons/fishing-rod.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.fish,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/chef-hat.svg', height: 30, width: 30,),
-            label: ("COOK")),
+          icon: SvgPicture.asset(
+            'assets/icons/chef-hat.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.cook,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/map.svg', height: 30, width: 30,),
-            label: ("MAP")),
+          icon: SvgPicture.asset(
+            'assets/icons/map.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.map,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/envelope-open.svg', height: 25, width: 30,),
-            label: ("POST")),
+          icon: SvgPicture.asset(
+            'assets/icons/envelope-open.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.post,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/user.svg', height: 30, width: 30,),
-            label: ("YOU")),
+          icon: SvgPicture.asset(
+            'assets/icons/user.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.you,
+        ),
       ],
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900,),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900,),
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w900,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w900,
+      ),
     );
   }
-
 
   Widget buildContainer(String text, int number) {
     if (number == selectedBox || text.length <= 27 * 6) {
@@ -167,8 +190,8 @@ class _HomePage extends State<HomePage> {
                       selectedBox = number;
                     })
                   },
-              child: const Text("Read more...",
-                  style: TextStyle(
+              child: Text(AppLocalizations.of(context)!.read_more,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Color(0xffB4D8F9),
@@ -177,6 +200,7 @@ class _HomePage extends State<HomePage> {
       );
     }
   }
+
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: const Color(0xffB4D8F9),
@@ -209,8 +233,4 @@ class _HomePage extends State<HomePage> {
       ),
     );
   }
-
-
-
 }
-

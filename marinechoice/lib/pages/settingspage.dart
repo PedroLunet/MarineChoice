@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/auth/auth_service.dart';
 import 'package:marinechoice/pages/loginpage.dart';
 import 'package:marinechoice/globals.dart' as globals;
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'homepage.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -81,8 +81,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           const SizedBox(height: 20),
           Text(
-            "Select Language",
-            style: TextStyle(fontSize: 25, fontFamily: 'Poppins'),
+            AppLocalizations.of(context)!.select_language,
+            style: const TextStyle(fontSize: 25, fontFamily: 'Poppins'),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

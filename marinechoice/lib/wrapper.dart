@@ -20,12 +20,10 @@ class Wrapper extends StatelessWidget {
               return const Center(
                 child: Text("Error"),
               );
-            }
-            else {
-              if(snapshot.data == null) {
+            } else {
+              if (snapshot.data == null) {
                 return const LoginPage();
-              }
-              else {
+              } else {
                 return const HomePage();
               }
             }

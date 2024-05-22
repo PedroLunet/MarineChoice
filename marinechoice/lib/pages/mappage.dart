@@ -13,6 +13,7 @@ import 'settingspage.dart';
 import 'fishpage.dart';
 import 'package:marinechoice/globals.dart' as globals;
 import 'homepage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -236,7 +237,7 @@ class _MapPageState extends State<MapPage> {
             height: 25,
             width: 30,
           ),
-          label: ("HOME"),
+          label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -244,36 +245,40 @@ class _MapPageState extends State<MapPage> {
             height: 25,
             width: 30,
           ),
-          label: ("FISH"),
+          label: AppLocalizations.of(context)!.fish,
         ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/chef-hat.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("COOK")),
+          icon: SvgPicture.asset(
+            'assets/icons/chef-hat.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.cook,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/map.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("MAP")),
+          icon: SvgPicture.asset(
+            'assets/icons/map.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.map,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/envelope-open.svg',
-              height: 25,
-              width: 30,
-            ),
-            label: ("POST")),
+          icon: SvgPicture.asset(
+            'assets/icons/envelope-open.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.post,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/user.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("YOU")),
+          icon: SvgPicture.asset(
+            'assets/icons/user.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.you,
+        ),
       ],
       selectedLabelStyle: const TextStyle(
         fontWeight: FontWeight.w900,
@@ -331,7 +336,7 @@ class _MapPageState extends State<MapPage> {
     }
 
     if (kDebugMode) {
-      print("List $fisAreaList");
+      print(AppLocalizations.of(context)!.list + fisAreaList.toString());
     }
 
     var protAreas =
@@ -346,7 +351,7 @@ class _MapPageState extends State<MapPage> {
     }
 
     if (kDebugMode) {
-      print("List $protAreaList");
+      print(AppLocalizations.of(context)!.list + protAreaList.toString());
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:marinechoice/pages/postpage.dart';
 import 'package:marinechoice/pages/recipespage.dart';
 import 'package:marinechoice/pages/userprofile.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../components/getUploadImages.dart';
 import '../components/title_box.dart';
 import '../models/fish_model.dart';
@@ -84,7 +84,7 @@ class _FishInfoPage extends State<FishInfoPage> {
             height: 25,
             width: 30,
           ),
-          label: ("HOME"),
+          label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -92,36 +92,40 @@ class _FishInfoPage extends State<FishInfoPage> {
             height: 25,
             width: 30,
           ),
-          label: ("FISH"),
+          label: AppLocalizations.of(context)!.fish,
         ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/chef-hat.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("COOK")),
+          icon: SvgPicture.asset(
+            'assets/icons/chef-hat.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.cook,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/map.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("MAP")),
+          icon: SvgPicture.asset(
+            'assets/icons/map.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.map,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/envelope-open.svg',
-              height: 25,
-              width: 30,
-            ),
-            label: ("POST")),
+          icon: SvgPicture.asset(
+            'assets/icons/envelope-open.svg',
+            height: 25,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.post,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/user.svg',
-              height: 30,
-              width: 30,
-            ),
-            label: ("YOU")),
+          icon: SvgPicture.asset(
+            'assets/icons/user.svg',
+            height: 30,
+            width: 30,
+          ),
+          label: AppLocalizations.of(context)!.you,
+        ),
       ],
       selectedLabelStyle: const TextStyle(
         fontWeight: FontWeight.w900,
@@ -171,78 +175,84 @@ class _FishInfoPage extends State<FishInfoPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 40,),
+            const SizedBox(
+              height: 40,
+            ),
             Center(
               child: Text(
                 fish.fishData!.name!,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xff4A668A)
-                ),
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xff4A668A)),
               ),
             ),
             Text(
               fish.fishData!.origin!,
               style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Color(0xff5B92C6)
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff5B92C6)),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color(0xff5B92C6), width: 4),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: FutureBuilder<String?>(
+                  future: getImage(fish.fishData!
+                      .imagePath), // Ensure getImage returns a Future<String?>
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError || snapshot.data == null) {
+                      if (kDebugMode) {
+                        print('Error loading image: ${snapshot.error}');
+                      }
+                      return const Center(child: Text('Failed to load image'));
+                    } else {
+                      return Image.network(
+                        snapshot.data!,
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        //height: MediaQuery.of(context).size.height * 0.25,
+                      );
+                    }
+                  },
+                ),
               ),
             ),
-            const SizedBox(height: 40,),
-
-            Container(
-              margin: const EdgeInsets.fromLTRB(0,0,0,40),
-                decoration: BoxDecoration(
-
-                  border: Border.all(color: const Color(0xff5B92C6), width: 4),
-                  borderRadius: BorderRadius.circular(30),),
-
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-
-                  child: FutureBuilder<String?>(
-                    future: getImage(fish.fishData!.imagePath), // Ensure getImage returns a Future<String?>
-                    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError || snapshot.data == null) {
-                    if (kDebugMode) {
-                    print('Error loading image: ${snapshot.error}');
-                    }
-                    return const Center(child: Text('Failed to load image'));
-                    } else {
-                    return Image.network(
-                    snapshot.data!,
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    //height: MediaQuery.of(context).size.height * 0.25,
-                    );
-                  }},
-                  ),
-                ),
-            ),
-
             TitleBox(title: "Fun Fact!", text: fish.fishData!.facts!),
-            const SizedBox(height: 40,),
-
-            TitleBox(title: "Average price per kilogram", text: fish.fishData!.avgPricePerKg!),
-            const SizedBox(height: 40,),
-
-            TitleBox(title: "Sustainability Rate", widget: getSustainabilityBadge(fish)),
-            const SizedBox(height: 40,),
-
+            const SizedBox(
+              height: 40,
+            ),
+            TitleBox(
+                title: "Average price per kilogram",
+                text: fish.fishData!.avgPricePerKg!),
+            const SizedBox(
+              height: 40,
+            ),
+            TitleBox(
+                title: "Sustainability Rate",
+                widget: getSustainabilityBadge(fish)),
+            const SizedBox(
+              height: 40,
+            ),
           ],
         ),
       ),
     );
   }
 
-
- Widget getSustainabilityBadge(Fish fish){
-
+  Widget getSustainabilityBadge(Fish fish) {
     return Container(
       decoration: BoxDecoration(
           color: rates[fish.fishData!.sustainabilityRate!],
@@ -251,12 +261,8 @@ class _FishInfoPage extends State<FishInfoPage> {
       child: Text(
         fish.fishData!.sustainabilityRate!,
         style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w700,
-            color: Colors.white),
+            fontSize: 15, fontWeight: FontWeight.w700, color: Colors.white),
       ),
     );
-
- }
-
+  }
 }
