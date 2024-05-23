@@ -178,6 +178,7 @@ Sprint 3 end:
 
 ![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/d3363751-ff6b-4ef6-9f5e-66dabfce1ec8)
 
+[Release V3.0.0](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/releases/tag/ReleaseV3.0.0)
 # Sprint Reviews
 
 - Sprint 1
