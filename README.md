@@ -176,7 +176,7 @@ Sprint 3 beginning:
 
 Sprint 3 end:
 
-
+![image](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/d3363751-ff6b-4ef6-9f5e-66dabfce1ec8)
 
 # Sprint Reviews
 
@@ -185,5 +185,8 @@ In this sprint, we encountered a few mishaps. Notably, there were some errors, s
 
 - Sprint 2
 In this sprint, we successfully addressed the issues described previously and began drafting the changelog. We have completed the all of the user stories planned for this sprint.
+
+- Sprint 3
+In this sprint, we successfully finished all the features we set out to do.
 
 
