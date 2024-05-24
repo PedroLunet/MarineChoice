@@ -18,6 +18,8 @@ You can find here details about the MarineChoice, from a high-level vision to lo
 - [Project Management](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1#project-management)
     - [Iteration retrospective meeting (V1.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#iteration-retrospective-meeting-v100)
     - [Iteration retrospective meeting (V2.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#iteration-retrospective-meeting-v200)
+    - [Iteration retrospective meeting (V3.0.0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1?tab=readme-ov-file#iteration-retrospective-meeting-v300)
+
 
 Contributions are expected to be made exclusively by the initial team, but we may open them to the community, after the course, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
 
@@ -143,6 +145,19 @@ In this prototype we have implemented a few simple features, like allowing the u
 - We should start working earlier, to achieve this we should push each other to work by working during meetings.
 - We should make sure to read all the delivery rules many times throught the sprint, so we don't miss information.
 
+# Iteration retrospective meeting (V3.0.0)
+
+## What went well?
+- We have successfully implemented all planned features and resolved identified issues in accordance with the outlined objectives.
+- We worked well together as a team, supporting each other's strengths and weaknesses, which helped us achieve our goals effectively.
+- We were able to better manage our time, even better than most other sprint.
+- We had better communication overall.
+
+## What could have gone better?
+- We might have forgotten to double check some features.
+
+## What still puzzles us?
+- We were not able to complete unit testing.
 
 # Board
 
