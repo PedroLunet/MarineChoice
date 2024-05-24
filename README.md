@@ -66,7 +66,8 @@ MarineChoice empowers seafood consumers by offering insights into harmful fishin
 
 ### Elevator Pitch
 
-(...)
+Sabiam que Portugal é o terceiro país no mundo que mais peixe consome por pessoa, segundo a União Europeia? O problema disto é o facto de nós consumirmos muito peixe não sustentável, como por exemplo, o famoso bacalhau. Por esta razão, nós decidimos criar esta app. Com a MarineChoice, eliminamos a incerteza da escolha de peixe sustentável, capacitando os consumidores conscientes a tomar decisões informadas. A nossa aplicação categoriza as espécies de peixes de acordo com o seu estado de sustentabilidade, oferece 
+informações sobre práticas de pesca prejudiciais e disponibiliza receitas sustentáveis. Além disso, educamos os utilizadores sobre a importância da pesca sustentável e mapeamos os locais originais de pesca de várias espécies. Ao contrário de outras plataformas, promovemos uma comunidade de pessoas com mentalidade semelhante, apaixonadas por preservar os nossos oceanos. Juntem-se à MarineChoice: a fazer ondas por um futuro de pesca sustentável!
 
 ## Requirements
 
