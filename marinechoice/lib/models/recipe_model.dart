@@ -40,4 +40,6 @@ class RecipeData {
     author = json["author"];
     imagePath = json["imagePath"];
   }
+
+
 }

@@ -502,7 +502,7 @@ class _EditPage extends State<EditPage> {
       List<String> steps,
       String imagePath) async {
     DatabaseReference ref =
-        FirebaseDatabase.instance.ref("RECIPE/${widget.recipe.key}");
+        FirebaseDatabase.instance.ref("${globals.selectedLanguage.value}/RECIPE/${widget.recipe.key}");
 
     await ref.update({
       'title': title,

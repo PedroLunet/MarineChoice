@@ -274,6 +274,10 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
           return const Center(child: Text('Failed to load image'));
         }
 
+        final recipeData = recipe.recipeData;
+        final title = recipeData?.title ?? AppLocalizations.of(context)!.no_title;
+        final author = recipeData?.author ?? 'Author not available';
+
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -281,8 +285,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                 margin: const EdgeInsets.all(20),
                 child: Center(
                   child: Text(
-                    recipe.recipeData?.title ??
-                        AppLocalizations.of(context)!.no_title,
+                    title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 32,
@@ -294,44 +297,41 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
               ),
               _avg != null
                   ? Column(
-                      children: [
-                        RatingBar.builder(
-                          initialRating: _avg!,
-                          minRating: 0,
-                          allowHalfRating: true,
-                          tapOnlyMode: true,
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.sailing_outlined,
-                            color: Colors.amber,
-                          ),
-                          ignoreGestures: true,
-                          onRatingUpdate:
-                              (double value) {}, // Disable user interaction
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        RatingBar.builder(
-                          initialRating: 0,
-                          minRating: 0,
-                          allowHalfRating: true,
-                          tapOnlyMode: true,
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.sailing_outlined,
-                            color: Colors.amber,
-                          ),
-                          ignoreGestures: true,
-                          onRatingUpdate:
-                              (double value) {}, // Disable user interaction
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.no_rating,
-                          style: const TextStyle(
-                              fontSize: 15, color: Color(0xff4A668A)),
-                        ),
-                      ],
+                children: [
+                  RatingBar.builder(
+                    initialRating: _avg!,
+                    minRating: 0,
+                    allowHalfRating: true,
+                    tapOnlyMode: true,
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.sailing_outlined,
+                      color: Colors.amber,
                     ),
+                    ignoreGestures: true,
+                    onRatingUpdate: (double value) {}, // Disable user interaction
+                  ),
+                ],
+              )
+                  : Column(
+                children: [
+                  RatingBar.builder(
+                    initialRating: 0,
+                    minRating: 0,
+                    allowHalfRating: true,
+                    tapOnlyMode: true,
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.sailing_outlined,
+                      color: Colors.amber,
+                    ),
+                    ignoreGestures: true,
+                    onRatingUpdate: (double value) {}, // Disable user interaction
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.no_rating,
+                    style: const TextStyle(fontSize: 15, color: Color(0xff4A668A)),
+                  ),
+                ],
+              ),
               const SizedBox(height: 40),
               Container(
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -344,17 +344,15 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25),
                   child: FutureBuilder<String?>(
-                    future: getImage(recipe.recipeData!.imagePath),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<String?> snapshot) {
+                    future: getImage(recipeData?.imagePath),
+                    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError || snapshot.data == null) {
                         if (kDebugMode) {
                           print('Error loading image: ${snapshot.error}');
                         }
-                        return const Center(
-                            child: Text('Failed to load image'));
+                        return const Center(child: Text('Failed to load image'));
                       } else {
                         return Image.network(
                           snapshot.data!,
@@ -376,25 +374,22 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                       width: 300,
                       margin: EdgeInsets.all(40),
                       child: TitleBox(
-                        title: AppLocalizations.of(context)!.no_title,
+                        title: AppLocalizations.of(context)!.fishes,
                         widget: Container(
-                          child: (recipe.recipeData != null &&
-                                  recipe.recipeData!.fish != null)
+                          child: (recipeData != null && recipeData.fish != null)
                               ? ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: recipe.recipeData!.fish!.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      title: Text(
-                                        recipe.recipeData!.fish![index],
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: recipeData.fish!.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(
+                                  recipeData.fish![index],
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              );
+                            },
+                          )
                               : Text(AppLocalizations.of(context)!.no_fish),
                         ),
                       ),
@@ -405,26 +400,21 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                       child: TitleBox(
                         title: "Ingredients",
                         widget: Container(
-                          child: (recipe.recipeData != null &&
-                                  recipe.recipeData!.ingredients != null)
+                          child: (recipeData != null && recipeData.ingredients != null)
                               ? ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount:
-                                      recipe.recipeData!.ingredients!.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      title: Text(
-                                        recipe.recipeData!.ingredients![index],
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
-                              : Text(
-                                  AppLocalizations.of(context)!.no_ingredients),
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: recipeData.ingredients!.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(
+                                  recipeData.ingredients![index],
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              );
+                            },
+                          )
+                              : Text(AppLocalizations.of(context)!.no_ingredients),
                         ),
                       ),
                     ),
@@ -436,23 +426,20 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                 child: TitleBox(
                   title: AppLocalizations.of(context)!.preparation,
                   widget: Container(
-                    child: (recipe.recipeData != null &&
-                            recipe.recipeData!.preparation != null)
+                    child: (recipeData != null && recipeData.preparation != null)
                         ? ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: recipe.recipeData!.preparation!.length,
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                title: Text(
-                                  recipe.recipeData!.preparation![index],
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              );
-                            },
-                          )
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: recipeData.preparation!.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            recipeData.preparation![index],
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        );
+                      },
+                    )
                         : Text(AppLocalizations.of(context)!.no_steps),
                   ),
                 ),
@@ -463,7 +450,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Author: ${recipe.recipeData?.author ?? 'Author not available'}",
+                      "Author: $author",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
@@ -473,85 +460,76 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
                     const SizedBox(height: 20),
                     Text(
                       AppLocalizations.of(context)!.rate_recipe,
-                      style: const TextStyle(
-                          fontSize: 15, color: Color(0xff4A668A)),
+                      style: const TextStyle(fontSize: 15, color: Color(0xff4A668A)),
                     ),
                     // Conditionally display static or interactive rating bar based on _hasRated
                     _rating != null
                         ? Column(
-                            children: [
-                              RatingBar.builder(
-                                initialRating: _rating!,
-                                minRating: 0,
-                                allowHalfRating: true,
-                                tapOnlyMode: true,
-                                itemBuilder: (context, _) => const Icon(
-                                  Icons.sailing_outlined,
-                                  color: Colors.amber,
-                                ),
-                                ignoreGestures: true,
-                                onRatingUpdate: (double
-                                    value) {}, // Disable user interaction
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                AppLocalizations.of(context)!.thank_rating,
-                                style: const TextStyle(
-                                    fontSize: 15, color: Color(0xff4A668A)),
-                              ),
-                            ],
-                          )
-                        : Column(
-                            children: [
-                              RatingBar.builder(
-                                initialRating: 0,
-                                minRating: 0.5,
-                                allowHalfRating: true,
-                                tapOnlyMode: true,
-                                itemBuilder: (context, _) => const Icon(
-                                  Icons.sailing_outlined,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (rating) async {
-                                  // Update the state variable and rebuild the widget
-                                  setState(() {
-                                    _rating = rating; // Update the rating value
-                                  });
-
-                                  final SharedPreferences prefsEmail =
-                                      await SharedPreferences.getInstance();
-                                  String? email = prefsEmail.getString('email');
-                                  if (email == null) {
-                                    throw Exception("Email null");
-                                  }
-
-                                  saveRatingToDatabase(
-                                      rating.toString(),
-                                      email,
-                                      widget.recipe.recipeData?.title ??
-                                          'Unknown');
-                                },
-                              ),
-                              const SizedBox(height: 10),
-                            ],
+                      children: [
+                        RatingBar.builder(
+                          initialRating: _rating!,
+                          minRating: 0,
+                          allowHalfRating: true,
+                          tapOnlyMode: true,
+                          itemBuilder: (context, _) => const Icon(
+                            Icons.sailing_outlined,
+                            color: Colors.amber,
                           ),
+                          ignoreGestures: true,
+                          onRatingUpdate: (double value) {}, // Disable user interaction
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          AppLocalizations.of(context)!.thank_rating,
+                          style: const TextStyle(fontSize: 15, color: Color(0xff4A668A)),
+                        ),
+                      ],
+                    )
+                        : Column(
+                      children: [
+                        RatingBar.builder(
+                          initialRating: 0,
+                          minRating: 0.5,
+                          allowHalfRating: true,
+                          tapOnlyMode: true,
+                          itemBuilder: (context, _) => const Icon(
+                            Icons.sailing_outlined,
+                            color: Colors.amber,
+                          ),
+                          onRatingUpdate: (rating) async {
+                            // Update the state variable and rebuild the widget
+                            setState(() {
+                              _rating = rating; // Update the rating value
+                            });
+
+                            final SharedPreferences prefsEmail =
+                            await SharedPreferences.getInstance();
+                            String? email = prefsEmail.getString('email');
+                            if (email == null) {
+                              throw Exception("Email null");
+                            }
+
+                            saveRatingToDatabase(
+                                rating.toString(),
+                                email,
+                                recipeData?.title ?? 'Unknown');
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                     const SizedBox(height: 30),
-                    if (recipe.recipeData!.author! == user)
+                    if (recipeData?.author == user)
                       ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  EditPage(recipe: widget.recipe)));
+                              builder: (context) => EditPage(recipe: widget.recipe)));
                         },
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.blue[200]!),
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.black),
-                          shadowColor: MaterialStateProperty.all<Color>(
-                              Colors.transparent),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[200]!),
+                          foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                          shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7.0),
                                 side: BorderSide(color: Colors.grey[600]!)),
@@ -569,6 +547,7 @@ class _RecipeInfoPage extends State<RecipeInfoPage> {
       },
     );
   }
+
 
   Future<void> saveRatingToDatabase(
       String rating, String userEmail, String recipeTitle) async {

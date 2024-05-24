@@ -395,4 +395,33 @@ class _RecipesPageState extends State<RecipesPage> {
     }
     return fishes;
   }
+
+  Future<List<String>> retrieveFishDataUser() async {
+    List<String> fishes = [];
+    var result = await _database
+        .child(globals.selectedLanguage.value)
+        .child("RECIPE")
+        .get();
+
+    for (var recipe in result.children) {
+      try {
+        RecipeData recipeData = RecipeData.fromJson(
+            recipe.value as Map, globals.selectedLanguage.value);
+        if (recipeData.ingredients != null) {
+          for (var ingredient in recipeData.ingredients!) {
+            if (!fishes.contains(ingredient)) {
+              fishes.add(ingredient);
+            }
+          }
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error: ${e.toString()}");
+        }
+      }
+    }
+    return fishes;
+  }
+
+
 }

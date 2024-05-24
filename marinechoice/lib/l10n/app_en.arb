@@ -15,6 +15,7 @@
     "close" : "Close",
     "recommended" : "Recommended",
      "no_rating": "This recipe has no ratings yet.",
+     "fish_title" : "Fish",
     "fish_used" : "Fish used for this recipe",
     "no_fish" : "No fish were inserted into the database, something went wrong.",
     "ingredients" : "Ingredients",
