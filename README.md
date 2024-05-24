@@ -204,6 +204,6 @@ In this sprint, we encountered a few mishaps. Notably, there were some errors, s
 In this sprint, we successfully addressed the issues described previously and began drafting the changelog. We have completed the all of the user stories planned for this sprint.
 
 - Sprint 3
-In this sprint, we successfully finished all the features we set out to do.
+In this sprint, we successfully finished all the features we set out to do. And worked efficiently and cooperatively.
 
 
