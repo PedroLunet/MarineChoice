@@ -38,7 +38,7 @@ Pedro Lunet ([up202207150@fe.up.pt](mailto:up202207150@fe.up.pt))
 ### Product Vision
 
 
-MarineChoice empowers seafood consumers by offering insights into harmful fishing practices, sustainable recipes, and fostering an eco-conscious community, all aimed at shaping a future where every seafood choice supports healthy oceans.
+MarineChoice empowers seafood consumers with insights into harmful fishing practices, sustainable recipes, and fosters an ecologically conscious community, shaping a future where every seafood choice supports healthy oceans.
 
 ### Features and Assumptions
 
@@ -147,6 +147,14 @@ In this prototype we have implemented a few simple features, like allowing the u
 - We should make sure to read all the delivery rules many times throught the sprint, so we don't miss information.
 
 # Iteration retrospective meeting (V3.0.0)
+[#4](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/4)  - Edit recipes. <br>
+[#9](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/9)  - List of susbtainable fish. <br>
+[#10](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/10)  - Post recipes. <br>
+[#11](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/11)  - Rate recipes and show the average rating for each recipe. <br>
+[#12](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/12)  - See detailed information about species. <br>
+[#13](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/13)  - Read other users recipes. <br>
+[#14](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/14)  - Swap the language between portuguese and english. <br>
+[#15](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/issues/15)  - Show the average rating for each recipe. <br>
 
 ## What went well?
 - We have successfully implemented all planned features and resolved identified issues in accordance with the outlined objectives.
