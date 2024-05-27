@@ -37,8 +37,7 @@ Pedro Lunet ([up202207150@fe.up.pt](mailto:up202207150@fe.up.pt))
 
 ### Product Vision
 
-
-MarineChoice empowers seafood consumers with insights into harmful fishing practices, sustainable recipes, and fosters an ecologically conscious community, shaping a future where every seafood choice supports healthy oceans.
+MarineChoice empowers seafood consumers by offering insights into harmful fishing practices, sustainable recipes, and fostering an eco-conscious community, all aimed at shaping a future where every seafood choice supports healthy oceans.
 
 ### Features and Assumptions
 
