@@ -72,17 +72,17 @@ informações sobre práticas de pesca prejudiciais e disponibiliza receitas sus
 
 ### Domain Model
 
-![domain modeling](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/95a41aff-235c-4c56-be79-8f38a7845b91)
+![domain modeling](/images/domain_model.png)
 
 ## Architecture and Design
 
 ### Logical Design
 
-![image-2](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/e36f1651-87b0-4700-8ab2-be8d79483422)
+![logical design](/images/logical_design.png)
 
 ### Physical Architecture
 
-![image-1](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC14T1/assets/93152747/6e90a0a0-3192-4b20-9035-2fa164c1a4f7)
+![physical architecture](/images/physical_architecture.png)
 
 ### Vertical Prototype
 

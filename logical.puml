@@ -1,4 +1,11 @@
-@startuml physical
+@startuml logical
+
+header
+The client device interacts with the user interface to access various 
+data stored on the database and API servers. Users can view and create 
+recipes, which include fish data represented on a map showing the 
+location of different fish species and protected areas.
+end header
 
 package "Client Device" {
   [User Interface]
@@ -7,11 +14,11 @@ package "Client Device" {
 database "Database Server" {
   [User Data]
   [Recipe Data]
+  [Fish Data]
 }
 
 database "API Server" {
   [Map Data]
-  [Fish Data]
 }
 
 

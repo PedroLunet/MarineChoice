@@ -1,4 +1,11 @@
-@startuml logical
+@startuml physical
+
+header
+The MarineChoice Application interacts with the Recipe Validation 
+component. The Recipe Validation component accesses the Database for 
+storing and retrieving data and communicates with the Admin Gateway for 
+external administrative services.
+end header
 
 top to bottom direction
 
